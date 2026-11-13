@@ -1,18 +1,19 @@
 # GitHub 开源发布检查记录
 
-最后复核：2026-11-05
-复核基线：本地 `main@0a1c012`；远程 `main` 当时仍指向 `2e73c31`。
+最后复核：2026-11-14
+复核基线：`main@f151b02`；正式 Release 为 `v1.0.0`。
 用途：这是发布前检查表，不是部署状态或发布日期承诺。每次准备公开仓库或
 创建 tag 前，应按下面的命令重新检查，并更新本文件。
 
 当前仓库状态：
 
-- GitHub 仓库仍为私有，未认证访问返回 404。
-- 远端没有 tag；[Cargo.toml](Cargo.toml) 中的 `1.0.0` 尚未对应正式 Release。
+- GitHub 仓库已公开，`v1.0.0` tag 与 GitHub Release 已发布。
 - 仓库 description、homepage、topics、Issues 以及 `bug`/`enhancement` labels
   已配置。
-- 当前工作流仍使用 `actions/checkout@v7` 等可移动标签，仓库中没有
-  `.github/dependabot.yml`，GitHub Actions 也未要求 SHA pinning。
+- 工作流使用完整 commit SHA 固定 GitHub Actions，Dependabot 已配置 Cargo、
+  npm 和 Actions 的每周检查。
+- RustSec、npm audit 和 Dependabot 当前均无已知漏洞；RustSec 仍有上游
+  unmaintained/unsound 预警，详见后文。
 
 ## 当前已验证事项
 
@@ -20,7 +21,7 @@
 - [x] `cargo fmt --all -- --check` 通过。
 - [x] `cargo clippy --all-targets --all-features --locked -- -D warnings`
   通过。
-- [x] `cargo test --locked` 通过：736 passed，0 failed，4 ignored。
+- [x] `cargo test --locked` 通过：740 passed，0 failed，4 ignored。
 - [x] 应用图标检查通过，ICO、ICNS 和 Linux PNG 的尺寸/内容一致。
 - [x] `python3 tools/licenses/gen_deb_copyright.py --check` 通过。
 - [x] 642 个翻译键在 `en`、`zh-CN`、`zh-TW` 中齐全，占位符一致。
@@ -30,19 +31,16 @@
 
 ### GitHub 仓库状态与治理
 
-- [ ] 将 `narol2026/termlet` 从私有切换为公开。
-
-  当前外部 HTTPS 页面和 GitHub API 返回 404，HTTPS Git 请求要求认证；
-  只有现有的 SSH remote 可读取，说明仓库尚未对公众开放。
+- [x] 将 `narol2026/termlet` 从私有切换为公开。
 
 - [x] 重新登录本机 GitHub CLI，并移除失效的旧账号 session。
-- [ ] 在仓库公开后立即开启并验证 GitHub 私有漏洞报告。
+- [x] 在仓库公开后立即开启并验证 GitHub 私有漏洞报告。
 
   [SECURITY.md](SECURITY.md) 和 Issue 模板都指向
   `Security -> Advisories -> Report a vulnerability`。私有漏洞报告通常要求仓库
   已公开，因此切换可见性后应立刻配置并从无权限账号验证入口。
 
-- [ ] 开启 secret scanning、push protection 和 Dependabot alerts/security
+- [x] 开启 secret scanning、push protection 和 Dependabot alerts/security
   updates。
 - [ ] 为 `main` 配置分支保护或 ruleset，要求 CI 和 CODEOWNERS 审核。
 
@@ -70,7 +68,7 @@
 - [x] 在 [NOTICE](NOTICE) 中补充实际使用的 `iced` family 归属信息。
 - [ ] 处理“声明许可证但未随 crate 提供许可证正文”的依赖。
 
-  当前生成器仍报告 830 个依赖中有 100 个没有随 crate 提供许可证正文；
+  当前生成器报告 825 个依赖中有 95 个没有随 crate 提供许可证正文；
   `tools/licenses/upstream/` 目录存在，但其中没有 Git 跟踪的补充文件。
 
 - [ ] 给 `tools/licenses/gen_third_party_licenses.py` 增加真正的 `--check`
@@ -101,25 +99,25 @@
 
 ## P1：发布 1.0 二进制前完成
 
-- [ ] 在 `CHANGELOG.md` 中增加正式的 `1.0.0` 版本段，并清理 `Unreleased`。
-- [ ] 创建并推送与 `Cargo.toml` 版本一致的 `v1.0.0` tag。
+- [x] 在 `CHANGELOG.md` 中增加正式的 `1.0.0` 版本段，并清理 `Unreleased`。
+- [x] 创建并推送与 `Cargo.toml` 版本一致的 `v1.0.0` tag。
 
-  当前仓库没有任何 tag 或 GitHub Release；README 已移除无效的 Release
-  徽章，并明确说明目前只能从源码构建。
+- [x] 构建并验证 Linux x86_64、Linux aarch64、macOS Intel 和 macOS Apple
+  Silicon 产物，然后发布到 `v1.0.0`。
 
-- [ ] 运行并验证 release workflow，检查 Linux x86_64、Linux aarch64、
-  macOS Intel 和 macOS Apple Silicon 产物。
+  首次 release workflow 的 checksum 步骤把嵌套的 `debian/` 目录当成文件；
+  安装包均已成功构建，Release 使用这些 CI 产物发布，main 上的工作流已修复。
 - [ ] 配置 macOS 代码签名和 notarization。
 
   当前 release workflow 明确说明 DMG 未签名、未公证，普通用户首次启动会遇到
   Gatekeeper 阻止。
 
-- [ ] 如果首版提供 Windows 安装包，将其加入 release workflow；否则在下载说明中
+- [x] 如果首版提供 Windows 安装包，将其加入 release workflow；否则在下载说明中
   明确 Windows 暂不提供正式二进制。
 - [ ] 在 CI 中启动真实 `sshd`，运行当前 4 个被忽略的 SSH/SFTP 集成测试。
-- [ ] 为 Linux 与 macOS 发布产物增加可验证的签名，或者明确仅提供
+- [x] 为 Linux 与 macOS 发布产物增加可验证的签名，或者明确仅提供
   `SHA256SUMS`。
-- [ ] 增加“下载与安装”章节，直接链接 Release 中的 `.deb` 和 `.dmg`。
+- [x] 增加“下载与安装”章节，直接链接 Release 中的 `.deb` 和 `.dmg`。
 
 ## Windows 转正式支持前必须完成
 
@@ -179,7 +177,7 @@
   cargo audit
   ```
 
-- [ ] 将 GitHub Actions 从可移动的 `@vN` tag 固定到完整 commit SHA，
+- [x] 将 GitHub Actions 从可移动的 `@vN` tag 固定到完整 commit SHA，
   尤其是拥有 `contents: write` 的 release job。
 - [ ] 考虑把 release job 放入受保护 environment，限制 tag 发布权限。
 - [ ] 定期验证 fork 的许可证变化、upstream rebase 和固定 commit 的可访问性。

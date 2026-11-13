@@ -152,11 +152,17 @@ jobs:
           pattern: release-*
           path: dist
           merge-multiple: true
+      - name: Flatten packages
+        working-directory: dist
+        run: |
+          # Linux artifacts retain their target/debian/ directory when merged.
+          find . -mindepth 2 -type f -exec mv -t . -- {} +
+          find . -mindepth 1 -type d -empty -delete
       - name: Write checksums
         working-directory: dist
         run: |
           # A stable, sorted checksum file alongside the installers.
-          sha256sum -- * > SHA256SUMS
+          sha256sum -- *.deb *.dmg | LC_ALL=C sort > SHA256SUMS
           ls -l
       - name: Create or refresh the GitHub Release
         env:
