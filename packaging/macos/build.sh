@@ -69,9 +69,11 @@ command -v cargo-bundle >/dev/null 2>&1 ||
     die "cargo-bundle not found; install it with: cargo install cargo-bundle"
 
 bundle_args=(--release --format "$format")
-for target in "${targets[@]}"; do
-    bundle_args+=(-t "$target")
-done
+if ((${#targets[@]})); then
+    for target in "${targets[@]}"; do
+        bundle_args+=(-t "$target")
+    done
+fi
 
 (
     cd "$root"
