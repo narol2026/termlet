@@ -27,7 +27,7 @@
     "build:icons": "node tools/icons/build_icon_font.mjs"
   },
   "devDependencies": {
-    "fs-extra": "^11.2.0",
-    "svgtofont": "^6.5.2"
+    "fs-extra": "^11.4.1",
+    "svgtofont": "^6.5.3"
   }
 }
