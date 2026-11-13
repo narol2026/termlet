@@ -1,0 +1,48 @@
+Termlet
+Copyright 2026 narol
+
+This product bundles third-party software and assets. The complete component
+list and the full text of every license are in THIRD_PARTY_LICENSES.md. The
+items below are redistributed as part of Termlet's compiled binary and are
+called out here to satisfy their attribution requirements.
+
+Patched crates (built from the forks pinned by Cargo.toml and listed in
+THIRD_PARTY_LICENSES.md):
+
+  iced family 0.14.0
+    Copyright 2019 Héctor Ramón, Iced contributors — MIT
+  alacritty_terminal 0.25.1
+    Copyright the Alacritty contributors — Apache-2.0
+  vte 0.15.0
+    Copyright 2016 Joe Wilm, the Alacritty contributors — Apache-2.0 OR MIT
+  iced_term 0.8.0
+    Copyright 2024 Ilia Shvyrialkin — MIT
+  iced_drop 0.2.2
+    Copyright 2024 jhannyj — MIT
+
+Bundled terminal font:
+
+  Source Code Pro 2.042
+    Copyright 2023 Adobe (http://www.adobe.com/), with Reserved Font Name
+    "Source" — SIL Open Font License 1.1 (fonts/licenses/SourceCodePro-OFL-1.1.txt)
+
+Bundled icon font:
+
+  Lucide
+    Copyright (c) portions Cole Bemis 2013-2022 (Feather, MIT); all other
+    copyright Lucide Contributors 2022 — ISC
+    (fonts/licenses/Lucide-ISC.txt)
+
+Bundled platform/OS icon glyphs:
+
+  Font Awesome Free 7.2.0
+    Copyright 2026 Fonticons, Inc. — icons under CC BY 4.0
+    (fonts/licenses/FontAwesome-CC-BY-4.0.txt)
+
+The same notice set ships inside the Linux `.deb` (under
+`/usr/share/doc/termlet/`) and the macOS `.app` bundle (as resources): `LICENSE`
+(also installed as the Debian `copyright` file), this `NOTICE`,
+`THIRD_PARTY_LICENSES.md`, and the license texts under `fonts/licenses/`.
+
+The application UI bundles no typeface and renders with the platform default
+sans-serif.

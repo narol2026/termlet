@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!--
+    Windows master for 16-40 px ICO entries.
+
+    It keeps the generic tile and safe area, but removes the grid, sheen, and
+    border and enlarges the terminal glyph. Those details turn into noise when
+    Windows downsamples the 1024 px master to taskbar and title-bar sizes.
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141F3C"/>
+      <stop offset="55%" stop-color="#0B1226"/>
+      <stop offset="100%" stop-color="#060A16"/>
+    </linearGradient>
+
+    <radialGradient id="glow" cx="40%" cy="44%" r="52%">
+      <stop offset="0%" stop-color="#4A8AF4" stop-opacity="0.34"/>
+      <stop offset="55%" stop-color="#4A8AF4" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#4A8AF4" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="glyph" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#C9DCFF"/>
+    </linearGradient>
+
+    <linearGradient id="accentBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6FB1FF"/>
+      <stop offset="100%" stop-color="#3D7BF0"/>
+    </linearGradient>
+
+    <clipPath id="tile">
+      <rect width="512" height="512" rx="116" ry="116"/>
+    </clipPath>
+  </defs>
+
+  <g transform="translate(32,32) scale(0.875)">
+    <g clip-path="url(#tile)">
+      <rect width="512" height="512" fill="url(#bg)"/>
+      <rect width="512" height="512" fill="url(#glow)"/>
+
+      <polyline points="124,174 248,256 124,338"
+                fill="none"
+                stroke="url(#glyph)"
+                stroke-width="56"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+      <rect x="282" y="302" width="126" height="54" rx="18" fill="url(#accentBar)"/>
+    </g>
+  </g>
+</svg>

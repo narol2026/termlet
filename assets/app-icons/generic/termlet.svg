@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!--
+    Generic (Linux / Windows / runtime window) icon master: the tile fills
+    87.5% of the canvas.
+
+    macOS gets its own master with a larger transparent safe area so the Dock
+    icon matches the size of Apple's apps: `assets/app-icons/macos/termlet.svg`
+    (824/1024 = 80.469% of the canvas).  When the artwork below changes, port
+    the same edit there and run `tools/icons/build_app_icons.sh`.
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141F3C"/>
+      <stop offset="55%" stop-color="#0B1226"/>
+      <stop offset="100%" stop-color="#060A16"/>
+    </linearGradient>
+
+    <radialGradient id="glow" cx="40%" cy="44%" r="52%">
+      <stop offset="0%" stop-color="#4A8AF4" stop-opacity="0.34"/>
+      <stop offset="55%" stop-color="#4A8AF4" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#4A8AF4" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="glyph" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#C9DCFF"/>
+    </linearGradient>
+
+    <linearGradient id="accentBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6FB1FF"/>
+      <stop offset="100%" stop-color="#3D7BF0"/>
+    </linearGradient>
+
+    <linearGradient id="sheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.09"/>
+      <stop offset="38%" stop-color="#FFFFFF" stop-opacity="0.02"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <clipPath id="tile">
+      <rect width="512" height="512" rx="116" ry="116"/>
+    </clipPath>
+  </defs>
+
+  <g transform="translate(32,32) scale(0.875)">
+  <g clip-path="url(#tile)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <rect width="512" height="512" fill="url(#glow)"/>
+
+    <g stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="1">
+      <line x1="128" y1="0" x2="128" y2="512"/>
+      <line x1="256" y1="0" x2="256" y2="512"/>
+      <line x1="384" y1="0" x2="384" y2="512"/>
+      <line x1="0" y1="128" x2="512" y2="128"/>
+      <line x1="0" y1="256" x2="512" y2="256"/>
+      <line x1="0" y1="384" x2="512" y2="384"/>
+    </g>
+
+    <!-- Chevron prompt ">" -->
+    <polyline points="151,198 235,260 151,322"
+              fill="none"
+              stroke="url(#glyph)"
+              stroke-width="40"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+
+    <!-- Cursor underscore "_" (brand blue) -->
+    <rect x="267" y="310" width="116" height="46" rx="16" fill="url(#accentBar)"/>
+
+    <rect width="512" height="512" fill="url(#sheen)"/>
+
+    <rect x="1.5" y="1.5" width="509" height="509" rx="114.5" ry="114.5"
+          fill="none" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="3"/>
+  </g>
+  </g>
+</svg>

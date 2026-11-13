@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!--
+    macOS app icon master.
+
+    Same artwork as `assets/app-icons/generic/termlet.svg`, sized for Apple's
+    macOS (Big Sur+) icon grid instead of the generic (Linux/Windows) one:
+
+      * canvas            1024 x 1024
+      * icon body          824 x 824   (100 px transparent safe area per side,
+                                        body = 80.46875% of the canvas)
+      * corner radius      185.4       (0.225 x body)
+
+    The generic master draws its tile at 87.5% of the canvas, which makes the
+    Dock/Finder icon look visibly larger than Apple's own apps.  In this
+    512-unit viewBox the body is therefore 512 * 0.8046875 = 412 units, i.e.
+    `translate(50,50) scale(0.8046875)`, and the tile radius is 92.7 / 0.8046875
+    = 115.2 (with the 3-unit border stroke concentric at 115.2 - 1.5 = 113.7).
+
+    Keep the artwork in sync with `assets/app-icons/generic/termlet.svg`; only
+    the outer transform and the corner radii are meant to differ. Build the
+    .icns with `tools/icons/build_app_icons.sh`.
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141F3C"/>
+      <stop offset="55%" stop-color="#0B1226"/>
+      <stop offset="100%" stop-color="#060A16"/>
+    </linearGradient>
+
+    <radialGradient id="glow" cx="40%" cy="44%" r="52%">
+      <stop offset="0%" stop-color="#4A8AF4" stop-opacity="0.34"/>
+      <stop offset="55%" stop-color="#4A8AF4" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#4A8AF4" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="glyph" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#C9DCFF"/>
+    </linearGradient>
+
+    <linearGradient id="accentBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6FB1FF"/>
+      <stop offset="100%" stop-color="#3D7BF0"/>
+    </linearGradient>
+
+    <linearGradient id="sheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.09"/>
+      <stop offset="38%" stop-color="#FFFFFF" stop-opacity="0.02"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+
+    <clipPath id="tile">
+      <rect width="512" height="512" rx="115.2" ry="115.2"/>
+    </clipPath>
+  </defs>
+
+  <g transform="translate(50,50) scale(0.8046875)">
+  <g clip-path="url(#tile)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <rect width="512" height="512" fill="url(#glow)"/>
+
+    <g stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="1">
+      <line x1="128" y1="0" x2="128" y2="512"/>
+      <line x1="256" y1="0" x2="256" y2="512"/>
+      <line x1="384" y1="0" x2="384" y2="512"/>
+      <line x1="0" y1="128" x2="512" y2="128"/>
+      <line x1="0" y1="256" x2="512" y2="256"/>
+      <line x1="0" y1="384" x2="512" y2="384"/>
+    </g>
+
+    <!-- Chevron prompt ">" -->
+    <polyline points="151,198 235,260 151,322"
+              fill="none"
+              stroke="url(#glyph)"
+              stroke-width="40"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+
+    <!-- Cursor underscore "_" (brand blue) -->
+    <rect x="267" y="310" width="116" height="46" rx="16" fill="url(#accentBar)"/>
+
+    <rect width="512" height="512" fill="url(#sheen)"/>
+
+    <rect x="1.5" y="1.5" width="509" height="509" rx="113.7" ry="113.7"
+          fill="none" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="3"/>
+  </g>
+  </g>
+</svg>

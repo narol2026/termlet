@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/narol2026/termlet/security/advisories/new
+    about: Do not open a public issue for security problems. Report privately.
+  - name: Contributing guide
+    url: https://github.com/narol2026/termlet/blob/main/CONTRIBUTING.md
+    about: Build, test, and PR conventions before you open a pull request.

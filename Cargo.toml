@@ -1,0 +1,309 @@
+[package]
+name = "termlet"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.89"
+default-run = "termlet"
+
+description = "A cross-platform desktop terminal focused on SSH session management"
+authors = ["narol <narolcat@gmail.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/narol2026/termlet"
+homepage = "https://github.com/narol2026/termlet"
+keywords = ["terminal", "ssh", "sftp", "terminal-emulator", "gui"]
+categories = ["command-line-utilities", "gui", "network-programming"]
+
+# Lint configuration. The lint job in CI runs clippy with `-D warnings`, so
+# every entry here is load-bearing: a new violation fails the build.
+#
+# `undocumented_unsafe_blocks` makes the `// SAFETY:` comment on every `unsafe`
+# block required. That job runs on Linux, so only the blocks it compiles are
+# machine-checked — the macOS-only paths (`core/dock_menu.rs`,
+# `core/traffic_lights.rs`) are documented by hand and are not verified here.
+[lints.rust]
+ambiguous_negative_literals = "warn"
+missing_debug_implementations = "warn"
+redundant_imports = "warn"
+redundant_lifetimes = "warn"
+trivial_numeric_casts = "warn"
+unsafe_op_in_unsafe_fn = "warn"
+unused_lifetimes = "warn"
+
+# All major clippy categories, plus individual lints from the `restriction`
+# group that drive consistency. `priority = -1` keeps the group below the
+# individual entries below it, so a specific lint can still be tuned without
+# being overridden by its group.
+[lints.clippy]
+cargo = { level = "warn", priority = -1 }
+complexity = { level = "warn", priority = -1 }
+correctness = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+perf = { level = "warn", priority = -1 }
+style = { level = "warn", priority = -1 }
+suspicious = { level = "warn", priority = -1 }
+
+allow_attributes_without_reason = "warn"
+as_pointer_underscore = "warn"
+assertions_on_result_states = "warn"
+clone_on_ref_ptr = "warn"
+deref_by_slicing = "warn"
+disallowed_script_idents = "warn"
+empty_drop = "warn"
+empty_enum_variants_with_brackets = "warn"
+empty_structs_with_brackets = "warn"
+fn_to_numeric_cast_any = "warn"
+if_then_some_else_none = "warn"
+map_err_ignore = "warn"
+redundant_type_annotations = "warn"
+renamed_function_params = "warn"
+semicolon_outside_block = "warn"
+undocumented_unsafe_blocks = "warn"
+unnecessary_safety_comment = "warn"
+unnecessary_safety_doc = "warn"
+unneeded_field_pattern = "warn"
+unused_result_ok = "warn"
+too_long_first_doc_paragraph = "warn"
+
+# `literal_string_with_formatting_args` would otherwise flag every `t!("key")`
+# call whose translation contains braces, which is not a formatting bug here.
+literal_string_with_formatting_args = "allow"
+
+# Individual opt-outs. Each one is a lint that fires on a deliberate shape in
+# this codebase rather than on a mistake; they are listed one by one so the rest
+# of the groups above stay enforced.
+
+# `ThemePalette` is a `Copy` struct of a few hundred bytes passed by value
+# through the whole widget tree. Threading a reference through it would touch
+# roughly 130 call sites for a per-frame copy that is orders of magnitude below
+# the frame budget.
+large_types_passed_by_value = "allow"
+
+# Elm-style `view`/`update` functions read top to bottom in one screen's order.
+# Splitting them to satisfy a line count would scatter one screen's logic across
+# helpers that only that screen calls.
+too_many_lines = "allow"
+
+# iced `Task` futures inline their update handler's whole state machine. Boxing
+# each one would add an allocation per message on the UI thread.
+large_futures = "allow"
+
+# UI geometry, font metrics and Unix timestamps. The value ranges are bounded by
+# the window and terminal dimensions and by the epoch, so these casts are exact
+# in practice; `cast_lossless` (the casts that can be expressed with `From`)
+# stays enabled and is fixed rather than allowed.
+cast_possible_truncation = "allow"
+cast_precision_loss = "allow"
+cast_sign_loss = "allow"
+cast_possible_wrap = "allow"
+
+# Animation code compares an eased value against the exact constant it is
+# animated to, and the tests assert on exactly-representable values.
+float_cmp = "allow"
+
+# Session/tab id pairs (`*_sid`/`*_tid`) are deliberately parallel names; so are
+# the `dragged`/`target` pairs they are used in.
+similar_names = "allow"
+
+# Match arms in the message dispatch are written per variant, one arm per
+# message kind, so the state machine stays greppable even where two variants
+# currently share a body.
+match_same_arms = "allow"
+
+# State and settings structs mirror the persisted shape one flag per setting;
+# folding the flags into an enum would obscure that mapping.
+struct_excessive_bools = "allow"
+fn_params_excessive_bools = "allow"
+
+# The graph carries several versions of the same crate through the pinned
+# `iced`, `russh` and `alacritty_terminal` forks. Collapsing them is not
+# something this repository can do.
+multiple_crate_versions = "allow"
+
+[build-dependencies]
+# Embeds assets/app-icons/windows/termlet.ico in termlet.exe so Explorer and
+# shell integrations use the same application icon as shortcuts and the
+# installed installer.
+embed-resource = "3.0.12"
+
+[dependencies]
+iced = { version = "0.14.0", features = ["canvas", "tokio", "image", "svg"] }
+iced_runtime = { git = "https://github.com/narol2026/iced", rev = "5f54377281b37857e0985d2cf6958a9662763d4f" }
+tokio = { version = "1", features = ["fs", "io-util", "io-std", "macros", "net", "rt", "signal", "sync", "time"] }
+iced_term = "0.8.0"
+# Patched fork pinned to an exact commit. The branch is a reference for where
+# the patch set lives, not what the build resolves; the other patched forks are
+# pinned the same way in `[patch.crates-io]` below. What each fork changes is
+# in PATCHES.md.
+iced_drop = { git = "https://github.com/narol2026/iced_drop", rev = "1ad755105665498781e3a2a269ff3b4470c0ea6a", features = ["helpers"] }
+lucide-icons = { version = "1", features = ["iced"] }
+rusqlite = { version = "0.32", features = ["bundled"] }
+russh = "0.60.2"
+russh-sftp = "2.1.2"
+rand = "0.10"
+directories = "5"
+rfd = "0.15"
+tar = "0.4"
+flate2 = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+time = { version = "0.3", features = ["macros", "formatting", "parsing", "local-offset"] }
+uuid = { version = "1", features = ["v4"] }
+age = { version = "0.11", features = ["armor"] }
+rust-i18n = "4"
+sha2 = "0.11"
+chacha20poly1305 = "0.10"
+base64 = "0.22"
+getrandom = "0.2"
+# Zeroizing in-memory secret holder for credentials (see core/data.rs). The
+# `SecretString` wrapper wipes its buffer on drop via `zeroize`, so passwords
+# never linger as plaintext `String` copies beyond the exact call boundary.
+secrecy = "0.10"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+backtrace = "0.3"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Gdi",
+    "Win32_Graphics_Dwm",
+    "Win32_Security",
+    "Win32_Security_Authorization",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Console",
+    "Win32_System_Threading",
+    "Win32_UI_HiDpi",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+core-graphics = "0.23"
+dispatch2 = "0.3"
+objc2 = "0.5.2"
+objc2-foundation = { version = "0.2.2", features = ["NSGeometry", "NSThread", "NSNotification", "NSString"] }
+objc2-app-kit = { version = "0.2.2", features = [
+    "NSAnimationContext",
+    "NSButton",
+    "NSControl",
+    "NSMenu",
+    "NSMenuItem",
+    "NSView",
+    "NSWindow",
+] }
+security-framework = "3"
+
+# OS keychain for the at-rest master key on non-macOS platforms (see
+# core/crypto.rs). On macOS we talk to the modern Keychain Services API
+# directly via `security-framework`.
+#
+# The Linux `sync-secret-service` backend links the C libdbus — building on
+# Linux requires the `libdbus-1-dev` package (runtime only needs the
+# `libdbus-1` shared library, present on all desktop installs).
+[target.'cfg(not(target_os = "macos"))'.dependencies]
+keyring = { version = "3", features = ["windows-native", "sync-secret-service", "crypto-rust"] }
+
+[dev-dependencies]
+# Headless UI testing, taken from the same pinned fork revision as `iced`
+# (see `[patch.crates-io]` below). `iced_test` drives the real widget tree with
+# synthetic events and renders through the software renderer, so the UI can be
+# exercised without a window, a display or a GPU.
+iced_test = { git = "https://github.com/narol2026/iced", rev = "5f54377281b37857e0985d2cf6958a9662763d4f" }
+
+[[bin]]
+name = "termlet-bridge"
+path = "src/bin/termlet-bridge.rs"
+
+[package.metadata.deb]
+maintainer = "narol <narolcat@gmail.com>"
+# Debian's long description, and it has to be plain text. If this field is
+# absent, cargo-deb falls back to README.md and puts the raw markdown into the
+# control file — badge URLs, HTML tags and all — which is what `apt show termlet`
+# then prints. cargo-deb adds the single leading space per line and renders a
+# blank line as ".", so this value is written as plain prose with blank lines:
+# do not indent, and do not use tabs (they are rewritten as spaces).
+extended-description = """\
+A desktop terminal for people who work over SSH. Terminals, SFTP, host vaults,
+keys, port forwarding, snippets, and known hosts live in one window.
+
+Features:
+
+ * SSH terminals backed by the russh client, plus local terminals.
+ * SFTP browsing and transfers with a queue and conflict handling.
+ * Host vaults with password or key authentication, one-click connect.
+ * An age-encrypted keychain for private keys, passphrases, identities.
+ * Local, remote, and dynamic port forwarding with a runtime log.
+ * Split panes, tabs, in-terminal search, and saved workspaces.
+ * Six built-in themes, plus an auto mode that follows the system.
+ * English, Simplified Chinese, and Traditional Chinese.
+
+Passwords, passphrases, and private keys are encrypted at rest, and the master
+key is held in the operating system keychain.
+"""
+# Debian wants a machine-readable copyright file at
+# /usr/share/doc/<package>/copyright. This one carries DEP-5 fields itself, so
+# cargo-deb installs it verbatim (it only writes its own header, a bare SPDX id
+# with no license text, when those are absent). The second element is the number
+# of leading lines to skip. Generated by `tools/licenses/gen_deb_copyright.py` — re-run
+# it when a bundled asset or license changes.
+license-file = ["packaging/debian/copyright", "0"]
+depends = "$auto"
+section = "utility"
+priority = "optional"
+assets = [
+    ["target/release/termlet", "usr/bin/", "755"],
+    ["assets/desktop/termlet.desktop", "usr/share/applications/", "644"],
+    ["assets/app-icons/linux/256x256/termlet.png", "usr/share/icons/hicolor/256x256/apps/", "644"],
+    ["assets/app-icons/generic/termlet.svg", "usr/share/icons/hicolor/scalable/apps/", "644"],
+    # Apache-2.0 §4(a): a copy of the License travels with the binary. It is
+    # also what the copyright file above points at for the full text.
+    ["LICENSE", "usr/share/doc/termlet/", "644"],
+    ["THIRD_PARTY_LICENSES.md", "usr/share/doc/termlet/", "644"],
+    ["NOTICE", "usr/share/doc/termlet/", "644"],
+    ["fonts/licenses/SourceCodePro-OFL-1.1.txt", "usr/share/doc/termlet/", "644"],
+    ["fonts/licenses/Lucide-ISC.txt", "usr/share/doc/termlet/", "644"],
+    ["fonts/licenses/FontAwesome-CC-BY-4.0.txt", "usr/share/doc/termlet/", "644"],
+]
+
+[package.metadata.bundle]
+name = "Termlet"
+identifier = "com.narol.termlet"
+# cargo-bundle picks the first .icns in this list for macOS, so the
+# macOS-specific set (Apple's 824/1024 icon safe area — see
+# assets/app-icons/macos/termlet.svg, built by tools/icons/build_app_icons.sh)
+# comes first and the generic PNG covers non-macOS tooling.
+icon = [
+    "assets/app-icons/macos/termlet.icns",
+    "assets/app-icons/generic/termlet.png",
+]
+# Ship the attribution and font-license files inside the .app so the macOS
+# bundle carries the same notices as the Linux package.
+resources = [
+    "LICENSE",
+    "THIRD_PARTY_LICENSES.md",
+    "NOTICE",
+    "fonts/licenses/SourceCodePro-OFL-1.1.txt",
+    "fonts/licenses/Lucide-ISC.txt",
+    "fonts/licenses/FontAwesome-CC-BY-4.0.txt",
+]
+category = "public.app-category.utilities"
+short_description = "A cross-platform desktop terminal for SSH session management"
+long_description = "A cross-platform desktop terminal with SSH sessions, SFTP, port forwarding, and host management."
+
+# Every crate here is built from a patched fork, pinned to an exact commit
+# rather than a `*-patched` branch so an unrelated `cargo update` can never move
+# the build to a different revision. Bump the `rev` on every entry together when
+# a fork moves; the `iced_drop` dependency above is pinned the same way. What
+# each fork changes, and the upstream revision its patch branch is based on, is
+# recorded in PATCHES.md.
+[patch.crates-io]
+iced_term = { git = "https://github.com/narol2026/iced_term", rev = "a0964fc7e98bab8a846e619f609de9039b0d9596" }
+vte = { git = "https://github.com/narol2026/vte", rev = "c5a8ad1e017bebecd95427744324f8e11b0b8e74" }
+alacritty_terminal = { git = "https://github.com/narol2026/alacritty", rev = "bdf472845eca9c15e4968597962410a81213fd04" }
+iced = { git = "https://github.com/narol2026/iced", rev = "5f54377281b37857e0985d2cf6958a9662763d4f" }
+iced_core = { git = "https://github.com/narol2026/iced", rev = "5f54377281b37857e0985d2cf6958a9662763d4f" }
+iced_graphics = { git = "https://github.com/narol2026/iced", rev = "5f54377281b37857e0985d2cf6958a9662763d4f" }
+iced_futures = { git = "https://github.com/narol2026/iced", rev = "5f54377281b37857e0985d2cf6958a9662763d4f" }
+iced_widget = { git = "https://github.com/narol2026/iced", rev = "5f54377281b37857e0985d2cf6958a9662763d4f" }
+iced_runtime = { git = "https://github.com/narol2026/iced", rev = "5f54377281b37857e0985d2cf6958a9662763d4f" }

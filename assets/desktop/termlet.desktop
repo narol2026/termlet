@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Termlet
+Comment=A terminal UI application
+Exec=termlet
+Terminal=false
+Type=Application
+Icon=termlet
+Categories=Utility;TerminalEmulator;
+StartupWMClass=termlet

@@ -1,0 +1,16 @@
+# Default owner for everything in the repository.
+# Replace the handle below if the maintainer account differs from the
+# repository owner; CODEOWNERS handles must have write access to the repo.
+* @narol2026
+
+# Security-sensitive areas. Keep a maintainer on the review for these.
+/src/core/crypto.rs
+/src/core/data.rs
+/src/keychain/
+/src/ssh/
+/src/ssh_connect/
+/src/known_hosts/
+/src/hosts/export.rs
+
+# Governance and CI configuration.
+/.github/

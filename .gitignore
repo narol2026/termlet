@@ -1,0 +1,41 @@
+# Rust / Cargo
+# Compiled output. `debug` covers the older layout, `target` is the current one.
+debug
+target
+
+# Installer output produced by the scripts under packaging/.
+/dist/
+
+# Backups written by rustfmt.
+**/*.rs.bk
+
+# Debug symbols produced by MSVC builds of rustc.
+*.pdb
+
+# Output of cargo-mutants.
+**/mutants.out*/
+
+# Stack traces rustc dumps into the working directory on an internal compiler
+# error.
+rustc-ice-*.txt
+
+# Build tooling used by this repository
+# Icon font build (tools/icons/build_icon_font.mjs, via svgtofont).
+node_modules/
+# Bytecode cache of the Python tooling (tools/licenses/gen_*.py).
+__pycache__/
+*.py[cod]
+
+# Credentials and signing material
+# These ignore the files themselves rather than a whole directory, so a
+# directory a contributor adds is never dropped silently.
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

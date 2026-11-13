@@ -1,0 +1,62 @@
+{
+  "centos": {
+    "encodedCode": "\\ea01",
+    "prefix": "myi",
+    "className": "myi-centos",
+    "unicode": "&#59905;"
+  },
+  "debian": {
+    "encodedCode": "\\ea02",
+    "prefix": "myi",
+    "className": "myi-debian",
+    "unicode": "&#59906;"
+  },
+  "github": {
+    "encodedCode": "\\ea03",
+    "prefix": "myi",
+    "className": "myi-github",
+    "unicode": "&#59907;"
+  },
+  "google": {
+    "encodedCode": "\\ea04",
+    "prefix": "myi",
+    "className": "myi-google",
+    "unicode": "&#59908;"
+  },
+  "linux": {
+    "encodedCode": "\\ea05",
+    "prefix": "myi",
+    "className": "myi-linux",
+    "unicode": "&#59909;"
+  },
+  "macos": {
+    "encodedCode": "\\ea06",
+    "prefix": "myi",
+    "className": "myi-macos",
+    "unicode": "&#59910;"
+  },
+  "panel-right-open": {
+    "encodedCode": "\\ea07",
+    "prefix": "myi",
+    "className": "myi-panel-right-open",
+    "unicode": "&#59911;"
+  },
+  "point": {
+    "encodedCode": "\\ea08",
+    "prefix": "myi",
+    "className": "myi-point",
+    "unicode": "&#59912;"
+  },
+  "ubuntu": {
+    "encodedCode": "\\ea09",
+    "prefix": "myi",
+    "className": "myi-ubuntu",
+    "unicode": "&#59913;"
+  },
+  "windows": {
+    "encodedCode": "\\ea0a",
+    "prefix": "myi",
+    "className": "myi-windows",
+    "unicode": "&#59914;"
+  }
+}

@@ -1,0 +1,185 @@
+# Release: build the platform installers and attach them to a GitHub Release.
+#
+# Triggered by a version tag (`v1.2.3`). The tag must match the version in
+# Cargo.toml, so a release can never ship a build with the wrong version
+# stamped into it. Linux produces a `.deb`, macOS produces a `.dmg` per
+# architecture, and everything is attached to the release for the tag along
+# with a `SHA256SUMS` file.
+#
+# To cut a release:
+#   1. Move the relevant CHANGELOG.md items out of `[Unreleased]` into a new
+#      `## [x.y.z] - YYYY-MM-DD` section, and bump the version in Cargo.toml.
+#   2. Commit on the default branch, then push the matching tag:
+#        git tag v1.2.3 && git push origin v1.2.3
+#   3. This workflow builds every platform and opens the release, using the
+#      CHANGELOG section as its notes.
+#
+# If a run needs to be retried, use "Re-run all jobs" on the tag's run — it
+# re-runs on the same tag ref, and an existing release has its assets
+# refreshed in place.
+#
+# The macOS `.dmg` is not signed or notarized, so Gatekeeper warns on first
+# launch (see the note in README.md).
+name: Release
+
+on:
+  push:
+    tags:
+      - "v[0-9]*"
+
+# The build jobs only read the repository; only the publishing job below is
+# granted write access, and only to the contents scope it needs.
+permissions:
+  contents: read
+
+# Never let two tag builds publish at the same time.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  meta:
+    name: resolve version
+    runs-on: ubuntu-22.04
+    outputs:
+      version: ${{ steps.vars.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Rust toolchain
+        # Installs the channel and components pinned in rust-toolchain.toml.
+        run: rustup install
+      - name: Read crate version and verify the tag
+        id: vars
+        run: |
+          version="$(cargo metadata --no-deps --format-version 1 --locked \
+            | jq -r '.packages[] | select(.name == "termlet") | .version')"
+          # The tag must be exactly `v<Cargo.toml version>`; a mismatch would
+          # put a misleading version in the binary and the release.
+          if [ "v${version}" != "${GITHUB_REF_NAME}" ]; then
+            echo "::error::tag ${GITHUB_REF_NAME} does not match Cargo.toml version ${version}"
+            exit 1
+          fi
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "Releasing termlet ${version}"
+
+  build:
+    name: build (${{ matrix.target }})
+    needs: meta
+    strategy:
+      # One failing platform should not hide the others.
+      fail-fast: false
+      matrix:
+        include:
+          # Ubuntu 22.04 (glibc 2.35) keeps the binary runnable on older
+          # distros; --release matches what packaging ships.
+          - target: linux-x86_64
+            os: ubuntu-22.04
+          # ARM64 Linux (aarch64) on a native ARM runner. It uses the same
+          # 22.04 base as x86_64 so both architectures link against the same
+          # glibc (2.35).
+          - target: linux-aarch64
+            os: ubuntu-22.04-arm
+          # macOS Intel (x86_64). The macos-13 / macos-14 images are retired.
+          - target: macos-x86_64
+            os: macos-15-intel
+          # macOS Apple Silicon (arm64).
+          - target: macos-aarch64
+            os: macos-15
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libdbus-1-dev pkg-config
+      - name: Install Rust toolchain
+        # Installs the channel and components pinned in rust-toolchain.toml.
+        run: rustup install
+      - uses: Swatinem/rust-cache@v2
+      # rust-cache caches `~/.cargo/bin`, so each packaging tool is compiled
+      # once per platform and reused by later runs.
+      - name: Install cargo-deb
+        if: runner.os == 'Linux'
+        run: command -v cargo-deb >/dev/null || cargo install cargo-deb --locked
+      - name: Install cargo-bundle
+        if: runner.os == 'macOS'
+        run: command -v cargo-bundle >/dev/null || cargo install cargo-bundle --locked
+      - name: Build release binary
+        run: cargo build --release --locked
+      - name: Package .deb
+        if: runner.os == 'Linux'
+        # Reuses the binary built above; dpkg-shlibdeps (already on the runner)
+        # resolves `depends = "$auto"` in Cargo.toml.
+        run: >
+          packaging/debian/build.sh --skip-build
+          --deb-version "${{ needs.meta.outputs.version }}"
+      - name: Package .dmg
+        if: runner.os == 'macOS'
+        # Both macOS targets contribute a file to the same release, so the
+        # artifact name carries the version and architecture.
+        run: >
+          packaging/macos/build.sh --format dmg
+          --output "target/Termlet-${{ needs.meta.outputs.version }}-${{ matrix.target }}.dmg"
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.target }}
+          # Each runner matches exactly one of these.
+          path: |
+            target/debian/*.deb
+            target/Termlet-*.dmg
+          # A silently empty artifact would be worse than a failed job.
+          if-no-files-found: error
+          # .deb and .dmg are already compressed.
+          compression-level: 0
+
+  release:
+    name: publish release
+    needs: [meta, build]
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - name: Download all packages
+        uses: actions/download-artifact@v4
+        with:
+          pattern: release-*
+          path: dist
+          merge-multiple: true
+      - name: Write checksums
+        working-directory: dist
+        run: |
+          # A stable, sorted checksum file alongside the installers.
+          sha256sum -- * > SHA256SUMS
+          ls -l
+      - name: Create or refresh the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.meta.outputs.version }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            # Tag re-run: refresh the asset set in place.
+            gh release upload "$tag" dist/* --clobber
+            exit 0
+          fi
+          # Prefer the CHANGELOG section for this version; fall back to
+          # GitHub's generated notes when the section is missing.
+          notes="$(mktemp)"
+          awk -v ver="$VERSION" '
+            $0 ~ "^## \\[" ver "\\]" || $0 ~ "^## " ver "( |$)" { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > "$notes"
+          if grep -q '[^[:space:]]' "$notes"; then
+            gh release create "$tag" --title "Termlet ${VERSION}" --notes-file "$notes" dist/*
+          else
+            echo "::warning::no CHANGELOG section for ${VERSION}; falling back to generated notes"
+            gh release create "$tag" --title "Termlet ${VERSION}" --generate-notes dist/*
+          fi

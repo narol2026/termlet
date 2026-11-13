@@ -1,0 +1,20 @@
+# The exact Rust toolchain this project is developed, tested, and released
+# with. Pinning it here means a build does not depend on whichever `stable`
+# happened to be current that day — the same reason `Cargo.lock` is committed
+# and the iced fork is pinned to an exact revision in `Cargo.toml`.
+#
+# `rust-version` in `Cargo.toml` is a different thing: the *minimum* compiler
+# (MSRV) that could build this crate. This file is the version we actually use.
+# The `msrv` job in .github/workflows/ci.yml installs the version named by
+# `rust-version` and compiles with it, so that floor is verified rather than
+# assumed — do not raise `rust-version` without checking that job.
+#
+# rustfmt and clippy ride along with the toolchain, because CONTRIBUTING.md
+# requires `cargo fmt` and `cargo clippy` to pass before a pull request.
+#
+# Bumping the pin is a deliberate change: update the channel here. Only move
+# `rust-version` in `Cargo.toml` when the MSRV itself moves.
+[toolchain]
+channel = "1.95.0"
+components = ["clippy", "rustfmt"]
+profile = "minimal"

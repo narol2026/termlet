@@ -1,0 +1,33 @@
+{
+  "name": "termlet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A cross-platform desktop terminal focused on SSH session management",
+  "license": "Apache-2.0",
+  "author": "narol <narolcat@gmail.com>",
+  "homepage": "https://github.com/narol2026/termlet#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/narol2026/termlet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/narol2026/termlet/issues"
+  },
+  "keywords": [
+    "terminal",
+    "ssh",
+    "sftp",
+    "terminal-emulator",
+    "gui"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build:icons": "node tools/icons/build_icon_font.mjs"
+  },
+  "devDependencies": {
+    "fs-extra": "^11.2.0",
+    "svgtofont": "^6.5.2"
+  }
+}

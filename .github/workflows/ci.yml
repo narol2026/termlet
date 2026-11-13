@@ -1,0 +1,211 @@
+# Continuous integration: formatting, lints, unit tests, an MSRV compile check,
+# and a release build on every supported platform, with each platform's
+# installer (`.deb` on Linux, `.dmg` on macOS) uploaded as an artifact. The
+# lint and test jobs mirror the "checks to run before opening a PR" list in
+# CONTRIBUTING.md.
+# Only `main` produces release markings; every other ref (feature branches and
+# pull requests) builds with a `-dev` version suffix.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # Allows running the workflow by hand from the Actions tab (useful on a
+  # feature branch before it is merged).
+  workflow_dispatch:
+
+# The jobs only read the repository, so keep the token read-only.
+permissions:
+  contents: read
+
+# Cancel superseded runs on the same ref to save runner minutes.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  lint:
+    name: fmt + clippy
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check application icon bundles
+        run: python3 tools/icons/check_app_icons.py
+      # The Debian copyright file is assembled from LICENSE and the texts under
+      # fonts/licenses/; a stale copy would ship an incomplete notice set in the
+      # .deb, so it is checked before anything is built.
+      - name: Check the generated Debian copyright file
+        run: python3 tools/licenses/gen_deb_copyright.py --check
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libdbus-1-dev pkg-config
+      - name: Install Rust toolchain
+        # Installs the channel and components pinned in rust-toolchain.toml.
+        run: rustup install
+      - uses: Swatinem/rust-cache@v2
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Run clippy
+        run: cargo clippy --all-targets --all-features --locked -- -D warnings
+
+  test:
+    name: test (linux x86_64)
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libdbus-1-dev pkg-config
+      - name: Install Rust toolchain
+        # Installs the channel and components pinned in rust-toolchain.toml.
+        run: rustup install
+      - uses: Swatinem/rust-cache@v2
+      - name: Run tests
+        run: cargo test --locked
+
+  # `rust-version` in Cargo.toml is a promise to anyone building from source
+  # with an older compiler; this job is what keeps it honest. It is deliberately
+  # not part of the "checks to run before opening a PR" list — contributors
+  # build with the toolchain pinned in rust-toolchain.toml, like every other job
+  # here.
+  msrv:
+    name: msrv (cargo check)
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libdbus-1-dev pkg-config
+      - name: Read the declared MSRV
+        id: msrv
+        # Read straight from the manifest: `cargo metadata` resolves through
+        # rust-toolchain.toml and would download the pinned channel just to
+        # print one field, which is the opposite of what this job is for.
+        run: |
+          msrv="$(sed -n 's/^rust-version = "\([^"]*\)"/\1/p' Cargo.toml)"
+          if [ -z "$msrv" ]; then
+            echo "::error::Cargo.toml declares no rust-version to check"
+            exit 1
+          fi
+          echo "version=$msrv" >> "$GITHUB_OUTPUT"
+          echo "Checking against the declared MSRV ${msrv}"
+      - name: Install the MSRV toolchain
+        # `--profile minimal` matches rust-toolchain.toml, and no rustfmt or
+        # clippy component is needed since this job only compiles.
+        #
+        # Exporting RUSTUP_TOOLCHAIN decides what the `cargo`/`rustc` shims
+        # resolve to for every step below, including the bare `rustc -vV` that
+        # Swatinem/rust-cache runs for its cache key. Without it that call would
+        # resolve through rust-toolchain.toml and download the pinned channel —
+        # the one compiler this job must not be checking with.
+        run: |
+          rustup toolchain install "${{ steps.msrv.outputs.version }}" --profile minimal
+          echo "RUSTUP_TOOLCHAIN=${{ steps.msrv.outputs.version }}" >> "$GITHUB_ENV"
+      - uses: Swatinem/rust-cache@v2
+      - name: Verify the compiler
+        # The check below is only worth running if it is the older compiler, so
+        # assert that rather than trusting the override to keep working.
+        run: |
+          rustc -vV
+          rustc -vV | grep -qE "release: ${{ steps.msrv.outputs.version }}\b" \
+            || { echo "::error::expected the MSRV ${{ steps.msrv.outputs.version }}, got $(rustc -V)"; exit 1; }
+      - name: Check
+        # `--all-targets` also compiles the inline test code; `--locked` fails
+        # if the lockfile would move.
+        run: cargo check --locked --all-targets --all-features
+
+  build:
+    name: build (${{ matrix.target }})
+    strategy:
+      # One failing platform should not hide the others.
+      fail-fast: false
+      matrix:
+        include:
+          # Ubuntu 22.04 (glibc 2.35) keeps the release binary runnable on
+          # older distros; --release matches what packaging ships.
+          - target: linux-x86_64
+            os: ubuntu-22.04
+          # ARM64 Linux (aarch64) on a native ARM runner. It uses the same
+          # 22.04 base as x86_64 so both architectures link against the same
+          # glibc (2.35).
+          - target: linux-aarch64
+            os: ubuntu-22.04-arm
+          # macOS Intel (x86_64). The macos-13 / macos-14 images are retired.
+          - target: macos-x86_64
+            os: macos-15-intel
+          # macOS Apple Silicon (arm64).
+          - target: macos-aarch64
+            os: macos-15
+    runs-on: ${{ matrix.os }}
+    env:
+      # Compiled into the binary's version string (see `src/core/version.rs`)
+      # and appended to the artifact name, so a dev build is never mistaken for
+      # a release build.
+      TERMLET_VERSION_SUFFIX: ${{ github.ref == 'refs/heads/main' && '' || '-dev' }}
+      # The same marker in Debian's prerelease form for the `.deb` metadata:
+      # `1.0.0~dev` compares *lower* than `1.0.0`, so apt never mistakes a dev
+      # build for an upgrade over the release. Empty means the plain version.
+      TERMLET_DEB_SUFFIX: ${{ github.ref == 'refs/heads/main' && '' || '~dev' }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libdbus-1-dev pkg-config
+      - name: Install Rust toolchain
+        # Installs the channel and components pinned in rust-toolchain.toml.
+        run: rustup install
+      - uses: Swatinem/rust-cache@v2
+      # rust-cache caches `~/.cargo/bin`, so the packaging tool is compiled
+      # once per platform and reused by later runs.
+      - name: Install cargo-deb
+        if: runner.os == 'Linux'
+        run: command -v cargo-deb >/dev/null || cargo install cargo-deb --locked
+      - name: Install cargo-bundle
+        if: runner.os == 'macOS'
+        run: command -v cargo-bundle >/dev/null || cargo install cargo-bundle --locked
+      - name: Build release binary
+        run: cargo build --release --locked
+      - name: Read crate version
+        id: crate
+        run: |
+          version="$(cargo metadata --no-deps --format-version 1 --locked \
+            | jq -r '.packages[] | select(.name == "termlet") | .version')"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - name: Build .deb
+        if: runner.os == 'Linux'
+        # Reuses the binary built above; dpkg-shlibdeps (from dpkg-dev, already
+        # on the runner image) resolves `depends = "$auto"` in Cargo.toml.
+        run: >
+          packaging/debian/build.sh --skip-build
+          --deb-version "${{ steps.crate.outputs.version }}${{ env.TERMLET_DEB_SUFFIX }}"
+      - name: Build .dmg
+        if: runner.os == 'macOS'
+        # cargo-bundle re-runs `cargo build --release`, which is a no-op here.
+        # The wrapper names the artifact so the download carries the version
+        # and the release/dev marker.
+        run: >
+          packaging/macos/build.sh --format dmg
+          --output "target/Termlet-${{ steps.crate.outputs.version }}${{ env.TERMLET_VERSION_SUFFIX }}.dmg"
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: termlet-${{ matrix.target }}${{ env.TERMLET_VERSION_SUFFIX }}
+          # Each runner matches exactly one of these.
+          path: |
+            target/debian/*.deb
+            target/Termlet-*.dmg
+          # A silently empty artifact would be worse than a failed job.
+          if-no-files-found: error
+          # .deb and .dmg are already compressed; the wrapper zip (v4 always
+          # adds one) only needs to store them, not compress them again.
+          compression-level: 0

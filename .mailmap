@@ -1,0 +1,12 @@
+# Canonical author identity for this repository.
+#
+# Git (`shortlog`, `blame`, `log --use-mailmap`) and GitHub use this file to
+# attribute commits that belong to the same person but carry different
+# name/email variants. The canonical form matches `authors` in `Cargo.toml`,
+# `author` in `package.json`, and the copyright line in `NOTICE`/`LICENSE`.
+#
+# Format: Proper Name <proper@email> Commit Name <commit@email>
+narol <narolcat@gmail.com> narol1024 <narolcat>
+narol <narolcat@gmail.com> narol1024 <narolcat@gmail.com>
+narol <narolcat@gmail.com> narol2026 <narolcat@gmail.com>
+narol <narolcat@gmail.com> <narolcat>

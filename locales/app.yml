@@ -1,0 +1,2573 @@
+_version: 2
+app.copy:
+  en: Copy
+  zh-CN: 复制
+  zh-TW: 複製
+app.crash_body:
+  en: Termlet crashed during the previous session.
+  zh-CN: Termlet 在上次会话中崩溃。
+  zh-TW: Termlet 在上次會話中崩潰。
+app.crash_detail:
+  en: See the report below for details.
+  zh-CN: 请查看下方报告了解详情。
+  zh-TW: 請檢視下方報告瞭解詳情。
+app.crash_title:
+  en: Crash Report
+  zh-CN: 崩溃报告
+  zh-TW: 崩潰報告
+app.crash_title_count:
+  en: Crash Reports (%{count})
+  zh-CN: 崩溃报告 (%{count})
+  zh-TW: 崩潰報告 (%{count})
+app.dismiss:
+  en: Dismiss
+  zh-CN: 关闭
+  zh-TW: 關閉
+app.logs_copied:
+  en: Logs copied to clipboard
+  zh-CN: 日志已复制到剪贴板
+  zh-TW: 日誌已複製到剪貼簿
+app.quit_body:
+  en: Are you sure you want to close the application?
+  zh-CN: 确定要关闭应用程序吗？
+  zh-TW: 確定要關閉應用程式嗎？
+app.quit_body_locked:
+  en: '%{count} locked terminal(s) will be closed.'
+  zh-CN: 将关闭 %{count} 个已锁定终端。
+  zh-TW: 將關閉 %{count} 個已鎖定終端。
+app.quit_title:
+  en: Quit Termlet?
+  zh-CN: 退出 Termlet？
+  zh-TW: 退出 Termlet？
+app.quit_without_save:
+  en: Quit
+  zh-CN: 确认退出
+  zh-TW: 確認退出
+app.workspace_saved_empty:
+  en: No terminal sessions to save
+  zh-CN: 没有可保存的终端会话
+  zh-TW: 沒有可儲存的終端會話
+workspace.title:
+  en: Workspaces
+  zh-CN: 工作区
+  zh-TW: 工作區
+workspace.name_placeholder:
+  en: Workspace name
+  zh-CN: 工作区名称
+  zh-TW: 工作區名稱
+workspace.name_required:
+  en: Workspace name cannot be empty
+  zh-CN: 工作区名称不能为空
+  zh-TW: 工作區名稱不能為空
+workspace.auto_name:
+  en: 'Workspace-%{number}'
+  zh-CN: '工作区-%{number}'
+  zh-TW: '工作區-%{number}'
+workspace.save_title:
+  en: Save Workspace
+  zh-CN: 保存工作区
+  zh-TW: 儲存工作區
+workspace.save_confirm:
+  en: Save
+  zh-CN: 保存
+  zh-TW: 儲存
+workspace.saved:
+  en: 'Workspace saved as "%{name}"'
+  zh-CN: 已另存为“%{name}”
+  zh-TW: 已另存為“%{name}”
+workspace.overwritten:
+  en: 'Workspace "%{name}" overwritten'
+  zh-CN: 已覆盖“%{name}”
+  zh-TW: 已覆蓋“%{name}”
+workspace.renamed:
+  en: Workspace renamed
+  zh-CN: 工作区已重命名
+  zh-TW: 工作區已重新命名
+workspace.deleted:
+  en: Workspace deleted
+  zh-CN: 工作区已删除
+  zh-TW: 工作區已刪除
+workspace.apply:
+  en: Apply
+  zh-CN: 应用
+  zh-TW: 應用
+workspace.rename:
+  en: Rename
+  zh-CN: 重命名
+  zh-TW: 重新命名
+workspace.delete:
+  en: Delete
+  zh-CN: 删除
+  zh-TW: 刪除
+workspace.empty:
+  en: No saved workspaces yet
+  zh-CN: 还没有已保存的工作区
+  zh-TW: 還沒有已儲存的工作區
+workspace.apply_title:
+  en: Apply Workspace?
+  zh-CN: 应用工作区？
+  zh-TW: 應用工作區？
+workspace.apply_body:
+  en: 'This will close %{current} terminal tab(s) (%{locked} locked) and restore "%{name}" with %{target} tab(s).'
+  zh-CN: 将关闭当前 %{current} 个终端标签，其中 %{locked} 个已锁定，并恢复“%{name}”的 %{target} 个标签。
+  zh-TW: 將關閉當前 %{current} 個終端標籤，其中 %{locked} 個已鎖定，並恢復“%{name}”的 %{target} 個標籤。
+workspace.apply_confirm:
+  en: Confirm Apply
+  zh-CN: 确认应用
+  zh-TW: 確認應用
+workspace.apply_saved:
+  en: Workspace applied
+  zh-CN: 工作区已应用
+  zh-TW: 工作區已應用
+workspace.apply_partial:
+  en: '%{count} SSH host(s) could not be restored'
+  zh-CN: 有 %{count} 个 SSH 主机无法恢复
+  zh-TW: 有 %{count} 個 SSH 主機無法恢復
+workspace.apply_empty:
+  en: No workspace to apply
+  zh-CN: 没有可应用的工作区
+  zh-TW: 沒有可應用的工作區
+workspace.rename_title:
+  en: Rename Workspace
+  zh-CN: 重命名工作区
+  zh-TW: 重新命名工作區
+workspace.rename_confirm:
+  en: Save
+  zh-CN: 保存
+  zh-TW: 儲存
+workspace.delete_title:
+  en: Delete Workspace?
+  zh-CN: 删除工作区？
+  zh-TW: 刪除工作區？
+workspace.delete_body:
+  en: 'Delete "%{name}"? This cannot be undone.'
+  zh-CN: 确定删除“%{name}”？此操作无法撤销。
+  zh-TW: 確定刪除“%{name}”？此操作無法撤銷。
+workspace.delete_confirm:
+  en: Delete
+  zh-CN: 删除
+  zh-TW: 刪除
+workspace.auto_restore_title:
+  en: Restore Last Session?
+  zh-CN: 恢复上次会话？
+  zh-TW: 恢復上次會話？
+workspace.auto_restore_body:
+  en: 'Termlet did not exit cleanly last time. Restore %{tabs} tab(s) and %{sessions} session(s) from the last snapshot?'
+  zh-CN: 上次未正常退出。是否恢复上次快照中的 %{tabs} 个标签和 %{sessions} 个会话？
+  zh-TW: 上次未正常退出。是否恢復上次快照中的 %{tabs} 個標籤和 %{sessions} 個會話？
+workspace.auto_restore_confirm:
+  en: Restore
+  zh-CN: 恢复
+  zh-TW: 恢復
+workspace.auto_restore_dismiss:
+  en: Don't Restore
+  zh-CN: 不恢复
+  zh-TW: 不恢復
+workspace.duplicate_title:
+  en: Workspace name already exists
+  zh-CN: 工作区名称已存在
+  zh-TW: 工作區名稱已存在
+workspace.duplicate_body:
+  en: 'A workspace named "%{name}" already exists. Overwrite it, or keep both?'
+  zh-CN: 已存在名为“%{name}”的工作区。要覆盖它，还是保留重名？
+  zh-TW: 已存在名為“%{name}”的工作區。要覆蓋它，還是保留重名？
+workspace.duplicate_overwrite:
+  en: Overwrite
+  zh-CN: 覆盖
+  zh-TW: 覆蓋
+workspace.duplicate_keep:
+  en: Keep Duplicate
+  zh-CN: 保留重名
+  zh-TW: 保留重名
+workspace.transfer_menu_btn:
+  en: Export / Import
+  zh-CN: 导出 / 导入
+  zh-TW: 匯出 / 匯入
+workspace.export_btn:
+  en: Export
+  zh-CN: 导出
+  zh-TW: 匯出
+workspace.import_btn:
+  en: Import
+  zh-CN: 导入
+  zh-TW: 匯入
+workspace.export_title:
+  en: Export Workspaces
+  zh-CN: 导出工作区
+  zh-TW: 匯出工作區
+workspace.import_title:
+  en: Import Workspaces
+  zh-CN: 导入工作区
+  zh-TW: 匯入工作區
+workspace.export_success:
+  en: 'Exported workspaces to %{path}'
+  zh-CN: '已导出工作区到 %{path}'
+  zh-TW: '已匯出工作區到 %{path}'
+workspace.export_empty:
+  en: There are no workspaces to export.
+  zh-CN: 没有可导出的工作区。
+  zh-TW: 沒有可匯出的工作區。
+workspace.import_confirm_title:
+  en: Confirm Import
+  zh-CN: 确认导入
+  zh-TW: 確認匯入
+workspace.import_confirm_body:
+  en: '%{new} new workspace(s) will be imported, %{dup} duplicate(s) will be skipped.'
+  zh-CN: '将导入 %{new} 个工作区，跳过 %{dup} 个重复工作区。'
+  zh-TW: '將匯入 %{new} 個工作區，跳過 %{dup} 個重複工作區。'
+workspace.import_confirm_submit:
+  en: Import
+  zh-CN: 导入
+  zh-TW: 匯入
+workspace.import_success:
+  en: 'Imported %{n} workspaces'
+  zh-CN: '已导入 %{n} 个工作区'
+  zh-TW: '已匯入 %{n} 個工作區'
+workspace.import_success_with_dups:
+  en: 'Imported %{new} workspaces, skipped %{dup} duplicates'
+  zh-CN: '已导入 %{new} 个工作区，跳过 %{dup} 个重复'
+  zh-TW: '已匯入 %{new} 個工作區，跳過 %{dup} 個重複'
+workspace.import_all_duplicates:
+  en: 'All %{n} workspace(s) already exist — nothing imported'
+  zh-CN: '%{n} 个工作区已全部存在，未导入任何内容'
+  zh-TW: '%{n} 個工作區已全部存在，未匯入任何內容'
+app.report_copied:
+  en: Report copied to clipboard
+  zh-CN: 报告已复制到剪贴板
+  zh-TW: 報告已複製到剪貼簿
+app.title:
+  en: Termlet
+  zh-CN: Termlet
+  zh-TW: Termlet
+crypto.keychain_fallback:
+  en: System keychain unavailable; using a local encrypted key file
+  zh-CN: 系统钥匙串不可用，已改用本地加密密钥文件
+  zh-TW: 系統鑰匙圈不可用，已改用本機加密金鑰檔案
+auth_type.key:
+  en: Key
+  zh-CN: 密钥
+  zh-TW: 金鑰
+auth_type.password:
+  en: Password
+  zh-CN: 密码
+  zh-TW: 密碼
+context_menu.copy:
+  en: Copy
+  zh-CN: 复制
+  zh-TW: 複製
+context_menu.edit:
+  en: Edit
+  zh-CN: 编辑
+  zh-TW: 編輯
+dialog.delete:
+  en: Delete
+  zh-CN: 删除
+  zh-TW: 刪除
+form.description:
+  en: Description
+  zh-CN: 描述
+  zh-TW: 描述
+form.from_keychain:
+  en: From Keychain
+  zh-CN: 从密钥库
+  zh-TW: 從金鑰庫
+form.hostname:
+  en: Hostname
+  zh-CN: 主机名
+  zh-TW: 主機名
+form.name:
+  en: Name
+  zh-CN: 名称
+  zh-TW: 名稱
+form.no_keys_hint:
+  en: No keys in Keychain. Generate one first or type a path manually.
+  zh-CN: 密钥库中没有密钥。请先生成密钥，或手动输入路径。
+  zh-TW: 金鑰庫中沒有金鑰。請先生成金鑰，或手動輸入路徑。
+form.password:
+  en: Password
+  zh-CN: 密码
+  zh-TW: 密碼
+form.port:
+  en: Port
+  zh-CN: 端口
+  zh-TW: 埠
+form.private_key:
+  en: Private Key
+  zh-CN: 私钥
+  zh-TW: 私鑰
+form.username:
+  en: Username
+  zh-CN: 用户名
+  zh-TW: 使用者名稱
+form.saved_ssh_password:
+  en: Saved SSH password
+  zh-CN: 已保存的 SSH 密码
+  zh-TW: 已儲存的 SSH 密碼
+hosts.auth_type:
+  en: Auth Type
+  zh-CN: 认证类型
+  zh-TW: 認證型別
+hosts.jump_host:
+  en: Jump Host
+  zh-CN: 跳板机
+  zh-TW: 跳板機
+hosts.no_jump_host:
+  en: None (direct connection)
+  zh-CN: 无（直连）
+  zh-TW: 無（直連）
+hosts.search_jump_hosts:
+  en: Search jump hosts…
+  zh-CN: 搜索跳板机...
+  zh-TW: 搜尋跳板機...
+hosts.no_jump_host_options:
+  en: No other hosts available
+  zh-CN: 没有其他主机可选
+  zh-TW: 沒有其他主機可選
+hosts.delete_confirm_body:
+  en: Are you sure you want to delete "%{name}"?
+  zh-CN: 确定要删除 "%{name}" 吗？
+  zh-TW: 確定要刪除 "%{name}" 嗎？
+hosts.delete_confirm_title:
+  en: Delete Host?
+  zh-CN: 删除主机？
+  zh-TW: 刪除主機？
+hosts.deleted_log:
+  en: Deleted host "%{name}"
+  zh-CN: 已删除主机 "%{name}"
+  zh-TW: 已刪除主機 "%{name}"
+hosts.deleted_toast:
+  en: Host "%{name}" deleted
+  zh-CN: 主机 "%{name}" 已删除
+  zh-TW: 主機 "%{name}" 已刪除
+hosts.edit_host:
+  en: Edit Host
+  zh-CN: 编辑主机
+  zh-TW: 編輯主機
+hosts.empty:
+  en: No hosts yet. Click + NEW HOST to add one.
+  zh-CN: 暂无主机。点击 + 新建主机 添加。
+  zh-TW: 暫無主機。點選 + 新建主機 新增。
+hosts.from_identities:
+  en: From Identities
+  zh-CN: 从身份列表
+  zh-TW: 從身份列表
+hosts.new_host:
+  en: NEW HOST
+  zh-CN: 新建主机
+  zh-TW: 新建主機
+hosts.tags:
+  en: Tags
+  zh-CN: 标签
+  zh-TW: 標籤
+hosts.add_tag:
+  en: Add Tag
+  zh-CN: 添加标签
+  zh-TW: 新增標籤
+hosts.search_tags:
+  en: Search or type a new tag…
+  zh-CN: 搜索或输入新标签...
+  zh-TW: 搜尋或輸入新標籤...
+hosts.new_tag:
+  en: New Tag
+  zh-CN: 新建标签
+  zh-TW: 新建標籤
+hosts.create_tag:
+  en: 'Create "%{name}"'
+  zh-CN: '创建 "%{name}"'
+  zh-TW: '建立 "%{name}"'
+hosts.no_tags_to_add:
+  en: No existing tags to add
+  zh-CN: 暂无可添加的标签
+  zh-TW: 暫無可新增的標籤
+hosts.no_tags:
+  en: No tags — this host is uncategorized.
+  zh-CN: 暂无标签，此主机未分类。
+  zh-TW: 暫無標籤，此主機未分類。
+hosts.filter_all:
+  en: All
+  zh-CN: 全部
+  zh-TW: 全部
+hosts.filter_no_match:
+  en: No hosts match this tag filter.
+  zh-CN: 没有符合当前标签筛选的主机。
+  zh-TW: 沒有符合當前標籤篩選的主機。
+hosts.no_identities:
+  en: No identities yet. Add one in Keychain.
+  zh-CN: 暂无身份。请到密钥管理中添加。
+  zh-TW: 暫無身份。請到金鑰管理中新增。
+hosts.no_identity_match:
+  en: No identities match your search.
+  zh-CN: 没有匹配的身份。
+  zh-TW: 沒有匹配的身份。
+hosts.no_host_selected:
+  en: No host selected
+  zh-CN: 未选择主机
+  zh-TW: 未選擇主機
+hosts.no_match:
+  en: No hosts match your search.
+  zh-CN: 没有匹配的主机。
+  zh-TW: 沒有匹配的主機。
+hosts.search:
+  en: Search hosts by name, IP, username…
+  zh-CN: 按名称、IP、用户名搜索主机...
+  zh-TW: 按名稱、IP、使用者名稱搜尋主機...
+hosts.search_identities:
+  en: Search identities…
+  zh-CN: 搜索身份...
+  zh-TW: 搜尋身份...
+hosts.select_identity:
+  en: Select identity…
+  zh-CN: 选择身份...
+  zh-TW: 選擇身份...
+hosts.select_key:
+  en: Select key…
+  zh-CN: 选择密钥...
+  zh-TW: 選擇金鑰...
+hosts.terminal:
+  en: TERMINAL
+  zh-CN: 本地终端
+  zh-TW: 本地終端
+hosts.export_btn:
+  en: Export
+  zh-CN: 导出
+  zh-TW: 匯出
+hosts.import_btn:
+  en: Import
+  zh-CN: 导入
+  zh-TW: 匯入
+hosts.transfer_menu_btn:
+  en: Export / Import
+  zh-CN: 导出 / 导入
+  zh-TW: 匯出 / 匯入
+hosts.export_title:
+  en: Export Hosts
+  zh-CN: 导出主机
+  zh-TW: 匯出主機
+hosts.import_title:
+  en: Import Hosts
+  zh-CN: 导入主机
+  zh-TW: 匯入主機
+hosts.export_dialog_title:
+  en: Export Hosts
+  zh-CN: 导出主机
+  zh-TW: 匯出主機
+hosts.export_body:
+  en: "Exporting %{n} hosts. Saved SSH passwords and key paths are included."
+  zh-CN: "即将导出 %{n} 台主机，导出文件包含已保存的 SSH 密码和密钥路径。"
+  zh-TW: "即將匯出 %{n} 臺主機，匯出檔案包含已儲存的 SSH 密碼和金鑰路徑。"
+hosts.export_password_placeholder:
+  en: Encryption password
+  zh-CN: 加密密码
+  zh-TW: 加密密碼
+hosts.export_password_required:
+  en: Enter an encryption password to continue.
+  zh-CN: 请输入加密密码后再导出。
+  zh-TW: 請輸入加密密碼後再匯出。
+hosts.export_submit:
+  en: Export
+  zh-CN: 导出
+  zh-TW: 匯出
+hosts.export_success:
+  en: "Exported hosts to %{path}"
+  zh-CN: "已导出主机到 %{path}"
+  zh-TW: "已匯出主機到 %{path}"
+hosts.export_empty:
+  en: There are no hosts to export.
+  zh-CN: 没有可导出的主机。
+  zh-TW: 沒有可匯出的主機。
+hosts.import_dialog_title:
+  en: Import Hosts
+  zh-CN: 导入主机
+  zh-TW: 匯入主機
+hosts.import_password_hint:
+  en: "%{file} is encrypted. Enter its passphrase to decrypt."
+  zh-CN: "%{file} 已加密，请输入密码解密。"
+  zh-TW: "%{file} 已加密，請輸入密碼解密。"
+hosts.import_password_placeholder:
+  en: Enter passphrase
+  zh-CN: 请输入解密密码
+  zh-TW: 請輸入解密密碼
+hosts.import_submit:
+  en: Import
+  zh-CN: 导入
+  zh-TW: 匯入
+hosts.import_wrong_password:
+  en: Wrong password. The file could not be decrypted.
+  zh-CN: 密码错误，无法解密该文件。
+  zh-TW: 密碼錯誤，無法解密該檔案。
+hosts.export_encrypting:
+  en: Encrypting…
+  zh-CN: 正在加密…
+  zh-TW: 正在加密…
+hosts.import_decrypting:
+  en: Decrypting…
+  zh-CN: 正在解密…
+  zh-TW: 正在解密…
+hosts.import_confirm_title:
+  en: Confirm Import
+  zh-CN: 确认导入
+  zh-TW: 確認匯入
+hosts.import_confirm_body:
+  en: "%{new} new host(s) will be imported, %{dup} duplicate(s) will be skipped. Saved passwords are restored."
+  zh-CN: "将导入 %{new} 台新主机，跳过 %{dup} 台重复主机。已保存的密码将被恢复。"
+  zh-TW: "將匯入 %{new} 臺新主機，跳過 %{dup} 臺重複主機。已儲存的密碼將被恢復。"
+hosts.import_confirm_key_warning:
+  en: Some hosts use key auth but have no key path — you may need to configure keys after import.
+  zh-CN: 部分主机使用密钥认证但未包含密钥路径，导入后可能需要手动配置密钥。
+  zh-TW: 部分主機使用金鑰認證但未包含金鑰路徑，匯入後可能需要手動配置金鑰。
+hosts.import_confirm_submit:
+  en: Import
+  zh-CN: 导入
+  zh-TW: 匯入
+hosts.import_success:
+  en: "Imported %{n} hosts"
+  zh-CN: "已导入 %{n} 台主机"
+  zh-TW: "已匯入 %{n} 臺主機"
+hosts.import_success_with_dups:
+  en: "Imported %{new} hosts, skipped %{dup} duplicates"
+  zh-CN: "已导入 %{new} 台主机，跳过 %{dup} 台重复"
+  zh-TW: "已匯入 %{new} 臺主機，跳過 %{dup} 臺重複"
+hosts.import_all_duplicates:
+  en: "All %{n} host(s) already exist — nothing imported"
+  zh-CN: "%{n} 台主机已全部存在，未导入任何内容"
+  zh-TW: "%{n} 臺主機已全部存在，未匯入任何內容"
+keychain.create_identity:
+  en: Create Identity
+  zh-CN: 创建身份
+  zh-TW: 建立身份
+keychain.created_identity:
+  en: Created identity "%{name}"
+  zh-CN: 已创建身份 "%{name}"
+  zh-TW: 已建立身份 "%{name}"
+keychain.default_key_name:
+  en: Termlet Generated Key
+  zh-CN: Termlet 生成的密钥
+  zh-TW: Termlet 生成的金鑰
+keychain.delete_identity_confirm:
+  en: Are you sure you want to delete "%{name}"?
+  zh-CN: 确定要删除 "%{name}" 吗？
+  zh-TW: 確定要刪除 "%{name}" 嗎？
+keychain.delete_identity_title:
+  en: Delete Identity?
+  zh-CN: 删除身份？
+  zh-TW: 刪除身份？
+keychain.delete_key_confirm:
+  en: Are you sure you want to delete "%{name}"?
+  zh-CN: 确定要删除 "%{name}" 吗？
+  zh-TW: 確定要刪除 "%{name}" 嗎？
+keychain.delete_key_title:
+  en: Delete Key?
+  zh-CN: 删除密钥？
+  zh-TW: 刪除金鑰？
+keychain.deleted_identity:
+  en: Deleted identity "%{name}"
+  zh-CN: 已删除身份 "%{name}"
+  zh-TW: 已刪除身份 "%{name}"
+keychain.deleted_key:
+  en: Deleted key "%{name}"
+  zh-CN: 已删除密钥 "%{name}"
+  zh-TW: 已刪除金鑰 "%{name}"
+keychain.edit_identity:
+  en: Edit Identity
+  zh-CN: 编辑身份
+  zh-TW: 編輯身份
+keychain.edit_key:
+  en: Edit Key
+  zh-CN: 编辑密钥
+  zh-TW: 編輯金鑰
+keychain.fingerprint:
+  en: Fingerprint
+  zh-CN: 指纹
+  zh-TW: 指紋
+keychain.gen_failed:
+  en: 'Key generation failed: %{msg}'
+  zh-CN: 密钥生成失败：%{msg}
+  zh-TW: 金鑰生成失敗：%{msg}
+keychain.generate_key:
+  en: GENERATE KEY
+  zh-CN: 生成密钥
+  zh-TW: 生成金鑰
+keychain.generate_key_title:
+  en: Generate Key
+  zh-CN: 生成密钥
+  zh-TW: 生成金鑰
+keychain.generate_save:
+  en: Generate & Save
+  zh-CN: 生成并保存
+  zh-TW: 生成並儲存
+keychain.generating:
+  en: Generating…
+  zh-CN: 正在生成…
+  zh-TW: 正在生成…
+keychain.generated:
+  en: Generated key "%{name}" (%{kind})
+  zh-CN: 已生成密钥 "%{name}" (%{kind})
+  zh-TW: 已生成金鑰 "%{name}" (%{kind})
+keychain.identities_title:
+  en: Identities
+  zh-CN: 身份
+  zh-TW: 身份
+keychain.key_exists:
+  en: 'Key generation failed: file already exists at %{path}'
+  zh-CN: 密钥生成失败：文件已存在于 %{path}
+  zh-TW: 金鑰生成失敗：檔案已存在於 %{path}
+keychain.key_path:
+  en: Key Path
+  zh-CN: 密钥路径
+  zh-TW: 金鑰路徑
+keychain.key_type_label:
+  en: Key Type
+  zh-CN: 密钥类型
+  zh-TW: 金鑰型別
+keychain.keys_title:
+  en: Keys
+  zh-CN: 密钥
+  zh-TW: 金鑰
+keychain.label:
+  en: Label
+  zh-CN: 标签
+  zh-TW: 標籤
+keychain.name:
+  en: Name
+  zh-CN: 名称
+  zh-TW: 名稱
+keychain.new_identity:
+  en: NEW IDENTITY
+  zh-CN: 新建身份
+  zh-TW: 新建身份
+keychain.new_identity_title:
+  en: New Identity
+  zh-CN: 新建身份
+  zh-TW: 新建身份
+keychain.no_identities_yet:
+  en: No identities yet. Click "+ New Identity" to create one.
+  zh-CN: 暂无身份。点击 "+ 新建身份" 创建一个。
+  zh-TW: 暫無身份。點選 "+ 新建身份" 建立一個。
+keychain.no_keys_match:
+  en: No keys match your search.
+  zh-CN: 没有匹配的密钥。
+  zh-TW: 沒有匹配的金鑰。
+keychain.no_keys_yet:
+  en: No keys yet. Generate an SSH key pair to get started.
+  zh-CN: 暂无密钥。生成 SSH 密钥对以开始使用。
+  zh-TW: 暫無金鑰。生成 SSH 金鑰對以開始使用。
+keychain.no_username:
+  en: No username set
+  zh-CN: 未设置用户名
+  zh-TW: 未設定使用者名稱
+keychain.passphrase:
+  en: Passphrase
+  zh-CN: 密码短语
+  zh-TW: 密碼短語
+keychain.passphrase_hint:
+  en: Optional passphrase to protect the key
+  zh-CN: 可选的密码短语以保护密钥
+  zh-TW: 可選的密碼短語以保護金鑰
+keychain.pubkey_exists:
+  en: 'Key generation failed: public key file already exists at %{pub_path}'
+  zh-CN: 密钥生成失败：公钥文件已存在于 %{pub_path}
+  zh-TW: 金鑰生成失敗：公鑰檔案已存在於 %{pub_path}
+keychain.public_key:
+  en: Public Key
+  zh-CN: 公钥
+  zh-TW: 公鑰
+keychain.save:
+  en: Save
+  zh-CN: 保存
+  zh-TW: 儲存
+keychain.search_keys:
+  en: Search keys by name, type, fingerprint…
+  zh-CN: 按名称、类型、指纹搜索密钥...
+  zh-TW: 按名稱、型別、指紋搜尋金鑰...
+keychain.updated_identity:
+  en: Updated identity "%{name}"
+  zh-CN: 已更新身份 "%{name}"
+  zh-TW: 已更新身份 "%{name}"
+keychain.updated_key:
+  en: Updated key "%{name}"
+  zh-CN: 已更新密钥 "%{name}"
+  zh-TW: 已更新金鑰 "%{name}"
+keychain.username:
+  en: Username
+  zh-CN: 用户名
+  zh-TW: 使用者名稱
+known_hosts.delete_confirm_body:
+  en: Are you sure you want to delete "%{name}"?
+  zh-CN: 确定要删除 "%{name}" 吗？
+  zh-TW: 確定要刪除 "%{name}" 嗎？
+known_hosts.delete_confirm_title:
+  en: Delete Known Host?
+  zh-CN: 删除信任主机？
+  zh-TW: 刪除信任主機？
+known_hosts.deleted_log:
+  en: Deleted known host "%{hostname}"
+  zh-CN: 已删除信任主机 "%{hostname}"
+  zh-TW: 已刪除信任主機 "%{hostname}"
+known_hosts.details:
+  en: Details
+  zh-CN: 详情
+  zh-TW: 詳情
+known_hosts.hostname_label:
+  en: Hostname
+  zh-CN: 主机名
+  zh-TW: 主機名
+known_hosts.key_type_label:
+  en: Key Type
+  zh-CN: 密钥类型
+  zh-TW: 金鑰型別
+known_hosts.port_label:
+  en: Port
+  zh-CN: 端口
+  zh-TW: 埠
+known_hosts.search:
+  en: Search known hosts…
+  zh-CN: 搜索信任主机...
+  zh-TW: 搜尋信任主機...
+log_category.host:
+  en: Host
+  zh-CN: 主机
+  zh-TW: 主機
+log_category.keychain:
+  en: Keychain
+  zh-CN: 密钥
+  zh-TW: 金鑰
+log_category.known_host:
+  en: Known Host
+  zh-CN: 信任主机
+  zh-TW: 信任主機
+log_category.port_forward:
+  en: Port Forward
+  zh-CN: 端口转发
+  zh-TW: 埠轉發
+log_category.sftp:
+  en: SFTP
+  zh-CN: SFTP
+  zh-TW: SFTP
+log_category.snippet:
+  en: Snippet
+  zh-CN: 代码片段
+  zh-TW: 程式碼片段
+log_category.system:
+  en: System
+  zh-CN: 系统
+  zh-TW: 系統
+log_category.terminal:
+  en: Terminal
+  zh-CN: 终端
+  zh-TW: 終端
+logs.empty:
+  en: No activity logs yet
+  zh-CN: 暂无活动日志
+  zh-TW: 暫無活動日誌
+logs.empty_hint:
+  en: Operations like connecting to hosts, managing port forwards, or editing snippets will appear here, and are kept in the logs/ directory of your Termlet config directory.
+  zh-CN: 连接主机、管理端口转发或编辑代码片段等操作将显示在此处，并保存在 termlet 配置目录的 logs/ 目录下。
+  zh-TW: 連線主機、管理埠轉發或編輯程式碼片段等操作將顯示在此處，並保存在 termlet 設定目錄的 logs/ 目錄下。
+logs.entries:
+  en: '%{count} entries'
+  zh-CN: '%{count} 条记录'
+  zh-TW: '%{count} 條記錄'
+logs.title:
+  en: Activity Logs
+  zh-CN: 活动日志
+  zh-TW: 活動日誌
+menu.hosts:
+  en: Hosts
+  zh-CN: 主机
+  zh-TW: 主機
+menu.keychain:
+  en: Keychain
+  zh-CN: 密钥
+  zh-TW: 金鑰
+menu.known_hosts:
+  en: Known Hosts
+  zh-CN: 信任主机
+  zh-TW: 信任主機
+menu.logs:
+  en: Logs
+  zh-CN: 日志
+  zh-TW: 日誌
+menu.port_forwarding:
+  en: Port Forwarding
+  zh-CN: 端口转发
+  zh-TW: 埠轉發
+menu.profiles:
+  en: Profiles
+  zh-CN: 个人资料
+  zh-TW: 個人資料
+menu.snippets:
+  en: Snippets
+  zh-CN: 代码片段
+  zh-TW: 程式碼片段
+new_tab.no_hosts_configured:
+  en: No hosts configured yet.
+  zh-CN: 暂无已配置的主机。
+  zh-TW: 暫無已配置的主機。
+new_tab.no_matching_hosts:
+  en: No matching hosts.
+  zh-CN: 没有匹配的主机。
+  zh-TW: 沒有匹配的主機。
+new_tab.placeholder:
+  en: Search saved hosts…
+  zh-CN: 搜索已保存的主机...
+  zh-TW: 搜尋已儲存的主機...
+placeholder.filter_files:
+  en: Filter files…
+  zh-CN: 过滤文件…
+  zh-TW: 過濾檔案…
+placeholder.find_terminal:
+  en: Find in terminal…
+  zh-CN: 在终端中查找…
+  zh-TW: 在終端中查詢…
+placeholder.tab_name:
+  en: tab name
+  zh-CN: 标签名称
+  zh-TW: 標籤名稱
+port_forward.add_forward:
+  en: Add Forward
+  zh-CN: 添加转发
+  zh-TW: 新增轉發
+port_forward.bind_address:
+  en: Bind Address
+  zh-CN: 绑定地址
+  zh-TW: 繫結地址
+port_forward.bind_address_remote:
+  en: Bind Address (remote)
+  zh-CN: 绑定地址（远程）
+  zh-TW: 繫結地址（遠端）
+port_forward.close:
+  en: Close
+  zh-CN: 关闭
+  zh-TW: 關閉
+port_forward.connect:
+  en: Connect
+  zh-CN: 连接
+  zh-TW: 連線
+port_forward.copy:
+  en: Copy
+  zh-CN: 复制
+  zh-TW: 複製
+port_forward.delete_confirm_body:
+  en: Are you sure you want to delete "%{name}"?
+  zh-CN: 确定要删除 "%{name}" 吗？
+  zh-TW: 確定要刪除 "%{name}" 嗎？
+port_forward.delete_confirm_title:
+  en: Delete Forward?
+  zh-CN: 删除转发？
+  zh-TW: 刪除轉發？
+port_forward.deleted_log:
+  en: Deleted port forward "%{name}"
+  zh-CN: 已删除端口转发 "%{name}"
+  zh-TW: 已刪除埠轉發 "%{name}"
+port_forward.dest_host:
+  en: Destination Host
+  zh-CN: 目标主机
+  zh-TW: 目標主機
+port_forward.dest_port:
+  en: Destination Port
+  zh-CN: 目标端口
+  zh-TW: 目標埠
+port_forward.disconnect:
+  en: Disconnect
+  zh-CN: 断开连接
+  zh-TW: 斷開連線
+port_forward.edit_forward:
+  en: Edit Forward
+  zh-CN: 编辑转发
+  zh-TW: 編輯轉發
+port_forward.empty:
+  en: No port forwards yet. Click NEW FORWARD to create your first tunnel.
+  zh-CN: 暂无端口转发。点击 新建转发 创建你的第一个隧道。
+  zh-TW: 暫無埠轉發。點選 新建轉發 建立你的第一個隧道。
+port_forward.listen_port:
+  en: Listen Port
+  zh-CN: 监听端口
+  zh-TW: 監聽埠
+port_forward.logs:
+  en: Logs
+  zh-CN: 日志
+  zh-TW: 日誌
+port_forward.logs_title:
+  en: Logs
+  zh-CN: 日志
+  zh-TW: 日誌
+port_forward.name_optional:
+  en: Name (optional)
+  zh-CN: 名称（可选）
+  zh-TW: 名稱（可選）
+port_forward.new:
+  en: NEW FORWARD
+  zh-CN: 新建转发
+  zh-TW: 新建轉發
+port_forward.new_forward:
+  en: New Forward
+  zh-CN: 新建转发
+  zh-TW: 新建轉發
+port_forward.no_activity_yet:
+  en: No activity yet
+  zh-CN: 暂无活动
+  zh-TW: 暫無活動
+port_forward.no_logs_yet:
+  en: No logs yet
+  zh-CN: 暂无日志
+  zh-TW: 暫無日誌
+port_forward.no_hosts:
+  en: No hosts yet.
+  zh-CN: 暂无主机。
+  zh-TW: 暫無主機。
+port_forward.no_match:
+  en: No port forwards match your search.
+  zh-CN: 没有匹配的端口转发。
+  zh-TW: 沒有匹配的埠轉發。
+port_forward.non_loopback_warning:
+  en: 'Port forward will listen on %{bind} and be accessible from other machines'
+  zh-CN: '端口转发将监听 %{bind}，其他机器也可以访问'
+  zh-TW: '埠轉發將監聽 %{bind}，其他機器也可以訪問'
+port_forward.password_body:
+  en: Enter the password for %{target} to start "%{name}".
+  zh-CN: 请输入 %{target} 的密码以启动“%{name}”。
+  zh-TW: 請輸入 %{target} 的密碼以啟動「%{name}」。
+port_forward.remote_refused:
+  en: 'Server refused remote forward %{bind}:%{port}: %{error}'
+  zh-CN: 服务器拒绝远程转发 %{bind}:%{port}：%{error}
+  zh-TW: 伺服器拒絕遠端轉發 %{bind}:%{port}：%{error}
+port_forward.search:
+  en: Search forwards by name, address, summary…
+  zh-CN: 按名称、地址、摘要搜索转发...
+  zh-TW: 按名稱、地址、摘要搜尋轉發...
+port_forward.search_hosts:
+  en: Search hosts…
+  zh-CN: 搜索主机...
+  zh-TW: 搜尋主機...
+port_forward.select_host:
+  en: Select a host…
+  zh-CN: 选择主机...
+  zh-TW: 選擇主機...
+port_forward.stopped:
+  en: Stopped
+  zh-CN: 已停止
+  zh-TW: 已停止
+port_forward.stop_requested:
+  en: Stop requested
+  zh-CN: 已请求停止
+  zh-TW: 已請求停止
+port_forward.target_host_not_found:
+  en: Target host not found
+  zh-CN: 未找到目标主机
+  zh-TW: 未找到目標主機
+port_forward.type:
+  en: Type
+  zh-CN: 类型
+  zh-TW: 型別
+port_forward.via_host:
+  en: Via Host
+  zh-CN: 经由主机
+  zh-TW: 經由主機
+port_forward.worker_dropped:
+  en: Forward worker dropped
+  zh-CN: 转发工作线程已断开
+  zh-TW: 轉發工作執行緒已斷開
+port_forward.worker_terminated:
+  en: Forward worker terminated before reporting start
+  zh-CN: 转发工作线程在报告启动前终止
+  zh-TW: 轉發工作執行緒在報告啟動前終止
+port_forward_kind.dynamic:
+  en: Dynamic
+  zh-CN: 动态
+  zh-TW: 動態
+port_forward_kind.local:
+  en: Local
+  zh-CN: 本地
+  zh-TW: 本地
+port_forward_kind.remote:
+  en: Remote
+  zh-CN: 远程
+  zh-TW: 遠端
+right_sidebar.add_snippet:
+  en: Add Snippet
+  zh-CN: 添加片段
+  zh-TW: 新增片段
+right_sidebar.command_copied:
+  en: Command copied to clipboard
+  zh-CN: 命令已复制到剪贴板
+  zh-TW: 命令已複製到剪貼簿
+right_sidebar.command_info_command:
+  en: Command
+  zh-CN: 命令
+  zh-TW: 命令
+right_sidebar.command_info_executed_at:
+  en: Started at
+  zh-CN: 开始执行时间
+  zh-TW: 開始執行時間
+right_sidebar.command_info_title:
+  en: Execution Details
+  zh-CN: 执行详情
+  zh-TW: 執行詳情
+right_sidebar.commands:
+  en: Command History
+  zh-CN: 命令历史
+  zh-TW: 命令歷史
+right_sidebar.font_size:
+  en: Font Size
+  zh-CN: 字体大小
+  zh-TW: 字型大小
+right_sidebar.no_commands:
+  en: No commands yet
+  zh-CN: 暂无命令
+  zh-TW: 暫無命令
+right_sidebar.no_matching_commands:
+  en: No matching commands
+  zh-CN: 没有匹配的命令
+  zh-TW: 沒有匹配的命令
+right_sidebar.search_commands:
+  en: Search commands…
+  zh-CN: 搜索命令…
+  zh-TW: 搜尋命令…
+right_sidebar.no_snippets:
+  en: No snippets. Add one above.
+  zh-CN: 暂无代码片段。在上方添加一个。
+  zh-TW: 暫無程式碼片段。在上方新增一個。
+settings.about_title:
+  en: About
+  zh-CN: 关于
+  zh-TW: 關於
+settings.about_hint:
+  en: Termlet — an application for SSH connections and session management.
+  zh-CN: Termlet —— 用于 SSH 连接与会话管理的应用。
+  zh-TW: Termlet —— 用於 SSH 連線與工作階段管理的應用。
+settings.about_version:
+  en: Version
+  zh-CN: 版本
+  zh-TW: 版本
+settings.feedback_title:
+  en: Feedback & Bug Reports
+  zh-CN: 反馈 / 报 bug
+  zh-TW: 意見回饋 / 回報問題
+settings.feedback_report_bug:
+  en: Report a Bug
+  zh-CN: 报告 Bug
+  zh-TW: 回報問題
+settings.shortcuts:
+  en: Keyboard Shortcuts
+  zh-CN: 键盘快捷键
+  zh-TW: 鍵盤快捷鍵
+settings.shortcuts_hint:
+  en: Global shortcuts work in the terminal window, except while a full-screen TUI (vim, less, …) is active.
+  zh-CN: 全局快捷键在终端窗口中生效；在全屏 TUI（vim、less 等）运行期间除外。
+  zh-TW: 全域性快捷鍵在終端視窗中生效；在全屏 TUI（vim、less 等）執行期間除外。
+settings.shortcut.open_local_terminal:
+  en: Open Local Terminal
+  zh-CN: 打开本地终端
+  zh-TW: 開啟本地終端
+settings.shortcut.new_terminal_tab:
+  en: New Tab (SSH Connect)
+  zh-CN: 新建标签页（SSH 连接）
+  zh-TW: 新建標籤頁（SSH 連線）
+settings.shortcut.toggle_search:
+  en: Toggle Terminal Search
+  zh-CN: 切换终端搜索
+  zh-TW: 切換終端搜尋
+settings.shortcut.close_current_tab:
+  en: Close Current Tab
+  zh-CN: 关闭当前标签页
+  zh-TW: 關閉當前標籤頁
+settings.shortcut.duplicate_session:
+  en: Duplicate Session
+  zh-CN: 复制会话
+  zh-TW: 複製會話
+settings.shortcut.toggle_fullscreen:
+  en: Toggle Fullscreen
+  zh-CN: 切换全屏
+  zh-TW: 切換全螢幕
+settings.shortcut.increase_font_size:
+  en: Increase Font Size
+  zh-CN: 增大字体
+  zh-TW: 增大字型
+settings.shortcut.decrease_font_size:
+  en: Decrease Font Size
+  zh-CN: 减小字体
+  zh-TW: 減小字型
+settings.appearance:
+  en: Appearance
+  zh-CN: 外观
+  zh-TW: 外觀
+settings.local_shell_title:
+  en: Local Shell
+  zh-CN: 本地 Shell
+  zh-TW: 本機 Shell
+settings.local_shell_hint:
+  en: Choose the shell used by new local terminals. Existing terminals keep their current shell. PowerShell 7 must be installed and available on PATH.
+  zh-CN: 选择新建本地终端使用的 Shell。现有终端会继续使用当前 Shell。PowerShell 7 需要已安装并加入 PATH。
+  zh-TW: 選擇新建本機終端使用的 Shell。現有終端會繼續使用目前的 Shell。PowerShell 7 需要已安裝並加入 PATH。
+settings.local_shell_default:
+  en: Default
+  zh-CN: 默认
+  zh-TW: 預設
+settings.local_shell_windows_powershell:
+  en: Windows PowerShell
+  zh-CN: Windows PowerShell
+  zh-TW: Windows PowerShell
+settings.local_shell_pwsh:
+  en: PowerShell 7 (pwsh)
+  zh-CN: PowerShell 7（pwsh）
+  zh-TW: PowerShell 7（pwsh）
+settings.shell_integration_title:
+  en: Shell Integration
+  zh-CN: Shell 集成
+  zh-TW: Shell 整合
+settings.shell_integration_hint:
+  en: Inject OSC 7 / OSC 633 markers into new local and SSH shells so Termlet can track the working directory, prompt boundaries and command exit codes for command history and diagnostics. Turning this off disables that tracking.
+  zh-CN: 向新建的本地与 SSH shell 注入 OSC 7 / OSC 633 标记，以便 termlet 追踪工作目录、提示符边界与命令退出码，用于命令历史和诊断。关闭后将停止追踪。
+  zh-TW: 向新建的本地與 SSH shell 注入 OSC 7 / OSC 633 標記，以便 termlet 追蹤工作目錄、提示符邊界與命令退出碼，用於命令歷史和診斷。關閉後將停止追蹤。
+settings.shell_integration_on:
+  en: "On"
+  zh-CN: 开启
+  zh-TW: 開啟
+settings.shell_integration_off:
+  en: "Off"
+  zh-CN: 关闭
+  zh-TW: 關閉
+settings.privacy_title:
+  en: Privacy
+  zh-CN: 隐私
+  zh-TW: 隱私
+settings.history_title:
+  en: Command History
+  zh-CN: 命令历史
+  zh-TW: 命令歷史
+settings.history_limit:
+  en: Commands kept per session
+  zh-CN: 每个会话保留的命令数
+  zh-TW: 每個工作階段保留的命令數
+settings.history_hint:
+  en: How many of the most recent commands each session keeps. Older commands are dropped once the limit is reached.
+  zh-CN: 每个会话保留最近多少条命令；达到上限后，最早的命令会被丢弃。
+  zh-TW: 每個工作階段保留最近多少條命令；達到上限後，最早的命令會被丟棄。
+settings.diagnostics_title:
+  en: Diagnostics
+  zh-CN: 诊断
+  zh-TW: 診斷
+settings.diagnostics_hint:
+  en: Control how much detail Termlet writes to its diagnostic log. Release builds default to Warning (freezes and failures only); raise this to troubleshoot a specific issue. The log file lives in your Termlet config directory.
+  zh-CN: 控制 termlet 写入诊断日志的详细程度。发布版默认 Warn（仅记录卡顿与故障）；如需排查具体问题可调高。日志文件位于 termlet 配置目录。
+  zh-TW: 控制 termlet 寫入診斷日誌的詳細程度。釋出版預設 Warn（僅記錄卡頓與故障）；如需排查具體問題可調高。日誌檔案位於 termlet 配置目錄。
+settings.diagnostics_level_error:
+  en: Error only
+  zh-CN: 仅错误
+  zh-TW: 僅錯誤
+settings.diagnostics_level_warn:
+  en: Warning (freezes & failures)
+  zh-CN: 警告
+  zh-TW: 警告
+settings.diagnostics_level_info:
+  en: Info
+  zh-CN: 信息
+  zh-TW: 資訊
+settings.diagnostics_level_debug:
+  en: Debug
+  zh-CN: 调试
+  zh-TW: 除錯
+settings.diagnostics_level_trace:
+  en: Trace
+  zh-CN: 追踪
+  zh-TW: 追蹤
+settings.appearance_hint:
+  en: Choose a theme for the terminal and UI.
+  zh-CN: 选择终端和界面的主题。
+  zh-TW: 選擇終端和介面的主題。
+settings.cancel:
+  en: Cancel
+  zh-CN: 取消
+  zh-TW: 取消
+settings.language:
+  en: Language
+  zh-CN: 语言
+  zh-TW: 語言
+settings.save:
+  en: Save
+  zh-CN: 保存
+  zh-TW: 儲存
+settings.theme:
+  en: Theme
+  zh-CN: 主题
+  zh-TW: 主題
+profiles.title:
+  en: Profiles
+  zh-CN: 个人资料
+  zh-TW: 個人資料
+sftp.cancelling:
+  en: Cancelling transfer
+  zh-CN: 正在取消传输
+  zh-TW: 正在取消傳輸
+sftp.transfer_cancelled:
+  en: Transfer cancelled
+  zh-CN: 传输已取消
+  zh-TW: 傳輸已取消
+sftp.transfer_cancelled_status:
+  en: Cancelled
+  zh-CN: 已取消
+  zh-TW: 已取消
+sftp.transfer_download_incomplete:
+  en: 'Download incomplete: received %{received} of %{total} bytes for %{path}'
+  zh-CN: '下载未完成：已接收 %{received} / %{total} 字节，文件：%{path}'
+  zh-TW: '下載未完成：已接收 %{received} / %{total} 位元組，檔案：%{path}'
+sftp.transfer_download_incomplete_no_path:
+  en: 'Download incomplete: received %{received} of %{total} bytes (the remote connection closed early)'
+  zh-CN: '下载未完成：已接收 %{received} / %{total} 字节（远端连接提前断开）'
+  zh-TW: '下載未完成：已接收 %{received} / %{total} 位元組（遠端連線提前中斷）'
+sftp.binary_no_preview:
+  en: File appears to be binary and can't be previewed
+  zh-CN: 文件似乎是二进制文件，无法预览
+  zh-TW: 檔案似乎是二進位制檔案，無法預覽
+sftp.cannot_preview:
+  en: Cannot preview file
+  zh-CN: 无法预览文件
+  zh-TW: 無法預覽檔案
+sftp.choose_saved_host:
+  en: Choose a saved host to connect via SFTP
+  zh-CN: 选择一个已保存的主机以通过 SFTP 连接
+  zh-TW: 選擇一個已儲存的主機以透過 SFTP 連線
+sftp.clear_all:
+  en: Clear All
+  zh-CN: 清除全部
+  zh-TW: 清除全部
+sftp.transfer_completed:
+  en: Completed
+  zh-CN: 已完成
+  zh-TW: 已完成
+sftp.col_date:
+  en: Date Modified
+  zh-CN: 修改日期
+  zh-TW: 修改日期
+sftp.col_kind:
+  en: Kind
+  zh-CN: 类型
+  zh-TW: 型別
+sftp.col_name:
+  en: Name
+  zh-CN: 名称
+  zh-TW: 名稱
+sftp.col_size:
+  en: Size
+  zh-CN: 大小
+  zh-TW: 大小
+sftp.connect_to_host:
+  en: Connect to Host
+  zh-CN: 连接到主机
+  zh-TW: 連線到主機
+sftp.create:
+  en: Create
+  zh-CN: 创建
+  zh-TW: 建立
+sftp.creating:
+  en: Creating…
+  zh-CN: 创建中…
+  zh-TW: 建立中…
+sftp.connect_to_host_hint:
+  en: Connect to a host to browse files via SFTP
+  zh-CN: 连接到主机以通过 SFTP 浏览文件
+  zh-TW: 連線到主機以透過 SFTP 瀏覽檔案
+sftp.dir_read_failed:
+  en: 'Failed to read directory %{path}: %{e}'
+  zh-CN: 读取目录 %{path} 失败：%{e}
+  zh-TW: 讀取目錄 %{path} 失敗：%{e}
+sftp.discard:
+  en: Discard
+  zh-CN: 丢弃
+  zh-TW: 丟棄
+sftp.discard_confirm_body:
+  en: This will cancel the current transfer and discard the progress for %{name}.
+  zh-CN: 这将取消当前传输，并丢弃 %{name} 的传输进度。
+  zh-TW: 這將取消當前傳輸，並丟棄 %{name} 的傳輸進度。
+sftp.discard_confirm_body_empty:
+  en: This will cancel the current transfer and discard its progress.
+  zh-CN: 这将取消当前传输，并丢弃传输进度。
+  zh-TW: 這將取消當前傳輸，並丟棄傳輸進度。
+sftp.discard_confirm_title:
+  en: Discard transfer?
+  zh-CN: 丢弃传输？
+  zh-TW: 丟棄傳輸？
+sftp.disconnect:
+  en: Disconnect
+  zh-CN: 断开连接
+  zh-TW: 斷開連線
+sftp.download:
+  en: Download
+  zh-CN: 下载
+  zh-TW: 下載
+sftp.duplicate:
+  en: Duplicate
+  zh-CN: 复制
+  zh-TW: 複製
+sftp.entry_read_failed:
+  en: 'Failed to read entry: %{e}'
+  zh-CN: 读取条目失败：%{e}
+  zh-TW: 讀取條目失敗：%{e}
+sftp.file_open_failed:
+  en: 'Failed to open file: %{e}'
+  zh-CN: 打开文件失败：%{e}
+  zh-TW: 開啟檔案失敗：%{e}
+sftp.file_read_failed:
+  en: 'Failed to read file: %{e}'
+  zh-CN: 读取文件失败：%{e}
+  zh-TW: 讀取檔案失敗：%{e}
+sftp.file_too_large:
+  en: File is %{size} and exceeds the %{limit} preview limit
+  zh-CN: 文件大小为 %{size}，超过了 %{limit} 的预览限制
+  zh-TW: 檔案大小為 %{size}，超過了 %{limit} 的預覽限制
+sftp.filetype_failed:
+  en: 'Failed to get file type: %{e}'
+  zh-CN: 获取文件类型失败：%{e}
+  zh-TW: 獲取檔案型別失敗：%{e}
+sftp.folder_name:
+  en: Enter folder name…
+  zh-CN: 输入文件夹名称...
+  zh-TW: 輸入資料夾名稱...
+sftp.loading:
+  en: Loading…
+  zh-CN: 加载中…
+  zh-TW: 載入中…
+sftp.local_path:
+  en: Enter local path…
+  zh-CN: 输入本地路径...
+  zh-TW: 輸入本地路徑...
+sftp.merge:
+  en: Merge
+  zh-CN: 合并
+  zh-TW: 合併
+sftp.new_folder:
+  en: New Folder
+  zh-CN: 新建文件夹
+  zh-TW: 新建資料夾
+sftp.new_folder_forbidden_chars:
+  en: 'New folder failed: name must not contain /, \, or null characters'
+  zh-CN: 新建文件夹失败：名称不能包含 /、\ 或空字符
+  zh-TW: 新建資料夾失敗：名稱不能包含 /、\ 或空字元
+sftp.rename_forbidden_chars:
+  en: 'Rename failed: file name must not contain /, \, or null characters'
+  zh-CN: 重命名失败：文件名不能包含 /、\ 或空字符
+  zh-TW: 重新命名失敗：檔名不能包含 /、\ 或空字元
+sftp.host_disappeared_password:
+  en: Stored host disappeared while saving password
+  zh-CN: 保存密码时已保存的主机不存在
+  zh-TW: 儲存密碼時已儲存的主機不存在
+sftp.new_name:
+  en: Enter new name…
+  zh-CN: 输入新名称...
+  zh-TW: 輸入新名稱...
+sftp.new_sftp:
+  en: New SFTP
+  zh-CN: 新建 SFTP
+  zh-TW: 新建 SFTP
+sftp.no_files:
+  en: No files found
+  zh-CN: 未找到文件
+  zh-TW: 未找到檔案
+sftp.no_hosts_match:
+  en: No hosts match your search
+  zh-CN: 没有匹配的主机
+  zh-TW: 沒有匹配的主機
+sftp.no_remote_host:
+  en: No remote host selected
+  zh-CN: 未选择远程主机
+  zh-TW: 未選擇遠端主機
+sftp.remote_path:
+  en: Enter remote path…
+  zh-CN: 输入远程路径...
+  zh-TW: 輸入遠端路徑...
+sftp.renaming:
+  en: Renaming…
+  zh-CN: 重命名中…
+  zh-TW: 重新命名中…
+sftp.rename:
+  en: Rename
+  zh-CN: 重命名
+  zh-TW: 重新命名
+sftp.rename_file_title:
+  en: Rename File
+  zh-CN: 重命名文件
+  zh-TW: 重新命名檔案
+sftp.rename_folder_title:
+  en: Rename Folder
+  zh-CN: 重命名文件夹
+  zh-TW: 重新命名資料夾
+sftp.rename_symlink_title:
+  en: Rename Symlink
+  zh-CN: 重命名符号链接
+  zh-TW: 重新命名符號連結
+sftp.replace:
+  en: Replace
+  zh-CN: 替换
+  zh-TW: 替換
+sftp.replace_all:
+  en: Replace All
+  zh-CN: 替换全部
+  zh-TW: 替換全部
+sftp.retry:
+  en: Retry
+  zh-CN: 重试
+  zh-TW: 重試
+sftp.select_host:
+  en: Select Host
+  zh-CN: 选择主机
+  zh-TW: 選擇主機
+sftp.select_host_btn:
+  en: SELECT HOST
+  zh-CN: 选择主机
+  zh-TW: 選擇主機
+sftp.select_local_first:
+  en: Select a local file first
+  zh-CN: 请先选择本地文件
+  zh-TW: 請先選擇本地檔案
+sftp.source_file_gone:
+  en: Selected source file no longer exists
+  zh-CN: 选定的源文件已不存在
+  zh-TW: 選定的原始檔已不存在
+sftp.stop:
+  en: Stop
+  zh-CN: 停止
+  zh-TW: 停止
+sftp.upload:
+  en: Upload
+  zh-CN: 上传
+  zh-TW: 上傳
+sftp.tooltip_disconnect:
+  en: Disconnect
+  zh-CN: 断开连接
+  zh-TW: 斷開連線
+sftp.tooltip_download:
+  en: Download selected
+  zh-CN: 下载选中
+  zh-TW: 下載選中
+sftp.tooltip_filter:
+  en: Toggle filter
+  zh-CN: 切换筛选
+  zh-TW: 切換篩選
+sftp.tooltip_new_folder:
+  en: New folder
+  zh-CN: 新建文件夹
+  zh-TW: 新建資料夾
+sftp.tooltip_open_terminal:
+  en: Open terminal
+  zh-CN: 打开终端
+  zh-TW: 開啟終端
+sftp.tooltip_refresh:
+  en: Refresh
+  zh-CN: 刷新
+  zh-TW: 重新整理
+sftp.tooltip_show_hidden:
+  en: Show hidden files
+  zh-CN: 显示隐藏文件
+  zh-TW: 顯示隱藏檔案
+sftp.tooltip_upload:
+  en: Upload selected
+  zh-CN: 上传选中
+  zh-TW: 上傳選中
+sftp.utf8_no_preview:
+  en: File is not valid UTF-8 and can't be previewed
+  zh-CN: 文件不是有效的 UTF-8 编码，无法预览
+  zh-TW: 檔案不是有效的 UTF-8 編碼，無法預覽
+sftp.location_local:
+  en: Local
+  zh-CN: 本地
+  zh-TW: 本地
+sftp.location_remote:
+  en: Remote
+  zh-CN: 远程
+  zh-TW: 遠端
+sftp.location_source_remote:
+  en: Source Remote
+  zh-CN: 源远程
+  zh-TW: 源遠端
+sftp.overwrite_file_body_local:
+  en: A file named "%{name}" already exists on the local filesystem.
+  zh-CN: 本地文件系统中已存在名为"%{name}"的文件。
+  zh-TW: 本地檔案系統中已存在名為"%{name}"的檔案。
+sftp.overwrite_file_body_remote:
+  en: A file named "%{name}" already exists on the remote server.
+  zh-CN: 远程服务器上已存在名为"%{name}"的文件。
+  zh-TW: 遠端伺服器上已存在名為"%{name}"的檔案。
+sftp.overwrite_file_title:
+  en: File Already Exists
+  zh-CN: 文件已存在
+  zh-TW: 檔案已存在
+sftp.overwrite_folder_body_local:
+  en: A folder named "%{name}" already exists on the local filesystem.
+  zh-CN: 本地文件系统中已存在名为"%{name}"的文件夹。
+  zh-TW: 本地檔案系統中已存在名為"%{name}"的資料夾。
+sftp.overwrite_folder_body_remote:
+  en: A folder named "%{name}" already exists on the remote server.
+  zh-CN: 远程服务器上已存在名为"%{name}"的文件夹。
+  zh-TW: 遠端伺服器上已存在名為"%{name}"的資料夾。
+sftp.overwrite_folder_title:
+  en: Folder Already Exists
+  zh-CN: 文件夹已存在
+  zh-TW: 資料夾已存在
+sftp.overwrite_large_warning:
+  en: 'This file is large (%{size} MB). If the transfer is interrupted, the original file may be lost.'
+  zh-CN: '该文件较大（%{size} MB），如果传输中断，原文件可能会丢失。'
+  zh-TW: '此檔案較大（%{size} MB），如果傳輸中斷，原始檔案可能會遺失。'
+sftp.delete_file_title:
+  en: Delete File?
+  zh-CN: 删除文件？
+  zh-TW: 刪除檔案？
+sftp.delete_folder_title:
+  en: Delete Folder and Its Contents?
+  zh-CN: 删除文件夹及其内容？
+  zh-TW: 刪除資料夾及其內容？
+sftp.delete_items_count:
+  en: '%{count} items'
+  zh-CN: '%{count} 个项目'
+  zh-TW: '%{count} 個專案'
+sftp.delete_items_total:
+  en: '(%{count} items)'
+  zh-CN: '等 %{count} 个项目'
+  zh-TW: '等 %{count} 個專案'
+sftp.delete_items_title:
+  en: Delete %{count} Items?
+  zh-CN: 删除 %{count} 个项目？
+  zh-TW: 刪除 %{count} 個專案？
+sftp.delete_symlink_title:
+  en: Delete Symlink?
+  zh-CN: 删除符号链接？
+  zh-TW: 刪除符號連結？
+sftp.deleted_log:
+  en: 'SFTP deleted: %{message}'
+  zh-CN: 'SFTP 已删除: %{message}'
+  zh-TW: 'SFTP 已刪除: %{message}'
+sftp.deleted_toast:
+  en: Deleted %{scope}
+  zh-CN: 已删除 %{scope}
+  zh-TW: 已刪除 %{scope}
+sftp.deleting:
+  en: Deleting…
+  zh-CN: 删除中…
+  zh-TW: 刪除中…
+sftp.deleting_existing_file:
+  en: Deleting existing file…
+  zh-CN: 正在删除已有文件…
+  zh-TW: 正在刪除已有檔案…
+sftp.deleting_existing_folder:
+  en: Deleting existing folder…
+  zh-CN: 正在删除已有文件夹…
+  zh-TW: 正在刪除已有資料夾…
+sftp.connected_left:
+  en: 'SFTP connected to %{target} (left pane)'
+  zh-CN: 'SFTP 已连接到 %{target}（左侧面板）'
+  zh-TW: 'SFTP 已連線到 %{target}（左側面板）'
+sftp.connected_right:
+  en: 'SFTP connected to %{target} (right pane)'
+  zh-CN: 'SFTP 已连接到 %{target}（右侧面板）'
+  zh-TW: 'SFTP 已連線到 %{target}（右側面板）'
+sftp.copied:
+  en: 'Copied %{path}'
+  zh-CN: '已复制 %{path}'
+  zh-TW: '已複製 %{path}'
+sftp.checksum_mismatch:
+  en: 'Checksum mismatch. The transferred file may be corrupted.'
+  zh-CN: '文件内容校验失败，传输后的文件可能已损坏。'
+  zh-TW: '檔案內容校驗失敗，傳輸後的檔案可能已損壞。'
+sftp.copied_folder:
+  en: 'Copied folder %{path}'
+  zh-CN: '已复制文件夹 %{path}'
+  zh-TW: '已複製資料夾 %{path}'
+sftp.copied_to:
+  en: 'Copied to %{path}'
+  zh-CN: '已复制到 %{path}'
+  zh-TW: '已複製到 %{path}'
+sftp.copying:
+  en: 'Copying %{name}'
+  zh-CN: '正在复制 %{name}'
+  zh-TW: '正在複製 %{name}'
+sftp.copying_folder:
+  en: 'Copying folder %{name}'
+  zh-CN: '正在复制文件夹 %{name}'
+  zh-TW: '正在複製資料夾 %{name}'
+sftp.created_folder:
+  en: 'Created folder %{name}'
+  zh-CN: '已创建文件夹 %{name}'
+  zh-TW: '已建立資料夾 %{name}'
+sftp.created_folder_log:
+  en: 'SFTP created folder: %{message}'
+  zh-CN: 'SFTP 已创建文件夹: %{message}'
+  zh-TW: 'SFTP 已建立資料夾: %{message}'
+sftp.delete_failed:
+  en: 'Failed to delete %{path}: %{error}'
+  zh-CN: '删除 %{path} 失败: %{error}'
+  zh-TW: '刪除 %{path} 失敗: %{error}'
+sftp.deleted_result:
+  en: 'Deleted %{path}'
+  zh-CN: '已删除 %{path}'
+  zh-TW: '已刪除 %{path}'
+sftp.disconnected:
+  en: 'SFTP disconnected from %{host}'
+  zh-CN: 'SFTP 已断开与 %{host} 的连接'
+  zh-TW: 'SFTP 已斷開與 %{host} 的連線'
+sftp.disconnected_left:
+  en: 'SFTP disconnected from %{host} (left pane)'
+  zh-CN: 'SFTP 已断开与 %{host} 的连接（左侧面板）'
+  zh-TW: 'SFTP 已斷開與 %{host} 的連線（左側面板）'
+sftp.download_started:
+  en: 'SFTP download started: %{name}'
+  zh-CN: 'SFTP 下载开始: %{name}'
+  zh-TW: 'SFTP 下載開始: %{name}'
+sftp.downloaded:
+  en: 'Downloaded %{path}'
+  zh-CN: '已下载 %{path}'
+  zh-TW: '已下載 %{path}'
+sftp.downloaded_folder:
+  en: 'Downloaded folder %{path}'
+  zh-CN: '已下载文件夹 %{path}'
+  zh-TW: '已下載資料夾 %{path}'
+sftp.downloading:
+  en: 'Downloading %{name}'
+  zh-CN: '正在下载 %{name}'
+  zh-TW: '正在下載 %{name}'
+sftp.downloading_folder:
+  en: 'Downloading folder %{name}'
+  zh-CN: '正在下载文件夹 %{name}'
+  zh-TW: '正在下載資料夾 %{name}'
+sftp.duplicating:
+  en: 'Duplicating %{name}'
+  zh-CN: '正在复制 %{name}'
+  zh-TW: '正在複製 %{name}'
+sftp.duplicating_folder:
+  en: 'Duplicating folder %{name}'
+  zh-CN: '正在复制文件夹 %{name}'
+  zh-TW: '正在複製資料夾 %{name}'
+sftp.error.remove_folder:
+  en: 'Failed to remove existing folder: %{error}'
+  zh-CN: '删除已有文件夹失败: %{error}'
+  zh-TW: '刪除已有資料夾失敗: %{error}'
+sftp.error.cannot_overwrite_local:
+  en: Cannot overwrite local files
+  zh-CN: 无法覆盖本地文件
+  zh-TW: 無法覆蓋本地檔案
+sftp.error.connection_failed:
+  en: Connection failed
+  zh-CN: 连接失败
+  zh-TW: 連線失敗
+sftp.error.copy_file:
+  en: 'Failed to copy file: %{error}'
+  zh-CN: '复制文件失败: %{error}'
+  zh-TW: '複製檔案失敗: %{error}'
+sftp.error.create_dir:
+  en: 'Failed to create directory: %{error}'
+  zh-CN: '创建目录失败: %{error}'
+  zh-TW: '建立目錄失敗: %{error}'
+sftp.error.read_dir:
+  en: 'Failed to read directory: %{error}'
+  zh-CN: '读取目录失败: %{error}'
+  zh-TW: '讀取目錄失敗: %{error}'
+sftp.error.read_entry:
+  en: 'Failed to read entry: %{error}'
+  zh-CN: '读取条目失败: %{error}'
+  zh-TW: '讀取條目失敗: %{error}'
+sftp.error.connect_first:
+  en: Connect to a remote host first to upload files
+  zh-CN: 请先连接到远程主机以上传文件
+  zh-TW: 請先連線到遠端主機以上傳檔案
+sftp.error_label:
+  en: Error
+  zh-CN: 错误
+  zh-TW: 錯誤
+sftp.error.dropped_file_gone:
+  en: Dropped file no longer exists
+  zh-CN: 拖放的文件已不存在
+  zh-TW: 拖放的檔案已不存在
+sftp.error.host_gone:
+  en: Host no longer exists
+  zh-CN: 主机已不存在
+  zh-TW: 主機已不存在
+sftp.error.invalid_download_overwrite:
+  en: Invalid download overwrite state
+  zh-CN: 无效的下载覆盖状态
+  zh-TW: 無效的下載覆蓋狀態
+sftp.error.invalid_dup_download:
+  en: Invalid duplicate download state
+  zh-CN: 无效的重复下载状态
+  zh-TW: 無效的重複下載狀態
+sftp.error.invalid_dup_folder:
+  en: Invalid folder duplicate state
+  zh-CN: 无效的文件夹重复状态
+  zh-TW: 無效的資料夾重複狀態
+sftp.error.invalid_duplicate:
+  en: Invalid duplicate state
+  zh-CN: 无效的重复状态
+  zh-TW: 無效的重複狀態
+sftp.error.invalid_folder_overwrite:
+  en: Invalid folder overwrite state
+  zh-CN: 无效的文件夹覆盖状态
+  zh-TW: 無效的資料夾覆蓋狀態
+sftp.error.invalid_merge_download:
+  en: Invalid merge download state
+  zh-CN: 无效的合并下载状态
+  zh-TW: 無效的合併下載狀態
+sftp.error.invalid_merge_folder:
+  en: Invalid folder merge state
+  zh-CN: 无效的文件夹合并状态
+  zh-TW: 無效的資料夾合併狀態
+sftp.error.invalid_overwrite:
+  en: Invalid overwrite state
+  zh-CN: 无效的覆盖状态
+  zh-TW: 無效的覆蓋狀態
+sftp.error.naming_conflict:
+  en: 'Could not find an available name for %{path}'
+  zh-CN: '无法为 %{path} 找到可用名称'
+  zh-TW: '無法為 %{path} 找到可用名稱'
+sftp.error.only_files_folders:
+  en: 'Only files and folders can be uploaded'
+  zh-CN: '只能上传文件和文件夹'
+  zh-TW: '只能上傳檔案和資料夾'
+sftp.error.no_dest_remote:
+  en: No destination remote host selected
+  zh-CN: 未选择目标远程主机
+  zh-TW: 未選擇目標遠端主機
+sftp.error.no_left_remote:
+  en: No left remote host selected
+  zh-CN: 未选择左侧远程主机
+  zh-TW: 未選擇左側遠端主機
+sftp.error.no_source_remote:
+  en: No source remote host selected
+  zh-CN: 未选择源远程主机
+  zh-TW: 未選擇源遠端主機
+sftp.error.remote_file_gone:
+  en: Selected remote file no longer exists
+  zh-CN: 选定的远程文件已不存在
+  zh-TW: 選定的遠端檔案已不存在
+sftp.error.select_remote_first:
+  en: Select a remote file first
+  zh-CN: 请先选择远程文件
+  zh-TW: 請先選擇遠端檔案
+sftp.error.symlink_no_download:
+  en: Symlinks cannot be downloaded
+  zh-CN: 符号链接无法下载
+  zh-TW: 符號連結無法下載
+sftp.error.scan_folder:
+  en: 'Failed to scan folder: %{error}'
+  zh-CN: '扫描文件夹失败: %{error}'
+  zh-TW: '掃描資料夾失敗: %{error}'
+sftp.merging_folder:
+  en: 'Merging folder %{name}'
+  zh-CN: '正在合并文件夹 %{name}'
+  zh-TW: '正在合併資料夾 %{name}'
+sftp.path_not_found:
+  en: 'Path not found: %{path}'
+  zh-CN: '路径未找到: %{path}'
+  zh-TW: '路徑未找到: %{path}'
+sftp.preview_local:
+  en: 'Local · %{directory}'
+  zh-CN: '本地 · %{directory}'
+  zh-TW: '本地 · %{directory}'
+sftp.preview_remote:
+  en: '%{host} · %{directory}'
+  zh-CN: '%{host} · %{directory}'
+  zh-TW: '%{host} · %{directory}'
+sftp.previewed_file:
+  en: 'Previewed file: %{name}'
+  zh-CN: '已预览文件: %{name}'
+  zh-TW: '已預覽檔案: %{name}'
+sftp.queue_cleared:
+  en: 'Cleared %{count} queued transfer(s)'
+  zh-CN: '已清除 %{count} 个排队传输'
+  zh-TW: '已清除 %{count} 個排隊傳輸'
+sftp.queue_full:
+  en: 'Transfer queue is full (max %{max})'
+  zh-CN: '传输队列已满（最大 %{max})'
+  zh-TW: '傳輸佇列已滿（最大 %{max})'
+sftp.queue_removed:
+  en: 'Removed from queue: %{name}'
+  zh-CN: '已从队列移除: %{name}'
+  zh-TW: '已從佇列移除: %{name}'
+sftp.queued:
+  en: 'Queued: %{name}'
+  zh-CN: '已排队: %{name}'
+  zh-TW: '已排隊: %{name}'
+sftp.renamed:
+  en: 'Renamed %{old} to %{new}'
+  zh-CN: '已将 %{old} 重命名为 %{new}'
+  zh-TW: '已將 %{old} 重新命名為 %{new}'
+sftp.renamed_log:
+  en: 'SFTP renamed: %{message}'
+  zh-CN: 'SFTP 已重命名: %{message}'
+  zh-TW: 'SFTP 已重新命名: %{message}'
+sftp.replacing:
+  en: 'Replacing %{name}'
+  zh-CN: '正在替换 %{name}'
+  zh-TW: '正在替換 %{name}'
+sftp.replacing_folder:
+  en: 'Replacing folder %{name}'
+  zh-CN: '正在替换文件夹 %{name}'
+  zh-TW: '正在替換資料夾 %{name}'
+sftp.upload_started:
+  en: 'SFTP upload started: %{name}'
+  zh-CN: 'SFTP 上传开始: %{name}'
+  zh-TW: 'SFTP 上傳開始: %{name}'
+sftp.uploaded:
+  en: 'Uploaded %{name}'
+  zh-CN: '已上传 %{name}'
+  zh-TW: '已上傳 %{name}'
+sftp.uploaded_folder:
+  en: 'Uploaded folder %{name}'
+  zh-CN: '已上传文件夹 %{name}'
+  zh-TW: '已上傳資料夾 %{name}'
+sftp.uploading:
+  en: 'Uploading %{name}'
+  zh-CN: '正在上传 %{name}'
+  zh-TW: '正在上傳 %{name}'
+sftp.resuming_download:
+  en: Resuming download
+  zh-CN: 恢复下载
+  zh-TW: 恢復下載
+sftp.resuming_upload:
+  en: Resuming upload
+  zh-CN: 恢复上传
+  zh-TW: 恢復上傳
+sftp.status_downloading:
+  en: Downloading
+  zh-CN: 下载中
+  zh-TW: 下載中
+sftp.transfer_tab:
+  en: Transfer
+  zh-CN: 传输
+  zh-TW: 傳輸
+sftp.status_uploading:
+  en: Uploading
+  zh-CN: 上传中
+  zh-TW: 上傳中
+sftp.connecting:
+  en: Connecting…
+  zh-CN: 连接中…
+  zh-TW: 連線中…
+sftp.uploading_ellipsis:
+  en: Uploading…
+  zh-CN: 正在上传…
+  zh-TW: 正在上傳…
+sftp.uploading_folder:
+  en: 'Uploading folder %{name}'
+  zh-CN: '正在上传文件夹 %{name}'
+  zh-TW: '正在上傳資料夾 %{name}'
+sftp.waiting:
+  en: Waiting…
+  zh-CN: 等待中…
+  zh-TW: 等待中…
+sidebar.add:
+  en: Add
+  zh-CN: 添加
+  zh-TW: 新增
+sidebar.description:
+  en: Description
+  zh-CN: 描述
+  zh-TW: 描述
+sidebar.package_none:
+  en: 'Package: None'
+  zh-CN: 代码片段包：无
+  zh-TW: 程式碼片段包：無
+sidebar.script:
+  en: Script
+  zh-CN: 脚本
+  zh-TW: 指令碼
+snippets.pasted:
+  en: Pasted to terminal
+  zh-CN: 已粘贴到终端
+  zh-TW: 已貼上到終端
+snippets.no_active_terminal:
+  en: No active terminal
+  zh-CN: 没有活动的终端
+  zh-TW: 沒有活動的終端
+snippets.running:
+  en: Running…
+  zh-CN: 运行中…
+  zh-TW: 執行中…
+snippets.script_copied:
+  en: Script copied to clipboard
+  zh-CN: 脚本已复制到剪贴板
+  zh-TW: 指令碼已複製到剪貼簿
+snippets.snippet_added:
+  en: Snippet added
+  zh-CN: 片段已添加
+  zh-TW: 片段已新增
+snippets.snippet_updated:
+  en: Snippet updated
+  zh-CN: 片段已更新
+  zh-TW: 片段已更新
+snippets.add_snippet:
+  en: Add Snippet
+  zh-CN: 添加片段
+  zh-TW: 新增片段
+snippets.click_new_snippet:
+  en: Click + New Snippet to save your first command template
+  zh-CN: 点击 + 新建片段来保存你的第一个命令模板
+  zh-TW: 點選 + 新建片段來儲存你的第一個命令模板
+snippets.create_package:
+  en: Create Package
+  zh-CN: 创建代码片段包
+  zh-TW: 建立程式碼片段包
+snippets.delete_package_confirm:
+  en: Are you sure you want to delete "%{name}"?
+  zh-CN: 确定要删除 "%{name}" 吗？
+  zh-TW: 確定要刪除 "%{name}" 嗎？
+snippets.delete_package_title:
+  en: Delete Package?
+  zh-CN: 删除代码片段包？
+  zh-TW: 刪除程式碼片段包？
+snippets.delete_snippet_confirm:
+  en: Are you sure you want to delete "%{name}"?
+  zh-CN: 确定要删除 "%{name}" 吗？
+  zh-TW: 確定要刪除 "%{name}" 嗎？
+snippets.delete_snippet_title:
+  en: Delete Snippet?
+  zh-CN: 删除代码片段？
+  zh-TW: 刪除程式碼片段？
+snippets.new_package:
+  en: NEW PACKAGE
+  zh-CN: 新建代码片段包
+  zh-TW: 新建程式碼片段包
+snippets.new_snippet:
+  en: NEW SNIPPET
+  zh-CN: 新建片段
+  zh-TW: 新建片段
+snippets.no_packages_yet:
+  en: No packages yet.
+  zh-CN: 暂无代码片段包。
+  zh-TW: 暫無程式碼片段包。
+snippets.no_snippets_yet:
+  en: No snippets yet
+  zh-CN: 暂无代码片段
+  zh-TW: 暫無程式碼片段
+snippets.package_optional_label:
+  en: Package (optional)
+  zh-CN: 代码片段包（可选）
+  zh-TW: 程式碼片段包（可選）
+snippets.packages_title:
+  en: Packages
+  zh-CN: 代码片段包
+  zh-TW: 程式碼片段包
+snippets.script_label:
+  en: Script
+  zh-CN: 脚本
+  zh-TW: 指令碼
+snippets.script_placeholder:
+  en: e.g. df -h | sort -rh | head -20
+  zh-CN: 例如 df -h | sort -rh | head -20
+  zh-TW: 例如 df -h | sort -rh | head -20
+snippets.snippets_title:
+  en: Snippets
+  zh-CN: 代码片段
+  zh-TW: 程式碼片段
+ssh.add_and_continue:
+  en: Add and Continue
+  zh-CN: 添加并继续
+  zh-TW: 新增並繼續
+ssh.auth_failed:
+  en: Authentication failed
+  zh-CN: 认证失败
+  zh-TW: 認證失敗
+ssh.auth_success:
+  en: Authentication succeeded
+  zh-CN: 认证成功
+  zh-TW: 認證成功
+ssh.check_creds:
+  en: Check credentials and try again
+  zh-CN: 请检查凭据后重试
+  zh-TW: 請檢查憑據後重試
+ssh.checking_auth:
+  en: Checking SSH authentication
+  zh-CN: 检查 SSH 认证
+  zh-TW: 檢查 SSH 認證
+ssh.close:
+  en: Close
+  zh-CN: 关闭
+  zh-TW: 關閉
+ssh.connect:
+  en: Connect
+  zh-CN: 连接
+  zh-TW: 連線
+ssh.connecting:
+  en: Connecting
+  zh-CN: 正在连接
+  zh-TW: 正在連線
+ssh.connecting_to:
+  en: Connecting to %{target}…
+  zh-CN: 正在连接到 %{target}...
+  zh-TW: 正在連線到 %{target}...
+ssh.connection_established:
+  en: Connection established
+  zh-CN: 连接已建立
+  zh-TW: 連線已建立
+ssh.connection_failed:
+  en: Connection failed
+  zh-CN: 连接失败
+  zh-TW: 連線失敗
+ssh.continue:
+  en: Continue
+  zh-CN: 继续
+  zh-TW: 繼續
+ssh.edit_host:
+  en: Edit Host
+  zh-CN: 编辑主机
+  zh-TW: 編輯主機
+ssh.enter_password:
+  en: Enter password…
+  zh-CN: 输入密码...
+  zh-TW: 輸入密碼...
+ssh.fingerprint:
+  en: Fingerprint (SHA256)
+  zh-CN: 指纹 (SHA256)
+  zh-TW: 指紋 (SHA256)
+ssh.host_key_required:
+  en: Host key verification required
+  zh-CN: 需要主机密钥验证
+  zh-TW: 需要主機金鑰驗證
+ssh.host_label:
+  en: Host
+  zh-CN: 主机
+  zh-TW: 主機
+ssh.key_info_unavailable:
+  en: No key information available
+  zh-CN: 没有可用的密钥信息
+  zh-TW: 沒有可用的金鑰資訊
+ssh.key_type:
+  en: Key Type
+  zh-CN: 密钥类型
+  zh-TW: 金鑰型別
+ssh.log_auth_failed:
+  en: Authentication failed
+  zh-CN: 认证失败
+  zh-TW: 認證失敗
+ssh.log_checking_auth:
+  en: Running SSH authentication check
+  zh-CN: 正在运行 SSH 认证检查
+  zh-TW: 正在執行 SSH 認證檢查
+ssh.log_no_target:
+  en: No SSH target selected
+  zh-CN: 未选择 SSH 目标
+  zh-TW: 未選擇 SSH 目標
+ssh.log_no_target_after_auth:
+  en: Authenticated but no SSH target was available
+  zh-CN: 已认证但没有可用的 SSH 目标
+  zh-TW: 已認證但沒有可用的 SSH 目標
+ssh.log_opening_session:
+  en: Authentication succeeded; opening SSH terminal session
+  zh-CN: 认证成功；正在打开 SSH 终端会话
+  zh-TW: 認證成功；正在開啟 SSH 終端會話
+ssh.log_probing_key:
+  en: First-time connection — probing the host key…
+  zh-CN: 首次连接 — 正在探测主机密钥...
+  zh-TW: 首次連線 — 正在探測主機金鑰...
+ssh.log_proceeding:
+  en: Proceeding with authentication…
+  zh-CN: 正在继续认证...
+  zh-TW: 正在繼續認證...
+ssh.log_waiting_key:
+  en: Waiting for user to confirm host key…
+  zh-CN: 等待用户确认主机密钥...
+  zh-TW: 等待使用者確認主機金鑰...
+ssh.opening_session:
+  en: Opening SSH terminal session
+  zh-CN: 正在打开 SSH 终端会话
+  zh-TW: 正在開啟 SSH 終端會話
+ssh.jump_session_missing:
+  en: The jump host did not return a session
+  zh-CN: 跳板主机未返回会话
+  zh-TW: 跳板主機未返回工作階段
+ssh.password:
+  en: Password
+  zh-CN: 密码
+  zh-TW: 密碼
+ssh.key_passphrase:
+  en: Private Key Passphrase
+  zh-CN: 私钥密码
+  zh-TW: 私鑰密碼
+ssh.enter_key_passphrase:
+  en: Enter private key passphrase…
+  zh-CN: 输入私钥密码...
+  zh-TW: 輸入私鑰密碼...
+ssh.key_passphrase_required:
+  en: Private key passphrase required
+  zh-CN: 需要私钥密码
+  zh-TW: 需要私鑰密碼
+ssh.password_required:
+  en: Password required
+  zh-CN: 需要密码
+  zh-TW: 需要密碼
+ssh.retry:
+  en: Retry
+  zh-CN: 重试
+  zh-TW: 重試
+ssh.review_key:
+  en: Review the server key fingerprint before connecting
+  zh-CN: 连接前请检查服务器密钥指纹
+  zh-TW: 連線前請檢查伺服器金鑰指紋
+ssh.trust_host:
+  en: Trust This Host?
+  zh-CN: 信任此主机？
+  zh-TW: 信任此主機？
+ssh.waiting_connect:
+  en: Waiting to connect
+  zh-CN: 等待连接
+  zh-TW: 等待連線
+ssh.waiting_for_connection:
+  en: Waiting for connection…
+  zh-CN: 等待连接...
+  zh-TW: 等待連線...
+ssh.connect_failed:
+  en: 'Failed to connect with russh: %{e}'
+  zh-CN: 连接失败：%{e}
+  zh-TW: 連線失敗：%{e}
+ssh.bridge_restart_required:
+  en: Termlet could not start its SSH bridge because the application binary was removed or replaced. Restart Termlet and try again.
+  zh-CN: Termlet 无法启动 SSH 桥接进程，因为应用程序二进制已被删除或替换。请重启 Termlet 后重试。
+  zh-TW: Termlet 無法啟動 SSH 橋接程序，因為應用程式二進位檔已被刪除或取代。請重新啟動 Termlet 後再試。
+ssh.connect_timeout:
+  en: Timed out connecting to %{host}:%{port}
+  zh-CN: 连接 %{host}:%{port} 超时
+  zh-TW: 連線 %{host}:%{port} 超時
+ssh.connection_limit_total:
+  en: 'SSH connection limit reached: a maximum of %{max} pooled sessions can be open.'
+  zh-CN: 已达到 SSH 连接上限：最多允许 %{max} 个已缓存会话。
+  zh-TW: 已達到 SSH 連線上限：最多允許 %{max} 個已快取會話。
+ssh.connection_limit_per_host:
+  en: 'SSH connection limit reached for this host: at most %{max} pooled sessions per host.'
+  zh-CN: 已达到该主机的 SSH 连接上限：每台主机最多允许 %{max} 个已缓存会话。
+  zh-TW: 已達到該主機的 SSH 連線上限：每臺主機最多允許 %{max} 個已快取會話。
+ssh.host_key_changed:
+  en: Host key verification failed for %{host}:%{port} — the server key has changed. See logs for details.
+  zh-CN: 主机密钥校验失败 %{host}:%{port}——服务器密钥已更改，详见日志。
+  zh-TW: 主機金鑰校驗失敗 %{host}:%{port}——伺服器金鑰已更改，詳見日誌。
+ssh.kbd_interactive_too_many:
+  en: Keyboard-interactive authentication was requested too many times
+  zh-CN: 键盘交互认证请求次数过多
+  zh-TW: 鍵盤互動認證請求次數過多
+ssh.key_load_failed:
+  en: 'Failed to load private key %{key_path}: %{e}'
+  zh-CN: 加载私钥 %{key_path} 失败：%{e}
+  zh-TW: 載入私鑰 %{key_path} 失敗：%{e}
+ssh.key_path_required:
+  en: Key authentication requires a private key path
+  zh-CN: 密钥认证需要提供私钥路径
+  zh-TW: 金鑰認證需要提供私鑰路徑
+ssh.password_rejected:
+  en: Password authentication was rejected
+  zh-CN: 密码认证被拒绝
+  zh-TW: 密碼認證被拒絕
+ssh.password_missing:
+  en: Password authentication requires a password
+  zh-CN: 密码认证需要提供密码
+  zh-TW: 密碼認證需要提供密碼
+ssh.public_key_rejected:
+  en: Public key authentication was rejected
+  zh-CN: 公钥认证被拒绝
+  zh-TW: 公鑰認證被拒絕
+term_lock_close.body:
+  en: '"%{name}" is locked. Close it anyway?'
+  zh-CN: '「%{name}」已锁定，仍要关闭吗？'
+  zh-TW: '「%{name}」已鎖定，仍要關閉嗎？'
+term_lock_close.confirm:
+  en: Close
+  zh-CN: 关闭
+  zh-TW: 關閉
+term_lock_close.title:
+  en: Close locked tab?
+  zh-CN: 关闭已锁定标签页？
+  zh-TW: 關閉已鎖定標籤頁？
+term_menu.close:
+  en: Close
+  zh-CN: 关闭
+  zh-TW: 關閉
+term_menu.close_others:
+  en: Close Others
+  zh-CN: 关闭其他
+  zh-TW: 關閉其他
+term_menu.close_right:
+  en: Close to the Right
+  zh-CN: 关闭右侧
+  zh-TW: 關閉右側
+term_menu.duplicate:
+  en: Duplicate
+  zh-CN: 复制
+  zh-TW: 複製
+term_menu.lock:
+  en: Lock
+  zh-CN: 锁定
+  zh-TW: 鎖定
+term_menu.new_window:
+  en: New Window
+  zh-CN: 新窗口
+  zh-TW: 新視窗
+term_menu.rename:
+  en: Rename
+  zh-CN: 重命名
+  zh-TW: 重新命名
+term_menu.unlock:
+  en: Unlock
+  zh-CN: 解锁
+  zh-TW: 解鎖
+dock.new_window:
+  en: New Window
+  zh-CN: 新建窗口
+  zh-TW: 新增視窗
+command_frequency.title:
+  en: 'Used %{count} times'
+  zh-CN: '已使用 %{count} 次'
+  zh-TW: '已使用 %{count} 次'
+command_frequency.add:
+  en: Add to Snippets
+  zh-CN: 添加为片段
+  zh-TW: 新增為片段
+terminal.connection_dropped:
+  en: The SSH connection has been dropped. Keep the terminal open to review or copy its output.
+  zh-CN: SSH 连接已断开。保留终端即可查看或复制其中的输出。
+  zh-TW: SSH 連線已斷開。保留終端即可檢視或複製其中的輸出。
+terminal.connection_lost_label:
+  en: 'Connection Lost — %{label}'
+  zh-CN: '连接丢失 — %{label}'
+  zh-TW: '連線丟失 — %{label}'
+terminal.disconnect_banner:
+  en: Connection lost — terminal kept for review
+  zh-CN: 连接已断开，终端内容已保留
+  zh-TW: 連線已斷開，終端內容已保留
+terminal.disconnect_close:
+  en: Close Terminal
+  zh-CN: 关闭终端
+  zh-TW: 關閉終端
+terminal.disconnect_dismiss:
+  en: Keep Terminal
+  zh-CN: 保留终端
+  zh-TW: 保留終端
+terminal.local_label:
+  en: Local Terminal
+  zh-CN: 本地终端
+  zh-TW: 本地終端
+terminal.local_session_opened:
+  en: 'Local terminal session opened: %{label}'
+  zh-CN: 本地终端会话已打开：%{label}
+  zh-TW: 本地終端會話已開啟：%{label}
+terminal.reconnect:
+  en: Reconnect
+  zh-CN: 重新连接
+  zh-TW: 重新連線
+terminal.session_not_found:
+  en: Session not found
+  zh-CN: 未找到会话
+  zh-TW: 未找到會話
+terminal.split_restore_tooltip:
+  en: Restore terminal tab
+  zh-CN: 恢复独立终端标签
+  zh-TW: 恢復獨立終端標籤
+terminal.split_close_tooltip:
+  en: Close terminal
+  zh-CN: 关闭终端
+  zh-TW: 關閉終端
+terminal.split_too_small:
+  en: 'Pane is too small to split further (minimum %{min_width}×%{min_height}px per pane).'
+  zh-CN: '窗格过小，无法继续分屏（每个窗格最小 %{min_width}×%{min_height}px）。'
+  zh-TW: '窗格過小，無法繼續分屏（每個窗格最小 %{min_width}×%{min_height}px）。'
+theme.auto:
+  en: Auto
+  zh-CN: 自动
+  zh-TW: 自動
+theme.dark:
+  en: Dark
+  zh-CN: 暗色
+  zh-TW: 暗色
+theme.dracula:
+  en: Dracula
+  zh-CN: Dracula
+  zh-TW: Dracula
+theme.high_contrast_dark:
+  en: High Contrast Dark
+  zh-CN: 暗色高对比
+  zh-TW: 暗色高對比
+theme.high_contrast_light:
+  en: High Contrast Light
+  zh-CN: 亮色高对比
+  zh-TW: 亮色高對比
+theme.light:
+  en: Light
+  zh-CN: 亮色
+  zh-TW: 亮色
+theme.novel:
+  en: Novel
+  zh-CN: 暖纸
+  zh-TW: 暖紙
+topbar.sftp:
+  en: SFTP
+  zh-CN: SFTP
+  zh-TW: SFTP
+topbar.vaults:
+  en: Vaults
+  zh-CN: 主机库
+  zh-TW: 主機庫
+topbar.new_tab:
+  en: New Tab
+  zh-CN: 新标签
+  zh-TW: 新標籤
+topbar.tooltip_minimize:
+  en: Minimize
+  zh-CN: 最小化
+  zh-TW: 最小化
+topbar.tooltip_maximize:
+  en: Maximize
+  zh-CN: 最大化
+  zh-TW: 最大化
+topbar.tooltip_restore:
+  en: Restore
+  zh-CN: 还原
+  zh-TW: 還原
+topbar.tooltip_close:
+  en: Close
+  zh-CN: 关闭
+  zh-TW: 關閉
+topbar.tooltip_sidebar:
+  en: Toggle sidebar
+  zh-CN: 切换侧边栏
+  zh-TW: 切換側邊欄
+topbar.tooltip_save_workspace:
+  en: Save workspace
+  zh-CN: 保存工作区
+  zh-TW: 儲存工作區
+new_tab.all_connections:
+  en: All Connections
+  zh-CN: 所有连接
+  zh-TW: 所有連線
+new_tab.recent_connections:
+  en: Recent Connections
+  zh-CN: 最近连接
+  zh-TW: 最近連線
+new_tab.search_results:
+  en: Search Results
+  zh-CN: 搜索结果
+  zh-TW: 搜尋結果
+ssh_connect.title:
+  en: SSH Connection
+  zh-CN: SSH 连接
+  zh-TW: SSH 連線
+ssh_connect.host_key_explanation:
+  en: The authenticity of this host cannot be established. Its SSH host key fingerprint is shown below. Are you sure you want to continue connecting?
+  zh-CN: 无法验证此主机的真实性。其 SSH 主机密钥指纹如下所示。确定要继续连接吗？
+  zh-TW: 無法驗證此主機的真實性。其 SSH 主機金鑰指紋如下所示。確定要繼續連線嗎？
+ssh_connect.remote_host:
+  en: remote host
+  zh-CN: 远程主机
+  zh-TW: 遠端主機
+known_hosts.empty:
+  en: No known hosts yet. Connect to an SSH server to automatically add its host key.
+  zh-CN: 暂无已知主机。连接到 SSH 服务器以自动添加其主机密钥。
+  zh-TW: 暫無已知主機。連線到 SSH 伺服器以自動新增其主機金鑰。
+known_hosts.no_match:
+  en: No known hosts match your search.
+  zh-CN: 没有匹配的已知主机。
+  zh-TW: 沒有匹配的已知主機。
+known_hosts.fingerprint_label:
+  en: Fingerprint
+  zh-CN: 指纹
+  zh-TW: 指紋
+known_hosts.public_key_label:
+  en: Public Key
+  zh-CN: 公钥
+  zh-TW: 公鑰
+known_hosts.line_number_label:
+  en: Line Number
+  zh-CN: 行号
+  zh-TW: 行號
+known_hosts.pattern_label:
+  en: Pattern
+  zh-CN: 模式
+  zh-TW: 模式
+known_hosts.marker_label:
+  en: Marker
+  zh-CN: 标记
+  zh-TW: 標記
+known_hosts.delete_fallback:
+  en: this host key
+  zh-CN: 此主机密钥
+  zh-TW: 此主機金鑰
+hosts.delete_fallback:
+  en: this host
+  zh-CN: 此主机
+  zh-TW: 此主機
+keychain.delete_identity_fallback:
+  en: this identity
+  zh-CN: 此身份
+  zh-TW: 此身份
+keychain.delete_key_fallback:
+  en: this key
+  zh-CN: 此密钥
+  zh-TW: 此金鑰
+port_forward.delete_fallback:
+  en: this forward
+  zh-CN: 此转发
+  zh-TW: 此轉發
+port_forward_kind.local_short:
+  en: L
+  zh-CN: L
+  zh-TW: L
+port_forward_kind.remote_short:
+  en: R
+  zh-CN: R
+  zh-TW: R
+port_forward_kind.dynamic_short:
+  en: D
+  zh-CN: D
+  zh-TW: D
+port_forward_kind.local_label:
+  en: Local (-L)
+  zh-CN: 本地 (-L)
+  zh-TW: 本地 (-L)
+port_forward_kind.remote_label:
+  en: Remote (-R)
+  zh-CN: 远程 (-R)
+  zh-TW: 遠端 (-R)
+port_forward_kind.dynamic_label:
+  en: Dynamic (-D)
+  zh-CN: 动态 (-D)
+  zh-TW: 動態 (-D)
+port_forward.log_line_count:
+  en: '%{count} lines'
+  zh-CN: '%{count} 行'
+  zh-TW: '%{count} 行'
+snippets.delete_snippet_fallback:
+  en: this snippet
+  zh-CN: 此片段
+  zh-TW: 此片段
+snippets.delete_package_fallback:
+  en: this package
+  zh-CN: 此代码片段包
+  zh-TW: 此程式碼片段包
+snippets.edit_package:
+  en: Edit Package
+  zh-CN: 编辑代码片段包
+  zh-TW: 編輯程式碼片段包
+snippets.edit_snippet:
+  en: Edit Snippet
+  zh-CN: 编辑片段
+  zh-TW: 編輯片段
+snippets.package_none:
+  en: None
+  zh-CN: 无
+  zh-TW: 無
+snippets.action_description:
+  en: Action description
+  zh-CN: 操作描述
+  zh-TW: 操作描述
+snippets.action_description_hint:
+  en: e.g. Show disk usage
+  zh-CN: 例如 显示磁盘使用情况
+  zh-TW: 例如 顯示磁碟使用情況
+sftp.drop_upload_left:
+  en: Upload to Left Remote
+  zh-CN: 上传到左侧远程
+  zh-TW: 上傳到左側遠端
+sftp.drop_upload_left_sub:
+  en: Upload to the current left remote folder
+  zh-CN: 发送到当前左侧远程文件夹
+  zh-TW: 傳送到當前左側遠端資料夾
+sftp.drop_local:
+  en: Drop to Local
+  zh-CN: 放入本地
+  zh-TW: 放入本地
+sftp.drop_local_sub:
+  en: Copy into the current local folder
+  zh-CN: 复制到当前本地文件夹
+  zh-TW: 複製到當前本地資料夾
+sftp.drop_upload:
+  en: Upload to Remote
+  zh-CN: 上传到远程
+  zh-TW: 上傳到遠端
+sftp.drop_upload_sub:
+  en: Upload to the current remote folder
+  zh-CN: 发送到当前远程文件夹
+  zh-TW: 傳送到當前遠端資料夾
+sftp.drop_no_remote:
+  en: Remote not connected
+  zh-CN: 远程未连接
+  zh-TW: 遠端未連線
+sftp.drop_no_remote_sub:
+  en: Connect a host before uploading
+  zh-CN: 上传前请先连接主机
+  zh-TW: 上傳前請先連線主機
+sftp.host_picker_subtitle:
+  en: '%{count} of %{total} hosts matching "%{query}"'
+  zh-CN: '%{total} 个主机中有 %{count} 个匹配 "%{query}"'
+  zh-TW: '%{total} 個主機中有 %{count} 個匹配 "%{query}"'
+sftp.pending_count:
+  en: '%{count} pending'
+  zh-CN: '%{count} 个待处理'
+  zh-TW: '%{count} 個待處理'
+sftp.file_count:
+  en: '%{count} files'
+  zh-CN: '%{count} 个文件'
+  zh-TW: '%{count} 個檔案'
+sftp.create_remote_no_parent:
+  en: 'Failed to create %{path}: parent directory does not exist'
+  zh-CN: 创建 %{path} 失败：父目录不存在
+  zh-TW: 建立 %{path} 失敗：父目錄不存在
+sftp.create_remote_permission:
+  en: 'Failed to create %{path}: permission denied'
+  zh-CN: 创建 %{path} 失败：权限不足
+  zh-TW: 建立 %{path} 失敗：許可權不足
+sftp.create_remote_permission_full:
+  en: 'Failed to create %{path}: permission denied, disk full, or parent directory missing'
+  zh-CN: 创建 %{path} 失败：权限不足、磁盘已满或父目录不存在
+  zh-TW: 建立 %{path} 失敗：許可權不足、磁碟已滿或父目錄不存在
+sftp.not_a_directory:
+  en: '%{path} exists but is not a directory'
+  zh-CN: '%{path} 已存在但不是目录'
+  zh-TW: '%{path} 已存在但不是目錄'
+sftp.size_mismatch:
+  en: 'Size mismatch after upload: remote %{remote} bytes, local %{local} bytes'
+  zh-CN: 上传后大小不一致：远程 %{remote} 字节，本地 %{local} 字节
+  zh-TW: 上傳後大小不一致：遠端 %{remote} 位元組，本地 %{local} 位元組
+terminal.spotlight_open_sftp:
+  en: Open in SFTP
+  zh-CN: 在 SFTP 中打开
+  zh-TW: 在 SFTP 中開啟
+terminal.spotlight_open_sftp_desc:
+  en: Open file manager for this host
+  zh-CN: 打开此主机的文件管理器
+  zh-TW: 開啟此主機的檔案管理器
+terminal.spotlight_open_sftp_cwd_unsynced:
+  en: 'Cannot open in SFTP: the current working directory is not synchronized (%{path})'
+  zh-CN: 'Open in SFTP 错误：当前工作目录未同步（%{path}）'
+  zh-TW: 'Open in SFTP 錯誤：當前工作目錄未同步（%{path}）'
+terminal.spotlight_placeholder:
+  en: Type to search commands
+  zh-CN: 输入以搜索命令
+  zh-TW: 輸入以搜尋命令
+terminal.spotlight_no_results:
+  en: No matching commands
+  zh-CN: 无匹配的命令
+  zh-TW: 無匹配的命令
+terminal.spotlight_cat_terminal:
+  en: Terminal
+  zh-CN: 终端
+  zh-TW: 終端
+terminal.spotlight_cat_sftp:
+  en: SFTP
+  zh-CN: SFTP
+  zh-TW: SFTP
+terminal.spotlight_new_tab:
+  en: New Tab
+  zh-CN: 新建标签
+  zh-TW: 新建標籤
+terminal.spotlight_new_tab_desc:
+  en: Open a new terminal tab
+  zh-CN: 打开新的终端标签
+  zh-TW: 開啟新的終端標籤
+terminal.spotlight_open_local_terminal:
+  en: Open Local Terminal
+  zh-CN: 打开本地终端
+  zh-TW: 開啟本地終端
+terminal.spotlight_open_local_terminal_desc:
+  en: Start a shell on this machine
+  zh-CN: 在本机启动 shell
+  zh-TW: 在本機啟動 shell
+terminal.spotlight_close_tab:
+  en: Close Current Tab
+  zh-CN: 关闭当前标签
+  zh-TW: 關閉當前標籤
+terminal.spotlight_close_tab_desc:
+  en: Close the active tab
+  zh-CN: 关闭当前活动标签
+  zh-TW: 關閉當前活動標籤
