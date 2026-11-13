@@ -3,7 +3,7 @@
 <img src="assets/app-icons/generic/termlet.svg" alt="Termlet icon" width="96" align="right" />
 
 [![CI](https://github.com/narol2026/termlet/actions/workflows/ci.yml/badge.svg)](https://github.com/narol2026/termlet/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/narol2026/termlet)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 Termlet is a cross-platform desktop terminal built with [iced](https://github.com/iced-rs/iced).
 It focuses on SSH session management: terminals, SFTP, a keychain, port
