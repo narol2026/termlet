@@ -21,13 +21,17 @@
     "gui"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "build:icons": "node tools/icons/build_icon_font.mjs"
   },
   "devDependencies": {
-    "fs-extra": "^11.2.0",
-    "svgtofont": "^6.5.2"
+    "fs-extra": "^11.4.1",
+    "svgtofont": "^6.5.3"
+  },
+  "overrides": {
+    "glob": "^14.0.6",
+    "minimatch": "^11.0.8"
   }
 }

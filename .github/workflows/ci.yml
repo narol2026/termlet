@@ -53,6 +53,8 @@ jobs:
         run: command -v cargo-audit >/dev/null || cargo install cargo-audit --locked
       - name: Audit dependencies
         run: cargo audit
+      - name: Audit icon tooling dependencies
+        run: npm audit --audit-level=moderate
       - name: Check formatting
         run: cargo fmt --all -- --check
       - name: Run clippy

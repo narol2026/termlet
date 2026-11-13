@@ -93,6 +93,8 @@ are not signed or notarized yet, so Gatekeeper warns on the first launch.
   agent keys.
 - Pinned the upstream `russh` commit that moves to RSA 0.10 and SSH key
   support with the current constant-time mitigations.
+- Refreshed the Node icon-generation toolchain and overrode its vulnerable
+  transitive glob dependencies; `npm audit` now reports no vulnerabilities.
 
 <!--
 Release entries are grouped under Added / Changed / Deprecated / Removed /
