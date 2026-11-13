@@ -7,8 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-14
+
+Termlet's first public release provides official Linux and macOS packages.
+Windows source builds remain available, but Windows is not part of this
+release.
+
+The release includes Debian/Ubuntu packages for x86_64 and aarch64, macOS disk
+images for Intel and Apple Silicon, and a `SHA256SUMS` file. The macOS images
+are not signed or notarized yet, so Gatekeeper warns on the first launch.
+
 ### Added
 
+- SSH terminals backed by russh, alongside local terminals, split panes, tabs,
+  shell integration, command history, in-terminal search, and a command
+  palette.
+- SFTP browsing and transfers with queueing, conflict handling, previews,
+  drag-and-drop, and local/remote panes.
+- Host vaults, age-encrypted keychain entries, known-hosts management, reusable
+  snippets, and local, remote, and dynamic port forwarding.
+- Saved workspaces, persistent logs, crash reports, six built-in themes plus
+  automatic system theme selection, and English, Simplified Chinese, and
+  Traditional Chinese localization.
+- Linux packages for x86_64 and aarch64, and macOS disk images for Intel and
+  Apple Silicon.
+- An automated tag workflow that builds the release packages, publishes their
+  SHA-256 checksums, and creates the GitHub Release.
 - The Logs page is persistent. Every entry is appended to
   `~/.termlet/logs/termlet-YYYY-MM-DD.log` — one file per day, the newest seven
   kept, `0600` — and the page opens on the newest entries of the previous run
@@ -59,9 +83,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (`/etc`, `/usr`, `/usr/local`, `/usr/local/bin`). The confirmation prompt is
   the only gate, so a file the user put under `/usr/local/bin` can be deleted.
 
+### Security
+
+- Updated the SSH, SQLite, XML, TLS, async runtime, and supporting dependency
+  graph before the first release. `cargo audit` reports no vulnerabilities in
+  the locked dependency set.
+- Upgraded to `russh` 0.65, including its fixes for malformed packet sizes,
+  decompression limits, unexpected channel callbacks, and confirm-constrained
+  agent keys.
+- Pinned the upstream `russh` commit that moves to RSA 0.10 and SSH key
+  support with the current constant-time mitigations.
+
 <!--
 Release entries are grouped under Added / Changed / Deprecated / Removed /
 Fixed / Security. Keep the newest version at the top. When cutting a release,
 move the relevant items from Unreleased into a new `## [x.y.z] - YYYY-MM-DD`
 section and add the comparison link below.
 -->
+
+[Unreleased]: https://github.com/narol2026/termlet/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/narol2026/termlet/releases/tag/v1.0.0

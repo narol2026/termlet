@@ -3,6 +3,7 @@
 <img src="assets/app-icons/generic/termlet.svg" alt="Termlet icon" width="96" align="right" />
 
 [![CI](https://github.com/narol2026/termlet/actions/workflows/ci.yml/badge.svg)](https://github.com/narol2026/termlet/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/narol2026/termlet)](https://github.com/narol2026/termlet/releases/latest)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 Termlet is a cross-platform desktop terminal built with [iced](https://github.com/iced-rs/iced).
@@ -11,6 +12,16 @@ forwarding, snippets, and known hosts, all in one window.
 
 Linux and macOS are the supported build targets today. Windows builds from
 source, but is still being verified and has no official release package yet.
+
+## Download
+
+[Termlet 1.0.0](https://github.com/narol2026/termlet/releases/tag/v1.0.0) is
+the first public release. It contains Debian/Ubuntu packages for x86_64 and
+aarch64, plus macOS disk images for Intel and Apple Silicon. Every release
+includes a `SHA256SUMS` file.
+
+The macOS packages are not signed or notarized yet, so Gatekeeper warns on the
+first launch. Windows is not included in the official release.
 
 ## Screenshot
 
@@ -81,10 +92,8 @@ The codebase has `target_os = "macos"` branches (window chrome, cursor,
 keybindings, theme detection) but no architecture-specific code, so Apple
 Silicon builds and runs directly.
 
-There is no tagged release yet. Until `v1.0.0` is published, build from source;
-the packages produced by CI are build artifacts, not supported downloads. The
-macOS 15 CI runner does not declare or verify a minimum runtime version for
-older macOS releases.
+The macOS 15 release runners do not declare or verify a minimum runtime version
+for older macOS releases.
 
 ## Building
 

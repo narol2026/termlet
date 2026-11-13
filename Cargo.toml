@@ -137,9 +137,12 @@ iced_term = "0.8.0"
 # in PATCHES.md.
 iced_drop = { git = "https://github.com/narol2026/iced_drop", rev = "1ad755105665498781e3a2a269ff3b4470c0ea6a", features = ["helpers"] }
 lucide-icons = { version = "1", features = ["iced"] }
-rusqlite = { version = "0.32", features = ["bundled"] }
-russh = "0.60.2"
-russh-sftp = "2.1.2"
+rusqlite = { version = "0.42", features = ["bundled"] }
+# The v0.65.1 crate pins RSA 0.10.0-rc.18, which RustSec still flags for the
+# Marvin timing attack. This commit moves the upstream crate to the patched
+# stable RSA release; pin it until the same change reaches a published crate.
+russh = { git = "https://github.com/Eugeny/russh", rev = "b541663a88381aab9f6af1af7bbadb02e155058a" }
+russh-sftp = "3.0.1"
 rand = "0.10"
 directories = "5"
 rfd = "0.15"

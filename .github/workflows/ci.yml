@@ -33,7 +33,7 @@ jobs:
     name: fmt + clippy
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Check application icon bundles
         run: python3 tools/icons/check_app_icons.py
       # The Debian copyright file is assembled from LICENSE and the texts under
@@ -48,7 +48,11 @@ jobs:
       - name: Install Rust toolchain
         # Installs the channel and components pinned in rust-toolchain.toml.
         run: rustup install
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
+      - name: Install cargo-audit
+        run: command -v cargo-audit >/dev/null || cargo install cargo-audit --locked
+      - name: Audit dependencies
+        run: cargo audit
       - name: Check formatting
         run: cargo fmt --all -- --check
       - name: Run clippy
@@ -58,7 +62,7 @@ jobs:
     name: test (linux x86_64)
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Install Linux build dependencies
         run: |
           sudo apt-get update
@@ -66,7 +70,7 @@ jobs:
       - name: Install Rust toolchain
         # Installs the channel and components pinned in rust-toolchain.toml.
         run: rustup install
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
       - name: Run tests
         run: cargo test --locked
 
@@ -79,7 +83,7 @@ jobs:
     name: msrv (cargo check)
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Install Linux build dependencies
         run: |
           sudo apt-get update
@@ -109,7 +113,7 @@ jobs:
         run: |
           rustup toolchain install "${{ steps.msrv.outputs.version }}" --profile minimal
           echo "RUSTUP_TOOLCHAIN=${{ steps.msrv.outputs.version }}" >> "$GITHUB_ENV"
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
       - name: Verify the compiler
         # The check below is only worth running if it is the older compiler, so
         # assert that rather than trusting the override to keep working.
@@ -155,7 +159,7 @@ jobs:
       # build for an upgrade over the release. Empty means the plain version.
       TERMLET_DEB_SUFFIX: ${{ github.ref == 'refs/heads/main' && '' || '~dev' }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Install Linux build dependencies
         if: runner.os == 'Linux'
         run: |
@@ -164,7 +168,7 @@ jobs:
       - name: Install Rust toolchain
         # Installs the channel and components pinned in rust-toolchain.toml.
         run: rustup install
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
       # rust-cache caches `~/.cargo/bin`, so the packaging tool is compiled
       # once per platform and reused by later runs.
       - name: Install cargo-deb
@@ -197,7 +201,7 @@ jobs:
           packaging/macos/build.sh --format dmg
           --output "target/Termlet-${{ steps.crate.outputs.version }}${{ env.TERMLET_VERSION_SUFFIX }}.dmg"
       - name: Upload package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: termlet-${{ matrix.target }}${{ env.TERMLET_VERSION_SUFFIX }}
           # Each runner matches exactly one of these.

@@ -538,6 +538,9 @@ impl Storage {
             tx.execute("DELETE FROM recent_connections", [])
                 .map_err(|e| format!("failed to clear recent connections: {e}"))?;
             for (position, host_id) in ids.iter().enumerate() {
+                let position = i64::try_from(position).map_err(|error| {
+                    format!("recent connection position exceeds SQLite range: {error}")
+                })?;
                 tx.execute(
                     "INSERT INTO recent_connections (position, host_id) VALUES (?1, ?2)",
                     params![position, host_id],

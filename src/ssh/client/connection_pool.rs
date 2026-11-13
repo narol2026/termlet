@@ -130,7 +130,7 @@ impl PoolState {
 }
 
 enum AcquireStep {
-    Reuse(PooledSession),
+    Reuse(Box<PooledSession>),
     Connect,
     Wait,
 }
@@ -182,7 +182,7 @@ impl SshSessions {
             let step = {
                 let mut state = self.state.lock().expect("SSH session pool lock poisoned");
                 if let Some(session) = state.take_idle(&key) {
-                    AcquireStep::Reuse(session)
+                    AcquireStep::Reuse(Box::new(session))
                 } else if state.try_reserve(&key, self.max_total, self.max_per_host) {
                     AcquireStep::Connect
                 } else {
@@ -193,9 +193,9 @@ impl SshSessions {
             match step {
                 AcquireStep::Reuse(session) => {
                     if session_is_reusable(&session, self.idle_timeout).await {
-                        return Ok(SessionLease::new(Arc::clone(self), key, session));
+                        return Ok(SessionLease::new(Arc::clone(self), key, *session));
                     }
-                    discard_session(session).await;
+                    discard_session(*session).await;
                     self.release_slot(&key);
                 }
                 AcquireStep::Connect => {

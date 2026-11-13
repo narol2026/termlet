@@ -6,7 +6,9 @@ use std::sync::{Arc, Mutex, OnceLock};
 use std::time::Duration;
 
 use russh::client::{self, AuthResult, KeyboardInteractiveAuthResponse, Msg as ClientMsg};
-use russh::keys::{HashAlg, PrivateKeyWithHashAlg, load_secret_key, ssh_key};
+use russh::keys::{
+    HashAlg, PrivateKeyWithHashAlg, PublicKeyOrCertificate, load_secret_key, ssh_key,
+};
 use russh::{Channel, ChannelStream, Disconnect, MethodSet};
 use russh_sftp::client::SftpSession;
 use tokio::io::{AsyncRead, AsyncWrite};
@@ -439,14 +441,16 @@ impl client::Handler for Client {
 
     fn check_server_key(
         &mut self,
-        server_public_key: &ssh_key::PublicKey,
+        server_public_key: &PublicKeyOrCertificate,
     ) -> impl Future<Output = Result<bool, Self::Error>> + Send {
+        let public_key = server_public_key.public_key();
+
         // Always capture the presented key so callers can inspect it later.
         if let Ok(mut key) = self.server_key.lock() {
-            *key = Some(server_public_key.clone());
+            *key = Some(public_key.clone());
         }
 
-        let presented = server_public_key.fingerprint(HashAlg::Sha256).to_string();
+        let presented = public_key.fingerprint(HashAlg::Sha256).to_string();
 
         // Probe-only: capture the key, then abort before authentication.
         if self.probe_only {
@@ -472,17 +476,21 @@ impl client::Handler for Client {
         connected_port: u32,
         _originator_address: &str,
         _originator_port: u32,
+        reply: russh::client::ChannelOpenHandle,
         _session: &mut russh::client::Session,
     ) -> impl Future<Output = Result<(), Self::Error>> + Send {
         let connected_address = connected_address.to_string();
         let sender = self.forwarded_tcpip.clone();
         async move {
             if let Some(sender) = sender {
-                let _ = sender.send(ForwardedTcpIp {
+                let channel = ForwardedTcpIp {
                     channel,
                     connected_address,
                     connected_port,
-                });
+                };
+                if sender.send(channel).is_ok() {
+                    reply.accept().await;
+                }
             }
             Ok(())
         }
