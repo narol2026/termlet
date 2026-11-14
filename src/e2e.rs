@@ -33,6 +33,7 @@ use iced::Task;
 use iced::futures::StreamExt;
 use iced::futures::channel::mpsc;
 use iced_test::emulator::{Emulator, Event, Mode};
+#[cfg(not(windows))]
 use iced_test::instruction::{Interaction, Mouse, Target};
 use iced_test::selector::Bounded;
 use iced_test::{Instruction, Selector, Simulator, program, simulator};
