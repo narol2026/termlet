@@ -409,6 +409,8 @@ fn the_topbar_tabs_switch_the_workspace_behind_them() {
     assert!(shows(&app, "NEW HOST"), "the vault workspace is back");
 }
 
+// `iced_test` cannot resolve this icon text target on Windows.
+#[cfg(not(windows))]
 #[test]
 fn clicking_the_sftp_filter_focuses_it_before_typing() {
     let program = iced::application(
