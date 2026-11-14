@@ -307,6 +307,7 @@ fn clicking_a_host_card_puts_the_collection_on_the_focus_stack() {
         crate::views::view,
     )
     .title("termlet")
+    .font(lucide_icons::LUCIDE_FONT_BYTES)
     .subscription(App::subscription);
     let preset = iced::Preset::new("cursor-activation", || {
         app_with_saved_hosts(&[host(1, "web-tower", "10.0.0.1")])

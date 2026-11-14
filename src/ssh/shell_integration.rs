@@ -509,6 +509,7 @@ mod tests {
     /// `PROMPT_COMMAND` that already ends in `; ` (the bug that produced a `;;`
     /// syntax error on login).  Runs the *generated* trim+assign lines through
     /// bash to keep the test honest.
+    #[cfg(unix)]
     #[test]
     fn bash_prompt_command_join_handles_trailing_semicolon() {
         use std::process::Command;
