@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0-rc.1] - 2026-11-14
+
+Termlet's first Windows release candidate adds an x86_64 portable ZIP and
+per-user installer. Windows remains a release candidate until it passes manual
+testing on clean Windows 10 and Windows 11 systems. The Windows binaries are
+not code-signed, so SmartScreen can warn on first launch.
+
+The Linux and macOS packages continue to be included with this prerelease.
+
+### Added
+
+- Windows x86_64 now runs native build, test, Clippy, portable ZIP, and
+  installer jobs in CI. The package smoke test verifies the installer checksum,
+  performs a silent per-user install, checks the App Paths registration, and
+  confirms uninstalling preserves existing Termlet user data.
+- The release workflow now publishes Windows x86_64 portable ZIP and Inno Setup
+  installer assets alongside the Linux and macOS packages.
+
 ### Fixed
 
 - Windows now applies a protected current-user DACL to the Termlet data
@@ -14,6 +32,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   permission hardening as a no-op. Directory entries inherit to newly created
   app files, and reparse points are rejected at the same boundaries as Unix
   symlinks.
+- Windows bug-report and external links now open through `ShellExecuteExW`
+  instead of passing the URL through `cmd.exe`, so query-string characters
+  cannot be interpreted as shell syntax.
+- The Windows installer now requires Windows 10 1809 (`10.0.17763`) or newer,
+  matching the minimum version that provides ConPTY.
 
 ## [1.0.0] - 2026-11-14
 
@@ -111,5 +134,6 @@ move the relevant items from Unreleased into a new `## [x.y.z] - YYYY-MM-DD`
 section and add the comparison link below.
 -->
 
-[Unreleased]: https://github.com/narol2026/termlet/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/narol2026/termlet/compare/v1.1.0-rc.1...HEAD
+[1.1.0-rc.1]: https://github.com/narol2026/termlet/releases/tag/v1.1.0-rc.1
 [1.0.0]: https://github.com/narol2026/termlet/releases/tag/v1.0.0

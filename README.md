@@ -10,18 +10,24 @@ Termlet is a cross-platform desktop terminal built with [iced](https://github.co
 It focuses on SSH session management: terminals, SFTP, a keychain, port
 forwarding, snippets, and known hosts, all in one window.
 
-Linux and macOS are the supported build targets today. Windows builds from
-source, but is still being verified and has no official release package yet.
+Linux and macOS are the stable release targets today. Windows x86_64 has
+release-candidate packages, with native build, test, Clippy, packaging, and
+installer smoke jobs in CI while clean-machine validation is completed.
 
 ## Download
 
-[Termlet 1.0.0](https://github.com/narol2026/termlet/releases/tag/v1.0.0) is
-the first public release. It contains Debian/Ubuntu packages for x86_64 and
-aarch64, plus macOS disk images for Intel and Apple Silicon. Every release
-includes a `SHA256SUMS` file.
+[Termlet 1.0.0](https://github.com/narol2026/termlet/releases/tag/v1.0.0)
+remains the current stable release. It contains Debian/Ubuntu packages for
+x86_64 and aarch64, plus macOS disk images for Intel and Apple Silicon.
+
+[Termlet 1.1.0-rc.1](https://github.com/narol2026/termlet/releases/tag/v1.1.0-rc.1)
+is the first Windows release candidate. It adds a Windows x86_64 portable ZIP
+and per-user installer while retaining the Linux and macOS packages. Every
+release includes a `SHA256SUMS` file.
 
 The macOS packages are not signed or notarized yet, so Gatekeeper warns on the
-first launch. Windows is not included in the official release.
+first launch. The Windows release-candidate binaries are also unsigned, so
+SmartScreen can warn.
 
 ## Screenshot
 
@@ -86,7 +92,7 @@ first launch. Windows is not included in the official release.
 | Linux (x86_64 / aarch64) | ✅ Supported; CI builds a `.deb` for both architectures against glibc 2.35 |
 | macOS Apple Silicon (arm64) | ✅ Supported build target; CI builds a `.dmg` on macOS 15 |
 | macOS Intel (x86_64) | ✅ Supported build target; CI builds a `.dmg` on macOS 15 |
-| Windows | 🚧 Source builds are available, but Windows is not covered by CI and has no official release package |
+| Windows 10 1809+ (x86_64) | 🚧 Release candidate; native CI and installer smoke tests pass automation, with clean-machine validation still pending |
 
 The codebase has `target_os = "macos"` branches (window chrome, cursor,
 keybindings, theme detection) but no architecture-specific code, so Apple

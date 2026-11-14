@@ -12,8 +12,14 @@ if ($manifest -notmatch '(?m)^version\s*=\s*"([^"]+)"') {
     throw "Could not read the package version from Cargo.toml"
 }
 $version = $Matches[1]
+$installerVersion = $version.Split("-", 2)[0]
+$versionSuffix = $env:TERMLET_VERSION_SUFFIX
+if ($null -eq $versionSuffix) {
+    $versionSuffix = ""
+}
+$artifactVersion = "$version$versionSuffix"
 $dist = Join-Path $repo "dist"
-$stage = Join-Path $dist "Termlet-$version-windows-x64"
+$stage = Join-Path $dist "Termlet-$artifactVersion-windows-x64"
 $exe = Join-Path $repo "target\release\termlet.exe"
 $bridge = Join-Path $repo "target\release\termlet-bridge.exe"
 $icon = Join-Path $repo "assets\app-icons\windows\termlet.ico"
@@ -79,7 +85,7 @@ $licenseDir = Join-Path $stageFull "licenses"
 New-Item -ItemType Directory -Force -Path $licenseDir | Out-Null
 Copy-Item -Path (Join-Path $repo "fonts\licenses\*.txt") -Destination $licenseDir
 
-$zip = Join-Path $dist "Termlet-$version-windows-x64.zip"
+$zip = Join-Path $dist "Termlet-$artifactVersion-windows-x64.zip"
 Compress-Archive -Path $stageFull -DestinationPath $zip -Force
 Write-Host "Portable ZIP: $zip"
 
@@ -111,12 +117,16 @@ if (-not $iscc) {
 }
 
 Write-Host "Building installer..."
-& $iscc "/DMyAppVersion=$version" (Join-Path $PSScriptRoot "termlet.iss")
+& $iscc `
+    "/DMyAppVersion=$version" `
+    "/DMyInstallerVersion=$installerVersion" `
+    "/DMyArtifactVersion=$artifactVersion" `
+    (Join-Path $PSScriptRoot "termlet.iss")
 if ($LASTEXITCODE -ne 0) {
     throw "ISCC failed with exit code $LASTEXITCODE"
 }
 
-$installer = Join-Path $dist "Termlet-$version-windows-x64-setup.exe"
+$installer = Join-Path $dist "Termlet-$artifactVersion-windows-x64-setup.exe"
 if (-not (Test-Path -LiteralPath $installer)) {
     throw "Installer was not produced at $installer"
 }

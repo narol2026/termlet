@@ -8,7 +8,15 @@
 ; ~/.termlet/ and any saved hosts alone.
 
 #ifndef MyAppVersion
-  #define MyAppVersion "1.0.0"
+  #define MyAppVersion "1.1.0-rc.1"
+#endif
+
+#ifndef MyInstallerVersion
+  #define MyInstallerVersion "1.1.0"
+#endif
+
+#ifndef MyArtifactVersion
+  #define MyArtifactVersion MyAppVersion
 #endif
 
 [Setup]
@@ -26,9 +34,9 @@ DisableProgramGroupPage=yes
 PrivilegesRequired=lowest
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
-MinVersion=10.0
+MinVersion=10.0.17763
 OutputDir=..\..\dist
-OutputBaseFilename=Termlet-{#MyAppVersion}-windows-x64-setup
+OutputBaseFilename=Termlet-{#MyArtifactVersion}-windows-x64-setup
 SetupIconFile=..\..\assets\app-icons\windows\termlet.ico
 UninstallDisplayIcon={app}\termlet.ico
 LicenseFile=..\..\LICENSE
@@ -38,9 +46,9 @@ WizardStyle=modern
 UsePreviousAppDir=yes
 CloseApplications=yes
 RestartApplications=no
-VersionInfoVersion={#MyAppVersion}
+VersionInfoVersion={#MyInstallerVersion}
 VersionInfoProductName=Termlet
-VersionInfoProductVersion={#MyAppVersion}
+VersionInfoProductVersion={#MyInstallerVersion}
 VersionInfoCompany=narol
 VersionInfoDescription=Termlet installer
 

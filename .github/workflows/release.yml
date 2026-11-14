@@ -3,8 +3,8 @@
 # Triggered by a version tag (`v1.2.3`). The tag must match the version in
 # Cargo.toml, so a release can never ship a build with the wrong version
 # stamped into it. Linux produces a `.deb`, macOS produces a `.dmg` per
-# architecture, and everything is attached to the release for the tag along
-# with a `SHA256SUMS` file.
+# architecture, Windows produces a portable ZIP and installer, and everything
+# is attached to the release for the tag along with a `SHA256SUMS` file.
 #
 # To cut a release:
 #   1. Move the relevant CHANGELOG.md items out of `[Unreleased]` into a new
@@ -19,7 +19,8 @@
 # refreshed in place.
 #
 # The macOS `.dmg` is not signed or notarized, so Gatekeeper warns on first
-# launch (see the note in README.md).
+# launch. The Windows binaries are also unsigned, so SmartScreen can warn. A
+# version containing a prerelease suffix is published as a GitHub prerelease.
 name: Release
 
 on:
@@ -89,6 +90,9 @@ jobs:
           # macOS Apple Silicon (arm64).
           - target: macos-aarch64
             os: macos-15
+          # Windows x86_64 portable ZIP and per-user installer.
+          - target: windows-x86_64
+            os: windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -109,7 +113,11 @@ jobs:
       - name: Install cargo-bundle
         if: runner.os == 'macOS'
         run: command -v cargo-bundle >/dev/null || cargo install cargo-bundle --locked
+      - name: Install Inno Setup
+        if: runner.os == 'Windows'
+        run: choco install innosetup --no-progress -y
       - name: Build release binary
+        if: runner.os != 'Windows'
         run: cargo build --release --locked
       - name: Package .deb
         if: runner.os == 'Linux'
@@ -125,6 +133,13 @@ jobs:
         run: >
           packaging/macos/build.sh --format dmg
           --output "target/Termlet-${{ needs.meta.outputs.version }}-${{ matrix.target }}.dmg"
+      - name: Package Windows ZIP and installer
+        if: runner.os == 'Windows'
+        # The Windows script builds with the static CRT enabled.
+        run: packaging/windows/build.ps1
+      - name: Smoke-test Windows packages
+        if: runner.os == 'Windows'
+        run: packaging/windows/smoke.ps1
       - name: Upload package
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -133,9 +148,12 @@ jobs:
           path: |
             target/debian/*.deb
             target/Termlet-*.dmg
+            dist/Termlet-*-windows-x64.zip
+            dist/Termlet-*-windows-x64-setup.exe
+            dist/Termlet-*-windows-x64-setup.exe.sha256
           # A silently empty artifact would be worse than a failed job.
           if-no-files-found: error
-          # .deb and .dmg are already compressed.
+          # Installers and archives are already compressed.
           compression-level: 0
 
   release:
@@ -162,7 +180,7 @@ jobs:
         working-directory: dist
         run: |
           # A stable, sorted checksum file alongside the installers.
-          sha256sum -- *.deb *.dmg | LC_ALL=C sort > SHA256SUMS
+          sha256sum -- *.deb *.dmg *.zip *-setup.exe | LC_ALL=C sort > SHA256SUMS
           ls -l
       - name: Create or refresh the GitHub Release
         env:
@@ -170,8 +188,15 @@ jobs:
           VERSION: ${{ needs.meta.outputs.version }}
         run: |
           tag="${GITHUB_REF_NAME}"
+          prerelease=()
+          if [[ "$VERSION" == *-* ]]; then
+            prerelease+=(--prerelease)
+          fi
           if gh release view "$tag" >/dev/null 2>&1; then
             # Tag re-run: refresh the asset set in place.
+            if ((${#prerelease[@]})); then
+              gh release edit "$tag" --prerelease
+            fi
             gh release upload "$tag" dist/* --clobber
             exit 0
           fi
@@ -184,8 +209,10 @@ jobs:
             found { print }
           ' CHANGELOG.md > "$notes"
           if grep -q '[^[:space:]]' "$notes"; then
-            gh release create "$tag" --title "Termlet ${VERSION}" --notes-file "$notes" dist/*
+            gh release create "$tag" --title "Termlet ${VERSION}" \
+              --notes-file "$notes" "${prerelease[@]}" dist/*
           else
             echo "::warning::no CHANGELOG section for ${VERSION}; falling back to generated notes"
-            gh release create "$tag" --title "Termlet ${VERSION}" --generate-notes dist/*
+            gh release create "$tag" --title "Termlet ${VERSION}" \
+              --generate-notes "${prerelease[@]}" dist/*
           fi

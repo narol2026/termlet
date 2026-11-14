@@ -127,11 +127,15 @@
   的受保护 DACL；目录 ACE 会继承到后续创建的文件，SQLite sidecar 也会在
   启用 WAL 后再次收紧。
 
-- [ ] 增加 Windows CI：build、test、clippy、打包和安装包冒烟测试。
-- [ ] 将 [packaging/windows/termlet.iss](packaging/windows/termlet.iss) 的
+- [x] 增加 Windows CI：build、test、clippy、打包和安装包冒烟测试。
+
+  `windows-latest` 原生 job 会运行 Clippy、完整测试、静态 CRT 构建、portable
+  ZIP 和 Inno Setup 安装包构建，并执行安装、App Paths、卸载和用户数据保留
+  冒烟测试。
+- [x] 将 [packaging/windows/termlet.iss](packaging/windows/termlet.iss) 的
   `MinVersion=10.0` 提升到支持 ConPTY 的 Windows 10 1809
   (`10.0.17763`) 或更高。
-- [ ] 替换 [src/core/open.rs](src/core/open.rs) 中的 `cmd.exe /c start` URL
+- [x] 替换 [src/core/open.rs](src/core/open.rs) 中的 `cmd.exe /c start` URL
   打开方式，避免 `&version=...&platform=...` 被命令解释器拆分。
 - [ ] 在干净的 Windows 10 22H2 和 Windows 11 VM 中验证 portable ZIP 与
   installer。

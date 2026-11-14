@@ -1,8 +1,8 @@
-# Continuous integration: formatting, lints, unit tests, an MSRV compile check,
-# and a release build on every supported platform, with each platform's
-# installer (`.deb` on Linux, `.dmg` on macOS) uploaded as an artifact. The
-# lint and test jobs mirror the "checks to run before opening a PR" list in
-# CONTRIBUTING.md.
+# Continuous integration: formatting, lints, native tests, an MSRV compile
+# check, and release packages on every supported platform. Linux uploads a
+# `.deb`, macOS a `.dmg`, and Windows a portable ZIP plus installer after
+# install/uninstall smoke tests. The lint and test jobs mirror the "checks to
+# run before opening a PR" list in CONTRIBUTING.md.
 # Only `main` produces release markings; every other ref (feature branches and
 # pull requests) builds with a `-dev` version suffix.
 name: CI
@@ -75,6 +75,38 @@ jobs:
       - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
       - name: Run tests
         run: cargo test --locked
+
+  windows:
+    name: windows x86_64
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      TERMLET_VERSION_SUFFIX: ${{ github.ref == 'refs/heads/main' && '' || '-dev' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install Rust toolchain
+        run: rustup install
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2
+      - name: Run clippy
+        run: cargo clippy --all-targets --all-features --locked -- -D warnings
+      - name: Run tests
+        run: cargo test --locked
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+      - name: Build portable ZIP and installer
+        run: packaging/windows/build.ps1
+      - name: Smoke-test packages
+        run: packaging/windows/smoke.ps1
+      - name: Upload package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: termlet-windows-x64${{ env.TERMLET_VERSION_SUFFIX }}
+          path: |
+            dist/Termlet-*-windows-x64.zip
+            dist/Termlet-*-windows-x64-setup.exe
+            dist/Termlet-*-windows-x64-setup.exe.sha256
+          if-no-files-found: error
+          compression-level: 0
 
   # `rust-version` in Cargo.toml is a promise to anyone building from source
   # with an older compiler; this job is what keeps it honest. It is deliberately

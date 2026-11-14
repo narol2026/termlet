@@ -3,6 +3,8 @@
 //! Used by the in-app feedback entry, which hands a prefilled GitHub issue form
 //! to the OS so it opens in whatever browser the user already has configured.
 
+// Rust guideline compliant 2026-10-09
+
 /// Repository that hosts the source and the issue tracker.
 const REPOSITORY: &str = "https://github.com/narol2026/termlet";
 
@@ -51,12 +53,9 @@ pub fn open_url(url: &str) {
 
     #[cfg(target_os = "windows")]
     {
-        let mut command = std::process::Command::new("cmd");
-        // The empty argument after `start` is the window title; without it
-        // `cmd` treats a quoted URL as the title and opens nothing.
-        command.args(["/c", "start", "", url]);
-        crate::core::process::suppress_console_window(&mut command);
-        let _ = command.spawn();
+        // ShellExecuteExW receives the URL as one wide string, so query-string
+        // separators such as `&` cannot escape into a command interpreter.
+        let _ = open::that_detached(url);
     }
 }
 
