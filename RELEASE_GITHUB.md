@@ -1,13 +1,14 @@
 # GitHub 开源发布检查记录
 
 最后复核：2026-11-14
-复核基线：`main@f151b02`；正式 Release 为 `v1.0.0`。
+复核基线：`main@cb2efc3`；稳定版为 `v1.0.0`，Windows RC 为
+`v1.1.0-rc.1`。
 用途：这是发布前检查表，不是部署状态或发布日期承诺。每次准备公开仓库或
 创建 tag 前，应按下面的命令重新检查，并更新本文件。
 
 当前仓库状态：
 
-- GitHub 仓库已公开，`v1.0.0` tag 与 GitHub Release 已发布。
+- GitHub 仓库已公开；`v1.0.0` 稳定版与 `v1.1.0-rc.1` prerelease 已发布。
 - 仓库 description、homepage、topics、Issues 以及 `bug`/`enhancement` labels
   已配置。
 - 工作流使用完整 commit SHA 固定 GitHub Actions，Dependabot 已配置 Cargo、
@@ -21,7 +22,10 @@
 - [x] `cargo fmt --all -- --check` 通过。
 - [x] `cargo clippy --all-targets --all-features --locked -- -D warnings`
   通过。
-- [x] `cargo test --locked` 通过：740 passed，0 failed，4 ignored。
+- [x] Linux `cargo test --locked` 通过：741 passed，0 failed，4 ignored。
+- [x] Windows x86_64 原生测试通过：756 passed，0 failed，4 ignored。
+- [x] Windows ZIP/安装器构建、安装、App Paths、卸载和用户数据保留冒烟测试
+  通过。
 - [x] 应用图标检查通过，ICO、ICNS 和 Linux PNG 的尺寸/内容一致。
 - [x] `python3 tools/licenses/gen_deb_copyright.py --check` 通过。
 - [x] 642 个翻译键在 `en`、`zh-CN`、`zh-TW` 中齐全，占位符一致。
@@ -91,8 +95,8 @@
 - [x] 修正 `packaging/windows/README.md` 中已过时的 OpenSSH 前置要求。
   当前文档明确说明 SSH 终端由内置 `termlet-bridge.exe` 启动，不依赖系统
   OpenSSH Client。
-- [x] 明确产品支持边界。README 现在将 Windows 标为源码构建、未覆盖 CI、
-  暂无官方发布包，并将 Linux 和 macOS 列为当前支持的构建目标。
+- [x] 明确产品支持边界。README 现在将 Linux 和 macOS 标为稳定发布目标，
+  Windows x86_64 标为原生 CI 支持的 release candidate。
 - [x] 补充已知的 Linux 二进制基线：CI 在 Ubuntu 22.04/glibc 2.35 上构建。
 - [ ] 在正式发布 macOS 二进制前，明确并验证最低运行时版本；当前 README
   只记录了 CI 使用 macOS 15，尚未承诺更低的运行时下限。
@@ -118,6 +122,8 @@
 - [x] 为 Linux 与 macOS 发布产物增加可验证的签名，或者明确仅提供
   `SHA256SUMS`。
 - [x] 增加“下载与安装”章节，直接链接 Release 中的 `.deb` 和 `.dmg`。
+- [x] 发布 `v1.1.0-rc.1` prerelease，包含 Linux、macOS 和 Windows 产物及
+  `SHA256SUMS`。
 
 ## Windows 转正式支持前必须完成
 
@@ -132,6 +138,8 @@
   `windows-latest` 原生 job 会运行 Clippy、完整测试、静态 CRT 构建、portable
   ZIP 和 Inno Setup 安装包构建，并执行安装、App Paths、卸载和用户数据保留
   冒烟测试。
+- [x] 将 Windows portable ZIP 和安装器加入 release workflow，并使用 GitHub
+  prerelease 发布 RC。
 - [x] 将 [packaging/windows/termlet.iss](packaging/windows/termlet.iss) 的
   `MinVersion=10.0` 提升到支持 ConPTY 的 Windows 10 1809
   (`10.0.17763`) 或更高。
@@ -139,7 +147,9 @@
   打开方式，避免 `&version=...&platform=...` 被命令解释器拆分。
 - [ ] 在干净的 Windows 10 22H2 和 Windows 11 VM 中验证 portable ZIP 与
   installer。
-- [ ] 完成 Windows 代码签名，或者把 SmartScreen 警告明确写入已知限制。
+- [x] 完成 Windows 代码签名，或者把 SmartScreen 警告明确写入已知限制。
+
+  当前 RC 未签名，README 和 CHANGELOG 已明确说明 SmartScreen 可能警告。
 - [ ] 验证 IME、粘贴、DPI、多显示器、ConPTY resize、安装/卸载和本地文件传输。
 - [ ] 覆盖 Windows 非法本地文件名、保留设备名、符号链接和 tar 解包边界。
 - [x] 确认哪些 Windows shell 支持 OSC 7/633；不支持时隐藏或禁用相关设置。
