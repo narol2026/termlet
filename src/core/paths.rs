@@ -549,7 +549,7 @@ mod tests {
             assert!(crate::core::windows_permissions::is_current_user_only(
                 &child
             ));
-        }
+        };
 
         std::fs::remove_dir_all(&dir).unwrap();
     }
@@ -593,7 +593,7 @@ mod tests {
         {
             assert!(crate::core::windows_permissions::is_current_user_only(&wal));
             assert!(crate::core::windows_permissions::is_current_user_only(&shm));
-        }
+        };
 
         std::fs::remove_dir_all(&dir).unwrap();
     }
