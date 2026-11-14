@@ -25,6 +25,11 @@ Prerequisites:
 No external OpenSSH client is required. SSH sessions are handled by the bundled
 `termlet-bridge.exe`, which the build script stages next to `termlet.exe`.
 
+Termlet stores its data under `%USERPROFILE%\.termlet\`. The app applies a
+protected DACL that grants only the current Windows user access, and new files
+inherit that boundary. Credential-bearing files and SQLite sidecars are
+restricted explicitly as well.
+
 The build script statically links the Microsoft C runtime. The resulting
 `termlet.exe` does not require the Microsoft Visual C++ Redistributable on the
 target machine. The same executable also contains the application icon as a

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Windows now applies a protected current-user DACL to the Termlet data
+  directory, credential-bearing files, and SQLite sidecars instead of treating
+  permission hardening as a no-op. Directory entries inherit to newly created
+  app files, and reparse points are rejected at the same boundaries as Unix
+  symlinks.
+
 ## [1.0.0] - 2026-11-14
 
 Termlet's first public release provides official Linux and macOS packages.

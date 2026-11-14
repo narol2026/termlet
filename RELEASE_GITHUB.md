@@ -121,10 +121,11 @@
 
 ## Windows 转正式支持前必须完成
 
-- [ ] 为 `%USERPROFILE%\.termlet` 实现显式 Windows DACL。
+- [x] 为 `%USERPROFILE%\.termlet` 实现显式 Windows DACL。
 
-  当前 [src/core/paths.rs](src/core/paths.rs) 在非 Unix 平台上是权限 no-op，
-  `master.key`、SQLite 附属文件、日志和崩溃报告没有等价的 `0600` 保护。
+  [src/core/paths.rs](src/core/paths.rs) 现在为目录和敏感文件设置仅当前用户
+  的受保护 DACL；目录 ACE 会继承到后续创建的文件，SQLite sidecar 也会在
+  启用 WAL 后再次收紧。
 
 - [ ] 增加 Windows CI：build、test、clippy、打包和安装包冒烟测试。
 - [ ] 将 [packaging/windows/termlet.iss](packaging/windows/termlet.iss) 的

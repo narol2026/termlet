@@ -143,16 +143,24 @@ pub fn config_file<P: AsRef<Path>>(file: P) -> std::io::Result<PathBuf> {
 /// crash reports, CWD snapshots, etc.) from being left truncated by a crash
 /// or briefly exposed with default permissions during a direct write.
 ///
-/// On non-Unix platforms the permission step is a no-op; the temp-file +
-/// rename behaviour is still used.
+/// On Windows the temporary path receives a protected current-user DACL before
+/// any contents are written. The temp-file + rename behaviour is used on every
+/// platform.
 pub fn write_private_atomic(path: &Path, contents: impl AsRef<[u8]>) -> std::io::Result<()> {
     static TEMP_SEQ: AtomicU64 = AtomicU64::new(0);
 
-    let parent = path
-        .parent()
-        .filter(|p| !p.as_os_str().is_empty())
-        .unwrap_or_else(|| Path::new("."));
-    fs::create_dir_all(parent)?;
+    let parent = path.parent().filter(|p| !p.as_os_str().is_empty());
+    let directory = parent.unwrap_or_else(|| Path::new("."));
+    fs::create_dir_all(directory)?;
+    if let Some(parent) = parent {
+        if is_link_like(&fs::symlink_metadata(parent)?) {
+            return Err(std::io::Error::other(format!(
+                "{} is a link; refusing to write private data through it",
+                parent.display()
+            )));
+        }
+        set_owner_only_directory_permissions(parent)?;
+    }
 
     let file_name = path
         .file_name()
@@ -166,7 +174,7 @@ pub fn write_private_atomic(path: &Path, contents: impl AsRef<[u8]>) -> std::io:
             .unwrap_or_default()
             .as_nanos();
         let sequence = TEMP_SEQ.fetch_add(1, Ordering::Relaxed);
-        let candidate = parent.join(format!(
+        let candidate = directory.join(format!(
             ".{file_name}.{}.{timestamp}.{sequence}.tmp",
             std::process::id()
         ));
@@ -213,50 +221,62 @@ pub fn write_private_atomic(path: &Path, contents: impl AsRef<[u8]>) -> std::io:
     Ok(())
 }
 
+#[cfg(unix)]
 fn set_owner_only_permissions(path: &Path) -> std::io::Result<()> {
-    set_mode(path, 0o600)
+    use std::os::unix::fs::PermissionsExt;
+
+    fs::set_permissions(path, fs::Permissions::from_mode(0o600))
 }
 
+#[cfg(windows)]
+fn set_owner_only_permissions(path: &Path) -> std::io::Result<()> {
+    crate::core::windows_permissions::restrict_to_current_user(path, false)
+}
+
+#[cfg(not(any(unix, windows)))]
+fn set_owner_only_permissions(_path: &Path) -> std::io::Result<()> {
+    Ok(())
+}
+
+#[cfg(unix)]
 fn set_owner_only_directory_permissions(path: &Path) -> std::io::Result<()> {
-    set_mode(path, 0o700)
+    use std::os::unix::fs::PermissionsExt;
+
+    fs::set_permissions(path, fs::Permissions::from_mode(0o700))
 }
 
-#[cfg_attr(
-    not(unix),
-    allow(
-        clippy::unnecessary_wraps,
-        reason = "permission bits are Unix-only; the no-op keeps the shared call sites simple"
-    )
-)]
-fn set_mode(path: &Path, mode: u32) -> std::io::Result<()> {
-    #[cfg(unix)]
-    {
-        use std::os::unix::fs::PermissionsExt;
-        let perms = fs::Permissions::from_mode(mode);
-        fs::set_permissions(path, perms)
-    }
-    #[cfg(not(unix))]
-    {
-        let _ = path;
-        let _ = mode;
-        Ok(())
-    }
+#[cfg(windows)]
+fn set_owner_only_directory_permissions(path: &Path) -> std::io::Result<()> {
+    crate::core::windows_permissions::restrict_to_current_user(path, true)
 }
 
-/// Restrict a file to owner-only permissions (mode `0600` on Unix, no-op
-/// elsewhere). Used for credential-bearing files: the `SQLite` database and the
-/// master-key fallback file.
+#[cfg(not(any(unix, windows)))]
+fn set_owner_only_directory_permissions(_path: &Path) -> std::io::Result<()> {
+    Ok(())
+}
+
+/// Restrict a file to the current user (mode `0600` on Unix, DACL on Windows).
+/// Used for credential-bearing files: the `SQLite` database and the master-key
+/// fallback file.
 pub fn restrict_file_permissions(path: &Path) -> Result<(), String> {
-    set_owner_only_permissions(path).map_err(|e| format!("failed to chmod {}: {e}", path.display()))
+    let metadata = fs::symlink_metadata(path)
+        .map_err(|e| format!("failed to inspect permissions for {}: {e}", path.display()))?;
+    if is_link_like(&metadata) {
+        return Err(format!(
+            "refusing to change permissions through link {}",
+            path.display()
+        ));
+    }
+    set_owner_only_permissions(path)
+        .map_err(|e| format!("failed to restrict permissions for {}: {e}", path.display()))
 }
 
 /// Create (if needed) and restrict the user-facing `~/.termlet/` directory to
-/// `0700` on Unix.
+/// the current user (`0700` on Unix, DACL on Windows).
 ///
-/// This is an invariant for new installs rather than a migration path: the
-/// application has no released users yet, so there are no legacy files to
-/// repair. Individual private files are instead created with `0600` at the
-/// point of first write.
+/// The check runs at every startup and is idempotent. Individual private files
+/// are also restricted at the point of first or replacement write, so existing
+/// data created by older builds is covered as the app touches it.
 pub fn ensure_termlet_dir_private() -> Result<(), String> {
     let root = termlet_dir();
     ensure_private_directory(&root).map_err(|e| format!("failed to secure {}: {e}", root.display()))
@@ -265,18 +285,66 @@ pub fn ensure_termlet_dir_private() -> Result<(), String> {
 fn ensure_private_directory(path: &Path) -> std::io::Result<()> {
     fs::create_dir_all(path)?;
 
-    #[cfg(unix)]
-    {
-        let metadata = fs::symlink_metadata(path)?;
-        if metadata.file_type().is_symlink() {
+    let metadata = fs::symlink_metadata(path)?;
+    if is_link_like(&metadata) {
+        return Err(std::io::Error::other(format!(
+            "{} is a link; refusing to change permissions through it",
+            path.display()
+        )));
+    }
+
+    #[cfg(windows)]
+    return secure_existing_tree(path);
+
+    #[cfg(not(windows))]
+    set_owner_only_directory_permissions(path)
+}
+
+#[cfg(windows)]
+fn secure_existing_tree(root: &Path) -> std::io::Result<()> {
+    let mut pending = vec![root.to_path_buf()];
+    while let Some(path) = pending.pop() {
+        let metadata = fs::symlink_metadata(&path)?;
+        if is_link_like(&metadata) {
             return Err(std::io::Error::other(format!(
-                "{} is a symlink; refusing to chmod through it",
+                "{} is a link; refusing to change permissions through it",
+                path.display()
+            )));
+        }
+
+        if metadata.is_dir() {
+            set_owner_only_directory_permissions(&path)?;
+            for entry in fs::read_dir(&path)? {
+                pending.push(entry?.path());
+            }
+        } else if metadata.is_file() {
+            set_owner_only_permissions(&path)?;
+        } else {
+            return Err(std::io::Error::other(format!(
+                "{} is not a regular file or directory",
                 path.display()
             )));
         }
     }
+    Ok(())
+}
 
-    set_owner_only_directory_permissions(path)
+fn is_link_like(metadata: &fs::Metadata) -> bool {
+    if metadata.file_type().is_symlink() {
+        return true;
+    }
+
+    #[cfg(windows)]
+    {
+        use std::os::windows::fs::MetadataExt;
+
+        metadata.file_attributes()
+            & windows_sys::Win32::Storage::FileSystem::FILE_ATTRIBUTE_REPARSE_POINT
+            != 0
+    }
+
+    #[cfg(not(windows))]
+    false
 }
 
 fn sqlite_sidecar(path: &Path, suffix: &str) -> PathBuf {
@@ -293,8 +361,11 @@ pub fn restrict_sqlite_sidecars(db_path: &Path) -> Result<(), String> {
         let sidecar = sqlite_sidecar(db_path, suffix);
         match fs::symlink_metadata(&sidecar) {
             Ok(metadata) => {
-                if metadata.file_type().is_symlink() {
-                    return Err(format!("refusing to chmod symlink {}", sidecar.display()));
+                if is_link_like(&metadata) {
+                    return Err(format!(
+                        "refusing to change permissions through link {}",
+                        sidecar.display()
+                    ));
                 }
                 if metadata.is_file() {
                     restrict_file_permissions(&sidecar)?;
@@ -435,6 +506,10 @@ mod tests {
             let mode = std::fs::metadata(&path).unwrap().permissions().mode() & 0o777;
             assert_eq!(mode, 0o600);
         };
+        #[cfg(windows)]
+        assert!(crate::core::windows_permissions::is_current_user_only(
+            &path
+        ));
 
         write_private_atomic(&path, "replacement").unwrap();
         assert_eq!(std::fs::read_to_string(&path).unwrap(), "replacement");
@@ -444,9 +519,14 @@ mod tests {
 
     #[test]
     fn ensure_private_directory_creates_and_restricts_root() {
-        let dir =
-            std::env::temp_dir().join(format!("termlet_paths_private_dir_{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!(
+            "termlet_paths_private_dir_existing_{}",
+            std::process::id()
+        ));
         let _ = std::fs::remove_dir_all(&dir);
+        let child = dir.join("nested").join("private.json");
+        std::fs::create_dir_all(child.parent().unwrap()).unwrap();
+        std::fs::write(&child, "{}").unwrap();
 
         ensure_private_directory(&dir).unwrap();
 
@@ -460,6 +540,16 @@ mod tests {
                 & 0o777;
             assert_eq!(mode, 0o700);
         };
+        #[cfg(windows)]
+        {
+            assert!(crate::core::windows_permissions::is_current_user_only(&dir));
+            assert!(crate::core::windows_permissions::is_current_user_only(
+                child.parent().unwrap()
+            ));
+            assert!(crate::core::windows_permissions::is_current_user_only(
+                &child
+            ));
+        }
 
         std::fs::remove_dir_all(&dir).unwrap();
     }
@@ -499,6 +589,33 @@ mod tests {
                 0o600
             );
         };
+        #[cfg(windows)]
+        {
+            assert!(crate::core::windows_permissions::is_current_user_only(&wal));
+            assert!(crate::core::windows_permissions::is_current_user_only(&shm));
+        }
+
+        std::fs::remove_dir_all(&dir).unwrap();
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn restricting_a_symlink_is_refused() {
+        use std::os::unix::fs::symlink;
+
+        let dir = std::env::temp_dir().join(format!(
+            "termlet_paths_symlink_permissions_{}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let target = dir.join("target.json");
+        let link = dir.join("link.json");
+        std::fs::write(&target, "{}").unwrap();
+        symlink(&target, &link).unwrap();
+
+        let error = super::restrict_file_permissions(&link).unwrap_err();
+        assert!(error.contains("through link"), "unexpected error: {error}");
 
         std::fs::remove_dir_all(&dir).unwrap();
     }
