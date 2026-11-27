@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "fs-extra": "^11.4.1",
-    "svgtofont": "^6.5.3"
+    "svgtofont": "^6.6.0"
   },
   "overrides": {
     "glob": "^14.0.6",
